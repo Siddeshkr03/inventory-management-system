@@ -39,7 +39,9 @@ function ItemForm() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => {
     const { name, value } = e.target;
 
@@ -59,7 +61,22 @@ function ItemForm() {
         .then((response) => response.json())
 
         .then((data) => {
-          setItemData(data);
+          setItemData({
+            itemName: data.itemName,
+            price: data.price,
+            quantity: data.quantity,
+            category: data.category,
+            brand: data.brand,
+            purchaseDate: data.purchaseDate,
+            productCode: data.productCode,
+            paymentMethod: data.paymentMethod,
+            productAvailability: data.productAvailability,
+
+            supplierName: data.supplier?.supplierName || "",
+            phoneNumber: data.supplier?.phoneNumber || "",
+            email: data.supplier?.email || "",
+            address: data.supplier?.address || "",
+          });
         })
 
         .catch((error) => {
@@ -68,41 +85,43 @@ function ItemForm() {
     }
   }, [id]);
 
- const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  const item = {
-    itemName: itemData.itemName,
-    price: itemData.price,
-    quantity: itemData.quantity,
-    category: itemData.category,
-    brand: itemData.brand,
-    purchaseDate: itemData.purchaseDate,
-    productCode: itemData.productCode,
-    paymentMethod: itemData.paymentMethod,
-    productAvailability: itemData.productAvailability,
+    const item = {
+      itemName: itemData.itemName,
+      price: itemData.price,
+      quantity: itemData.quantity,
+      category: itemData.category,
+      brand: itemData.brand,
+      purchaseDate: itemData.purchaseDate,
+      productCode: itemData.productCode,
+      paymentMethod: itemData.paymentMethod,
+      productAvailability: itemData.productAvailability,
+    };
+
+    const supplier = {
+      supplierName: itemData.supplierName,
+      phoneNumber: itemData.phoneNumber,
+      email: itemData.email,
+      address: itemData.address,
+    };
+
+    const itemSupplierDTO = {
+      item,
+      supplier,
+    };
+
+    try {
+      await axios.post("http://localhost:8080/api/items", itemSupplierDTO);
+
+      alert("Item and Supplier saved successfully!");
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      alert("Error saving data!");
+    }
   };
-
-  const supplier = {
-    supplierName: itemData.supplierName,
-    phoneNumber: itemData.phoneNumber,
-    email: itemData.email,
-    address: itemData.address,
-  };
-
-  try {
-    await axios.post("http://localhost:8080/api/items", item);
-
-    await axios.post("http://localhost:8080/api/suppliers", supplier);
-
-    alert("Item and Supplier saved successfully!");
-
-    navigate("/");
-  } catch (error) {
-    console.error(error);
-    alert("Error saving data!");
-  }
-};
 
   return (
     <div className="items">

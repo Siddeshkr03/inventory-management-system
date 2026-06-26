@@ -1,4 +1,5 @@
 package com.arraybots.formbackend.items.model;
+import com.arraybots.formbackend.supplier.model.Supplier;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,7 +27,9 @@ public class Item {
 
     private String brand;
 
-    private String supplier;
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 
     private LocalDate purchaseDate;
 

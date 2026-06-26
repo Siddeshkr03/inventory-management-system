@@ -1,8 +1,16 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./ItemIndex.css";
 
 function ItemIndex() {
+  interface Supplier {
+    id: number;
+    supplierName: string;
+    phoneNumber: string;
+    email: string;
+    address: string;
+  }
+
   interface Item {
     id: number;
     itemName: string;
@@ -10,16 +18,17 @@ function ItemIndex() {
     quantity: string;
     category: string;
     brand: string;
-    supplier: string;
     purchaseDate: string;
     productCode: string;
     paymentMethod: string;
     productAvailability: string;
+    supplier: Supplier;
   }
 
   const [items, setItems] = useState<Item[]>([]);
-
   const [search, setSearch] = useState("");
+
+  const navigate = useNavigate();
 
   const fetchItems = async () => {
     try {
@@ -39,9 +48,7 @@ function ItemIndex() {
       "Are you sure you want to delete this item?",
     );
 
-    if (!confirmDelete) {
-      return;
-    }
+    if (!confirmDelete) return;
 
     try {
       await fetch(`http://localhost:8080/api/items/${id}`, {
@@ -57,8 +64,6 @@ function ItemIndex() {
   useEffect(() => {
     fetchItems();
   }, []);
-
-  const navigate = useNavigate();
 
   return (
     <>
@@ -81,60 +86,73 @@ function ItemIndex() {
         </Link>
       </div>
 
-      <table className="item-table" border={1} cellPadding={10}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Item Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Category</th>
-            <th>Brand</th>
-            <th>Supplier</th>
-            <th>Purchase Date</th>
-            <th>Product Code</th>
-            <th>Payment Method</th>
-            <th>Availability</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
+      <div className="table-wrapper">
+        <table className="item-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Item Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Category</th>
+              <th>Brand</th>
+              <th>Purchase Date</th>
+              <th>Product Code</th>
+              <th>Payment Method</th>
+              <th>Availability</th>
+              <th>Supplier Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th className="action-column">Actions</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {items
-            .filter((item) =>
-              item.itemName.toLowerCase().includes(search.toLowerCase()),
-            )
-            .map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.itemName}</td>
-                <td>{item.price}</td>
-                <td>{item.quantity}</td>
-                <td>{item.category}</td>
-                <td>{item.brand}</td>
-                <td>{item.supplier}</td>
-                <td>{item.purchaseDate}</td>
-                <td>{item.productCode}</td>
-                <td>{item.paymentMethod}</td>
-                <td>{item.productAvailability}</td>
-                <td>
-                  <button
-                    className="edit"
-                    onClick={() => navigate(`/edit/${item.id}`)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="delete"
-                    onClick={() => deleteItem(item.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+          <tbody>
+            {items
+              .filter((item) =>
+                item.itemName.toLowerCase().includes(search.toLowerCase()),
+              )
+              .map((item) => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.itemName}</td>
+                  <td>{item.price}</td>
+                  <td>{item.quantity}</td>
+                  <td>{item.category}</td>
+                  <td>{item.brand}</td>
+                  <td>{item.purchaseDate}</td>
+                  <td>{item.productCode}</td>
+                  <td>{item.paymentMethod}</td>
+                  <td>{item.productAvailability}</td>
+
+                  <td>{item.supplier?.supplierName}</td>
+                  <td>{item.supplier?.phoneNumber}</td>
+                  <td>{item.supplier?.email}</td>
+                  <td>{item.supplier?.address}</td>
+
+                  <td className="action-column">
+                    <div className="action-buttons">
+                      <button
+                        className="edit"
+                        onClick={() => navigate(`/edit/${item.id}`)}
+                      >
+                        Edit
+                      </button>
+
+                      <button
+                        className="delete"
+                        onClick={() => deleteItem(item.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

@@ -13,13 +13,11 @@ body {
   font-weight: 700;
 }
 
-.item-table {
-  width: 95%;
-  margin: auto;
-  border-collapse: collapse;
-  background: rgba(24, 24, 24, 0.683);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: #40d8e9;
+.item-table{
+    width:max-content;
+    min-width:100%;
+    border-collapse:collapse;
+    table-layout:auto;
 }
 
 .item-table th {
@@ -94,4 +92,85 @@ body {
 .edit:hover {
   background-color: #1d4ed8;
   color: white;
+}
+
+.action-column {
+  width: 150px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit,
+.delete {
+  min-width: 65px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.item-table th,
+.item-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.action-column {
+  width: 170px;
+  min-width: 170px;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit,
+.delete {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit {
+  background: #2563eb;
+  color: white;
+  width: 80px;
+}
+
+.edit:hover {
+  background: #1d4ed8;
+}
+
+.delete {
+  background: #ef4444;
+  color: white;
+  width: 80px;
+}
+
+.delete:hover {
+  background: #dc2626;
 }
