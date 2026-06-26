@@ -10,11 +10,16 @@ function ItemForm() {
     quantity: string;
     category: string;
     brand: string;
-    supplier: string;
     purchaseDate: string;
     productCode: string;
     paymentMethod: string;
     productAvailability: string;
+
+    // Supplier Fields
+    supplierName: string;
+    phoneNumber: string;
+    email: string;
+    address: string;
   }
 
   const [itemData, setItemData] = useState<ItemData>({
@@ -23,15 +28,18 @@ function ItemForm() {
     quantity: "",
     category: "",
     brand: "",
-    supplier: "",
     purchaseDate: "",
     productCode: "",
     paymentMethod: "",
     productAvailability: "",
+    supplierName: "",
+    phoneNumber: "",
+    email: "",
+    address: "",
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
 
@@ -60,32 +68,47 @@ function ItemForm() {
     }
   }, [id]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(itemData);
+ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/api/items",
-        itemData,
-      );
-
-      alert("Item saved successfully!");
-
-      console.log(response.data);
-      navigate("/"); // Navigate back to the item index page
-    } catch (error) {
-      console.error(error);
-
-      alert("Error saving item!");
-    }
+  const item = {
+    itemName: itemData.itemName,
+    price: itemData.price,
+    quantity: itemData.quantity,
+    category: itemData.category,
+    brand: itemData.brand,
+    purchaseDate: itemData.purchaseDate,
+    productCode: itemData.productCode,
+    paymentMethod: itemData.paymentMethod,
+    productAvailability: itemData.productAvailability,
   };
+
+  const supplier = {
+    supplierName: itemData.supplierName,
+    phoneNumber: itemData.phoneNumber,
+    email: itemData.email,
+    address: itemData.address,
+  };
+
+  try {
+    await axios.post("http://localhost:8080/api/items", item);
+
+    await axios.post("http://localhost:8080/api/suppliers", supplier);
+
+    alert("Item and Supplier saved successfully!");
+
+    navigate("/");
+  } catch (error) {
+    console.error(error);
+    alert("Error saving data!");
+  }
+};
 
   return (
     <div className="items">
       <form onSubmit={handleSubmit}>
         <div className="items-block">
-          <h1>Items</h1>
+          <h1>Item Details</h1>
 
           <div className="form-grid">
             <div>
@@ -205,15 +228,60 @@ function ItemForm() {
           </div>
           <div className="supplier-block">
             <h2>Supplier Details</h2>
-            <div>
-              <label>Supplier</label>
-              <input
-                type="text"
-                name="supplier"
-                placeholder="Enter supplier"
-                value={itemData.supplier}
-                onChange={handleChange}
-              />
+            <div className="form-grid">
+              <div>
+                <label>Supplier Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter Supplier Name"
+                  name="supplierName"
+                  value={itemData.supplierName}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div>
+                <label>Phone Number</label>
+                <input
+                  type="text"
+                  placeholder="Enter Phone nuumber"
+                  name="phoneNumber"
+                  value={itemData.phoneNumber}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div>
+                <label>Email</label>
+                <input
+                  type="email"
+                  placeholder="Enter Email"
+                  name="email"
+                  value={itemData.email}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div>
+                <label>Address</label>
+
+                <textarea
+                  name="address"
+                  placeholder="Enter Address"
+                  value={itemData.address}
+                  onChange={(e) =>
+                    setItemData({
+                      ...itemData,
+                      address: e.target.value,
+                    })
+                  }
+                  style={{
+                    width: "100%",
+                    minHeight: "20px",
+                    resize: "vertical",
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
