@@ -113,13 +113,22 @@ function ItemForm() {
     };
 
     try {
-      await axios.post("http://localhost:8080/api/items", itemSupplierDTO);
+      if (id) {
+        await axios.put(
+          `http://localhost:8080/api/items/${id}`,
+          itemSupplierDTO,
+        );
 
-      alert("Item and Supplier saved successfully!");
+        alert("Updated Successfully!");
+      } else {
+        await axios.post("http://localhost:8080/api/items", itemSupplierDTO);
+
+        alert("Saved Successfully!");
+      }
+
       navigate("/");
     } catch (error) {
       console.error(error);
-      alert("Error saving data!");
     }
   };
 

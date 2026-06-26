@@ -12,5 +12,7 @@ public interface SupplierService {
 
     Supplier getSupplierById(Long id);
 
+    Supplier updateSupplier(Long id, Supplier supplier);
+
     void deleteSupplier(Long id);
 }

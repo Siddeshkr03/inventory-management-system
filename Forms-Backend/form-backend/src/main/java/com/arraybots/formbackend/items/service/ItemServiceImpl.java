@@ -49,10 +49,22 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item updateItem(Long id, Item item) {
 
-        item.setId(id);
+        Item existingItem = itemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Item not found"));
 
-        return itemRepository.save(item);
+        existingItem.setItemName(item.getItemName());
+        existingItem.setPrice(item.getPrice());
+        existingItem.setQuantity(item.getQuantity());
+        existingItem.setCategory(item.getCategory());
+        existingItem.setBrand(item.getBrand());
+        existingItem.setPurchaseDate(item.getPurchaseDate());
+        existingItem.setProductCode(item.getProductCode());
+        existingItem.setPaymentMethod(item.getPaymentMethod());
+        existingItem.setProductAvailability(item.getProductAvailability());
 
+        existingItem.setSupplier(item.getSupplier());
+
+        return itemRepository.save(existingItem);
     }
 
 }

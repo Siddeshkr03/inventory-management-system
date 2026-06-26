@@ -34,4 +34,18 @@ public class SupplierServiceImpl implements SupplierService {
     public void deleteSupplier(Long id) {
         supplierRepository.deleteById(id);
     }
+
+    @Override
+    public Supplier updateSupplier(Long id, Supplier supplier) {
+
+        Supplier existingSupplier = supplierRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Supplier not found"));
+
+        existingSupplier.setSupplierName(supplier.getSupplierName());
+        existingSupplier.setPhoneNumber(supplier.getPhoneNumber());
+        existingSupplier.setEmail(supplier.getEmail());
+        existingSupplier.setAddress(supplier.getAddress());
+
+        return supplierRepository.save(existingSupplier);
+    }
 }
