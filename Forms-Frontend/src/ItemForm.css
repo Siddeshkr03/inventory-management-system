@@ -74,3 +74,9 @@ button:hover{
 input:hover{
     background-color: antiquewhite;
 }
+
+h2{
+    display: block;
+    align-self: center;
+    margin-left: 280px;
+}
