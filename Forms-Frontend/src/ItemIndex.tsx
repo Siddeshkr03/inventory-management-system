@@ -132,7 +132,6 @@ function ItemIndex() {
                   <td>{item.supplier?.address}</td>
 
                   <td className="action-column">
-                    <div className="action-buttons">
                       <button
                         className="edit"
                         onClick={() => navigate(`/edit/${item.id}`)}
@@ -146,7 +145,6 @@ function ItemIndex() {
                       >
                         Delete
                       </button>
-                    </div>
                   </td>
                 </tr>
               ))}
