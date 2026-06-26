@@ -16,11 +16,22 @@ function ItemForm() {
     productAvailability: string;
 
     // Supplier Fields
+    supplierId: string;
     supplierName: string;
     phoneNumber: string;
     email: string;
     address: string;
   }
+
+  interface Supplier {
+    id: number;
+    supplierName: string;
+    phoneNumber: string;
+    email: string;
+    address: string;
+  }
+
+  const [suppliers, setSuppliers] = useState<Supplier[]>([]);
 
   const [itemData, setItemData] = useState<ItemData>({
     itemName: "",
@@ -32,6 +43,7 @@ function ItemForm() {
     productCode: "",
     paymentMethod: "",
     productAvailability: "",
+    supplierId: "",
     supplierName: "",
     phoneNumber: "",
     email: "",
@@ -45,9 +57,35 @@ function ItemForm() {
   ) => {
     const { name, value } = e.target;
 
+    // If Supplier dropdown changes
+    if (name === "supplierName") {
+      // If user selects "Add New Supplier"
+      if (value === "ADD_NEW_SUPPLIER") {
+        localStorage.setItem("itemFormData", JSON.stringify(itemData));
+
+        navigate("/supplier");
+        navigate("/supplier");
+        return;
+      }
+
+      const selectedSupplier = suppliers.find(
+        (supplier) => supplier.supplierName === value,
+      );
+
+      setItemData({
+        ...itemData,
+        supplierId: selectedSupplier?.id.toString() || "",
+        supplierName: value,
+        phoneNumber: selectedSupplier?.phoneNumber || "",
+        email: selectedSupplier?.email || "",
+        address: selectedSupplier?.address || "",
+      });
+
+      return;
+    }
+
     setItemData({
       ...itemData,
-
       [name]: name === "price" || name === "quantity" ? Number(value) : value,
     });
   };
@@ -71,7 +109,7 @@ function ItemForm() {
             productCode: data.productCode,
             paymentMethod: data.paymentMethod,
             productAvailability: data.productAvailability,
-
+            supplierId: data.supplier?.id?.toString() || "",
             supplierName: data.supplier?.supplierName || "",
             phoneNumber: data.supplier?.phoneNumber || "",
             email: data.supplier?.email || "",
@@ -84,6 +122,27 @@ function ItemForm() {
         });
     }
   }, [id]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/suppliers")
+      .then((response) => response.json())
+      .then((data) => {
+        setSuppliers(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching suppliers:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const savedData = localStorage.getItem("itemFormData");
+
+    if (savedData) {
+      setItemData(JSON.parse(savedData));
+    }
+  }, []);
+
+  console.log(suppliers);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -259,13 +318,34 @@ function ItemForm() {
             <div className="form-grid">
               <div>
                 <label>Supplier Name</label>
-                <input
-                  type="text"
-                  placeholder="Enter Supplier Name"
+
+                <select
                   name="supplierName"
                   value={itemData.supplierName}
                   onChange={handleChange}
-                />
+                >
+                  <option value="">Select Supplier</option>
+
+                  {Array.from(
+                    new Map(
+                      suppliers
+                        .filter(
+                          (supplier) =>
+                            supplier.supplierName &&
+                            supplier.supplierName.trim() !== "",
+                        )
+                        .map((supplier) => [supplier.supplierName, supplier]),
+                    ).values(),
+                  ).map((supplier) => (
+                    <option key={supplier.id} value={supplier.supplierName}>
+                      {supplier.supplierName}
+                    </option>
+                  ))}
+
+                  <option value="ADD_NEW_SUPPLIER" className="add-btn">
+                    Add New Supplier
+                  </option>
+                </select>
               </div>
 
               <div>

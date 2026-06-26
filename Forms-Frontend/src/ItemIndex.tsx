@@ -132,19 +132,21 @@ function ItemIndex() {
                   <td>{item.supplier?.address}</td>
 
                   <td className="action-column">
-                      <button
+                      <span
                         className="edit"
+                        role="button"
                         onClick={() => navigate(`/edit/${item.id}`)}
                       >
                         Edit
-                      </button>
+                      </span>
 
-                      <button
+                      <span
                         className="delete"
+                        role="button"
                         onClick={() => deleteItem(item.id)}
                       >
                         Delete
-                      </button>
+                      </span>
                   </td>
                 </tr>
               ))}

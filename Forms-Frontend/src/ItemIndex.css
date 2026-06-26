@@ -174,3 +174,7 @@ body {
 .delete:hover {
   background: #dc2626;
 }
+
+.add-btn{
+  background-color: #886ae3;
+}
