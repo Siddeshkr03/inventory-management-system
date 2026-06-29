@@ -195,13 +195,6 @@ function ItemForm() {
       supplierId: Number(itemData.supplierId),
     };
 
-    const supplier = {
-      supplierName: itemData.supplierName,
-      phoneNumber: itemData.phoneNumber,
-      email: itemData.email,
-      address: itemData.address,
-    };
-
     const itemSupplierDTO = {
       item,
       supplierId: Number(itemData.supplierId),
