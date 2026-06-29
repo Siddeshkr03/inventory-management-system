@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 import "./SupplierIndex.css";
 
 function SupplierIndex() {
@@ -56,7 +57,8 @@ function SupplierIndex() {
 
   return (
     <>
-      <h1 className="title">Supplier Index</h1>
+    <Navbar />
+      <h1 className="title">Suppliers</h1>
 
       <div className="top-bar">
         <div className="search-container">
@@ -70,7 +72,7 @@ function SupplierIndex() {
           />
         </div>
 
-        <Link to="/add-supplier" state={{ from: "supplierIndex" }}>
+        <Link to="/suppliers/add" state={{ from: "supplierIndex" }}>
           <button className="add-btn">Add Supplier</button>
         </Link>
       </div>
@@ -114,7 +116,7 @@ function SupplierIndex() {
                 <td className="action-column">
                   <span
                     className="edit"
-                    onClick={() => navigate(`/supplier/edit/${supplier.id}`)}
+                    onClick={() => navigate(`/suppliers/edit/${supplier.id}`)}
                   >
                     Edit
                   </span>

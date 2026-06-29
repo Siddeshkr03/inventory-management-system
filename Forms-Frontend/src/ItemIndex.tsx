@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 import "./ItemIndex.css";
 
 function ItemIndex() {
@@ -67,7 +68,8 @@ function ItemIndex() {
 
   return (
     <>
-      <h1 className="title">Item Index</h1>
+    <Navbar />
+      <h1 className="title">Items</h1>
 
       <div className="top-bar">
         <div className="search-container">
@@ -81,11 +83,11 @@ function ItemIndex() {
           />
         </div>
 
-        <Link to="/forms">
+        <Link to="/items/add">
           <button className="add-btn"
             onClick={() => {
               localStorage.removeItem("itemFormData");
-              navigate("/forms");
+              navigate("/items/add");
             }}
           >
             Add Item
@@ -142,7 +144,7 @@ function ItemIndex() {
                     <span
                       className="edit"
                       role="button"
-                      onClick={() => navigate(`/edit/${item.id}`)}
+                      onClick={() => navigate(`items/edit/${item.id}`)}
                     >
                       Edit
                     </span>

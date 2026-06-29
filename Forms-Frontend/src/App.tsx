@@ -1,23 +1,27 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import ItemForm from './ItemForm';
-import ItemIndex from './ItemIndex';
+import ItemForm from "./ItemForm";
+import ItemIndex from "./ItemIndex";
 import SupplierForm from "./SupplierForm";
 import SupplierIndex from "./SupplierIndex";
+import Dashboard from "./Dashboard";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ItemIndex />} />
-        <Route path="/forms" element={<ItemForm />} />
-        <Route path="/edit/:id" element={<ItemForm />} />
-        <Route path="/add-supplier" element={<SupplierForm />} />
-        <Route path="/supplier" element={<SupplierIndex/>}></Route>
-        <Route path="/supplier/edit/:id" element={<SupplierForm />} />
+        <Route path="/" element={<Dashboard />}></Route>
+
+        <Route path="/items" element={<ItemIndex />} />
+        <Route path="/items/add" element={<ItemForm />} />
+        <Route path="/items/edit/:id" element={<ItemForm />} />
+
+        <Route path="/suppliers" element={<SupplierIndex />}></Route>
+        <Route path="/suppliers/add" element={<SupplierForm />} />
+        <Route path="/suppliers/edit/:id" element={<SupplierForm />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;

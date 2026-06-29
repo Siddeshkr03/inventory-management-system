@@ -76,9 +76,9 @@ function SupplierForm() {
       }
 
       if (location.state?.from === "itemForm") {
-        navigate("/forms");
+        navigate("/items/add");
       } else {
-        navigate("/supplier");
+        navigate("/suppliers");
       }
     } catch (error) {
       console.error(error);

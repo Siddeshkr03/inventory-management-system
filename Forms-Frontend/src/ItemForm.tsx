@@ -64,7 +64,7 @@ function ItemForm() {
       if (value === "ADD_NEW_SUPPLIER") {
         localStorage.setItem("itemFormData", JSON.stringify(itemData));
 
-        navigate("/add-supplier", {
+        navigate("/suppliers/add", {
           state: {
             from: "itemForm",
           },
