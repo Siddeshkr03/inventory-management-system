@@ -1,5 +1,5 @@
-import "./SupplierForm.css";import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./SupplierForm.css";
 
@@ -19,9 +19,31 @@ function SupplierForm() {
   });
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      fetch(`http://localhost:8080/api/suppliers/${id}`)
+        .then((response) => response.json())
+
+        .then((data) => {
+          setSupplierData({
+            supplierName: data.supplierName,
+            phoneNumber: data.phoneNumber,
+            email: data.email,
+            address: data.address,
+          });
+        })
+
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [id]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
 
@@ -31,36 +53,47 @@ function SupplierForm() {
     });
   };
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "http://localhost:8080/api/suppliers",
-        supplierData
-      );
+      if (id) {
+        await axios.put(
+          `http://localhost:8080/api/suppliers/${id}`,
+          supplierData,
+        );
 
-      alert("Supplier Added Successfully!");
+        alert("Supplier Updated Successfully!");
+      } else {
+        const response = await axios.post(
+          "http://localhost:8080/api/suppliers",
+          supplierData,
+        );
 
-      navigate("/forms");
+        localStorage.setItem("newSupplierId", response.data.id.toString());
+
+        alert("Supplier Added Successfully!");
+      }
+
+      if (location.state?.from === "itemForm") {
+        navigate("/forms");
+      } else {
+        navigate("/supplier");
+      }
     } catch (error) {
       console.error(error);
-      alert("Error adding supplier!");
+
+      alert("Error saving supplier!");
     }
   };
 
   return (
     <div className="supplier-page">
       <form onSubmit={handleSubmit}>
-
         <div className="supplier-block">
-
           <h1>Add Supplier</h1>
 
           <div className="form-grid">
-
             <div>
               <label>Supplier Name</label>
 
@@ -112,19 +145,13 @@ function SupplierForm() {
                 }}
               />
             </div>
-
           </div>
 
-          <button type="submit">
-            Save Supplier
-          </button>
-
+          <button type="submit">Save Supplier</button>
         </div>
-
       </form>
     </div>
   );
 }
 
 export default SupplierForm;
-

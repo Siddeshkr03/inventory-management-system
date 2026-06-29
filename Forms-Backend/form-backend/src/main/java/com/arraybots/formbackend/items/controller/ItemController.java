@@ -29,13 +29,13 @@ public class ItemController {
     @PostMapping
     public Item saveItem(@RequestBody ItemSupplierDTO dto) {
 
-        // Save supplier first
-        Supplier supplier = supplierService.saveSupplier(dto.getSupplier());
+        // Get the existing supplier using supplierId
+        Supplier supplier = supplierService.getSupplierById(dto.getSupplierId());
 
         // Get item from DTO
         Item item = dto.getItem();
 
-        // Link supplier to item
+        // Link the existing supplier
         item.setSupplier(supplier);
 
         // Save item

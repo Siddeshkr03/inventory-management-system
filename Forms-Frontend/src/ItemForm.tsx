@@ -32,6 +32,7 @@ function ItemForm() {
   }
 
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
+  const [newSupplierId, setNewSupplierId] = useState<string | null>(null);
 
   const [itemData, setItemData] = useState<ItemData>({
     itemName: "",
@@ -63,8 +64,11 @@ function ItemForm() {
       if (value === "ADD_NEW_SUPPLIER") {
         localStorage.setItem("itemFormData", JSON.stringify(itemData));
 
-        navigate("/supplier");
-        navigate("/supplier");
+        navigate("/add-supplier", {
+          state: {
+            from: "itemForm",
+          },
+        });
         return;
       }
 
@@ -139,10 +143,41 @@ function ItemForm() {
 
     if (savedData) {
       setItemData(JSON.parse(savedData));
+
+      localStorage.removeItem("itemFormData");
     }
   }, []);
 
   console.log(suppliers);
+
+  useEffect(() => {
+    const supplierId = localStorage.getItem("newSupplierId");
+
+    if (supplierId) {
+      setNewSupplierId(supplierId);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (newSupplierId && suppliers.length > 0) {
+      const selectedSupplier = suppliers.find(
+        (supplier) => supplier.id === Number(newSupplierId),
+      );
+
+      if (selectedSupplier) {
+        setItemData((prev) => ({
+          ...prev,
+          supplierId: selectedSupplier.id.toString(),
+          supplierName: selectedSupplier.supplierName,
+          phoneNumber: selectedSupplier.phoneNumber,
+          email: selectedSupplier.email,
+          address: selectedSupplier.address,
+        }));
+
+        localStorage.removeItem("newSupplierId");
+      }
+    }
+  }, [newSupplierId, suppliers]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -157,6 +192,7 @@ function ItemForm() {
       productCode: itemData.productCode,
       paymentMethod: itemData.paymentMethod,
       productAvailability: itemData.productAvailability,
+      supplierId: Number(itemData.supplierId),
     };
 
     const supplier = {
@@ -168,7 +204,7 @@ function ItemForm() {
 
     const itemSupplierDTO = {
       item,
-      supplier,
+      supplierId: Number(itemData.supplierId),
     };
 
     try {
@@ -185,6 +221,7 @@ function ItemForm() {
         alert("Saved Successfully!");
       }
 
+      localStorage.removeItem("itemFormData");
       navigate("/");
     } catch (error) {
       console.error(error);

@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f4f7fc;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.title {
+  text-align: center;
+  color: #1e3a8a;
+  margin: 35px 0;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.top-bar {
+  width: 95%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 25px;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-container label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.search-container input {
+  width: 320px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+}
+
+.add-btn {
+  background: #28c0df;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background: #14b8d4;
+}
+
+.supplier-table {
+  width: 95%;
+  margin: auto;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.supplier-table th {
+  background: #66c7de;
+  color: black;
+  padding: 12px;
+  font-size: 16px;
+}
+
+.supplier-table td {
+  padding: 14px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.supplier-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.supplier-table tbody tr:hover {
+  background: #eef7ff;
+}
+
+.action-column {
+  white-space: nowrap;
+}
+
+.edit,
+.delete {
+  display: inline-block;
+  min-width: 70px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.edit {
+  background: #2563eb;
+  margin-right: 10px;
+}
+
+.edit:hover {
+  background: #1d4ed8;
+}
+
+.delete {
+  background: #ef4444;
+}
+
+.delete:hover {
+  background: #dc2626;
+}
+
+@media (max-width: 768px) {
+
+  .title {
+    font-size: 34px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .search-container input {
+    width: 100%;
+  }
+
+  .supplier-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+}

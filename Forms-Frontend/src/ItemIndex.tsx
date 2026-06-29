@@ -82,7 +82,14 @@ function ItemIndex() {
         </div>
 
         <Link to="/forms">
-          <button className="add-btn">Add Item</button>
+          <button className="add-btn"
+            onClick={() => {
+              localStorage.removeItem("itemFormData");
+              navigate("/forms");
+            }}
+          >
+            Add Item
+          </button>
         </Link>
       </div>
 
@@ -132,21 +139,21 @@ function ItemIndex() {
                   <td>{item.supplier?.address}</td>
 
                   <td className="action-column">
-                      <span
-                        className="edit"
-                        role="button"
-                        onClick={() => navigate(`/edit/${item.id}`)}
-                      >
-                        Edit
-                      </span>
+                    <span
+                      className="edit"
+                      role="button"
+                      onClick={() => navigate(`/edit/${item.id}`)}
+                    >
+                      Edit
+                    </span>
 
-                      <span
-                        className="delete"
-                        role="button"
-                        onClick={() => deleteItem(item.id)}
-                      >
-                        Delete
-                      </span>
+                    <span
+                      className="delete"
+                      role="button"
+                      onClick={() => deleteItem(item.id)}
+                    >
+                      Delete
+                    </span>
                   </td>
                 </tr>
               ))}

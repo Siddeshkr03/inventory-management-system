@@ -13,4 +13,6 @@ public class ItemSupplierDTO {
 
     private Supplier supplier;
 
+    private Long supplierId;
+
 }
