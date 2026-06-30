@@ -91,7 +91,7 @@ function SupplierForm() {
     <div className="supplier-page">
       <form onSubmit={handleSubmit}>
         <div className="supplier-block">
-          <h1>Add Supplier</h1>
+          <h1 className="title">Add Supplier</h1>
 
           <div className="form-grid">
             <div>

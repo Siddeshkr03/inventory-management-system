@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./ItemForm.css";
+import SupplierModal from "./SupplierModal";
 
 function ItemForm() {
   interface ItemData {
@@ -32,7 +33,7 @@ function ItemForm() {
   }
 
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
-  const [newSupplierId, setNewSupplierId] = useState<string | null>(null);
+  const [showSupplierModal, setShowSupplierModal] = useState(false);
 
   const [itemData, setItemData] = useState<ItemData>({
     itemName: "",
@@ -62,13 +63,7 @@ function ItemForm() {
     if (name === "supplierName") {
       // If user selects "Add New Supplier"
       if (value === "ADD_NEW_SUPPLIER") {
-        localStorage.setItem("itemFormData", JSON.stringify(itemData));
-
-        navigate("/suppliers/add", {
-          state: {
-            from: "itemForm",
-          },
-        });
+        setShowSupplierModal(true);
         return;
       }
 
@@ -150,35 +145,6 @@ function ItemForm() {
 
   console.log(suppliers);
 
-  useEffect(() => {
-    const supplierId = localStorage.getItem("newSupplierId");
-
-    if (supplierId) {
-      setNewSupplierId(supplierId);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (newSupplierId && suppliers.length > 0) {
-      const selectedSupplier = suppliers.find(
-        (supplier) => supplier.id === Number(newSupplierId),
-      );
-
-      if (selectedSupplier) {
-        setItemData((prev) => ({
-          ...prev,
-          supplierId: selectedSupplier.id.toString(),
-          supplierName: selectedSupplier.supplierName,
-          phoneNumber: selectedSupplier.phoneNumber,
-          email: selectedSupplier.email,
-          address: selectedSupplier.address,
-        }));
-
-        localStorage.removeItem("newSupplierId");
-      }
-    }
-  }, [newSupplierId, suppliers]);
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -214,12 +180,29 @@ function ItemForm() {
         alert("Saved Successfully!");
       }
 
-      localStorage.removeItem("itemFormData");
       navigate("/");
     } catch (error) {
       console.error(error);
     }
   };
+
+const handleSupplierAdded = (newSupplier: Supplier) => {
+
+    setSuppliers((prevSuppliers) => [
+        ...prevSuppliers,
+        newSupplier,
+    ]);
+
+    setItemData((prev) => ({
+        ...prev,
+        supplierId: newSupplier.id.toString(),
+        supplierName: newSupplier.supplierName,
+        phoneNumber: newSupplier.phoneNumber,
+        email: newSupplier.email,
+        address: newSupplier.address,
+    }));
+
+};
 
   return (
     <div className="items">
@@ -425,6 +408,12 @@ function ItemForm() {
         </div>
         <button type="submit">Submit</button>
       </form>
+
+      <SupplierModal
+        isOpen={showSupplierModal}
+        onClose={() => setShowSupplierModal(false)}
+        onSupplierAdded={handleSupplierAdded}
+      />
     </div>
   );
 }

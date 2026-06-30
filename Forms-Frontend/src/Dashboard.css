@@ -12,11 +12,12 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   cursor: pointer;
+  height: 150px;
 }
 
 .dashboard-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 16px 28px #6AECE1;
 }
 
 .dashboard-card h3 {
