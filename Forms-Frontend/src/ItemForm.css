@@ -80,3 +80,11 @@ h2{
     align-self: center;
     margin-left: 280px;
 }
+
+.file{
+    border-color: wheat;
+}
+
+.file :hover{
+    background: none;
+}

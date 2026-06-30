@@ -186,23 +186,18 @@ function ItemForm() {
     }
   };
 
-const handleSupplierAdded = (newSupplier: Supplier) => {
-
-    setSuppliers((prevSuppliers) => [
-        ...prevSuppliers,
-        newSupplier,
-    ]);
+  const handleSupplierAdded = (newSupplier: Supplier) => {
+    setSuppliers((prevSuppliers) => [...prevSuppliers, newSupplier]);
 
     setItemData((prev) => ({
-        ...prev,
-        supplierId: newSupplier.id.toString(),
-        supplierName: newSupplier.supplierName,
-        phoneNumber: newSupplier.phoneNumber,
-        email: newSupplier.email,
-        address: newSupplier.address,
+      ...prev,
+      supplierId: newSupplier.id.toString(),
+      supplierName: newSupplier.supplierName,
+      phoneNumber: newSupplier.phoneNumber,
+      email: newSupplier.email,
+      address: newSupplier.address,
     }));
-
-};
+  };
 
   return (
     <div className="items">
@@ -324,6 +319,10 @@ const handleSupplierAdded = (newSupplier: Supplier) => {
                 <option value="low Stock">Low Stock</option>
                 <option value="Pre-order">Pre-order</option>
               </select>
+            </div>
+            <div>
+            <label>Upload File</label>
+            <input className="file" type="file" accept=".pdf" />
             </div>
           </div>
           <div className="supplier-block">
