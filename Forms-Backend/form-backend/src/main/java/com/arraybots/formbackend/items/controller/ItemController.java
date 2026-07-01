@@ -63,15 +63,13 @@ public class ItemController {
         return itemService.getItemById(id);
 
     }
+    
     @PutMapping("/{id}")
     public Item updateItem(@PathVariable Long id,
                            @RequestBody ItemSupplierDTO dto) {
 
-        Item existingItem = itemService.getItemById(id);
-
-        Supplier supplier = supplierService.updateSupplier(
-                existingItem.getSupplier().getId(),
-                dto.getSupplier()
+        Supplier supplier = supplierService.getSupplierById(
+                dto.getSupplierId()
         );
 
         Item item = dto.getItem();

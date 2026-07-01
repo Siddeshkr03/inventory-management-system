@@ -144,7 +144,7 @@ function ItemIndex() {
                     <span
                       className="edit"
                       role="button"
-                      onClick={() => navigate(`items/edit/${item.id}`)}
+                      onClick={() => navigate(`/items/edit/${item.id}`)}
                     >
                       Edit
                     </span>
