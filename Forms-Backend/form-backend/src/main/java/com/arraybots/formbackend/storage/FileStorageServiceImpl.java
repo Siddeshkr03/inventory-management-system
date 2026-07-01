@@ -9,54 +9,62 @@ import java.nio.file.Paths;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FileStorageServiceImpl implements FileStorageService {
 
     @Override
-    public String savePdf(MultipartFile file) {
+    public String saveFiles(MultipartFile[] files) {
 
         try {
 
-            if (file.isEmpty()) {
-
-                throw new RuntimeException("PDF file is empty.");
-
+            if (files.length == 0) {
+                throw new RuntimeException("No files selected.");
             }
 
-            String originalFileName = file.getOriginalFilename();
-
-            String uniqueFileName =
-                    System.currentTimeMillis() + "_" + originalFileName;
-
-            Path uploadPath = Paths.get("uploads/pdfs");
+            Path uploadPath = Paths.get("uploads/files");
 
             if (!Files.exists(uploadPath)) {
-
                 Files.createDirectories(uploadPath);
-
             }
 
-            Path filePath = uploadPath.resolve(uniqueFileName);
+            List<String> uploadedFileNames = new ArrayList<>();
 
-            file.transferTo(filePath);
+            for (MultipartFile file : files) {
 
-            return uniqueFileName;
+                if (file.isEmpty()) {
+                    continue;
+                }
+
+                String originalFileName = file.getOriginalFilename();
+
+                String uniqueFileName =
+                        System.currentTimeMillis() + "_" + originalFileName;
+
+                Path filePath = uploadPath.resolve(uniqueFileName);
+
+                file.transferTo(filePath);
+
+                uploadedFileNames.add(uniqueFileName);
+            }
+
+            return String.join(",", uploadedFileNames);
 
         } catch (IOException e) {
 
-            throw new RuntimeException("Error while saving PDF.", e);
+            throw new RuntimeException("Error while saving files.", e);
 
         }
 
     }
-
     @Override
-    public Resource loadPdf(String fileName) {
+    public Resource loadFiles(String fileName) {
 
         try {
 
-            Path filePath = Paths.get("uploads/pdfs")
+            Path filePath = Paths.get("uploads/files")
                     .resolve(fileName)
                     .normalize();
 

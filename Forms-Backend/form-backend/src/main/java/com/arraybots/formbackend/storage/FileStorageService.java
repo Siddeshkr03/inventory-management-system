@@ -5,8 +5,8 @@ import org.springframework.core.io.Resource;
 
 public interface FileStorageService {
 
-    String savePdf(MultipartFile file);
+    String saveFiles(MultipartFile[] file);
 
-    Resource loadPdf(String fileName);
+    Resource loadFiles(String fileName);
 
 }

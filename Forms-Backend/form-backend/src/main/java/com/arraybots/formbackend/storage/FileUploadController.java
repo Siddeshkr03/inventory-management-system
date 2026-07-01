@@ -26,11 +26,11 @@ public class FileUploadController {
     @PostMapping("/upload")
     public String uploadPdf(
 
-            @RequestParam("pdfFile") MultipartFile pdfFile
+            @RequestParam("files") MultipartFile[] files
 
     ) {
 
-        return fileStorageService.savePdf(pdfFile);
+        return fileStorageService.saveFiles(files);
 
     }
 
@@ -39,7 +39,7 @@ public class FileUploadController {
             @PathVariable String fileName
     ) {
 
-        Resource resource = fileStorageService.loadPdf(fileName);
+        Resource resource = fileStorageService.loadFiles(fileName);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_PDF)

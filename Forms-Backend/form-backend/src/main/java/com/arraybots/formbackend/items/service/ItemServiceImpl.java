@@ -61,6 +61,7 @@ public class ItemServiceImpl implements ItemService {
         existingItem.setProductCode(item.getProductCode());
         existingItem.setPaymentMethod(item.getPaymentMethod());
         existingItem.setProductAvailability(item.getProductAvailability());
+        existingItem.setFiles(item.getFiles());
 
         existingItem.setSupplier(item.getSupplier());
 

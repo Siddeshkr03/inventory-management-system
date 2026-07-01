@@ -34,7 +34,7 @@ function ItemForm() {
 
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [showSupplierModal, setShowSupplierModal] = useState(false);
-  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
 
   const [itemData, setItemData] = useState<ItemData>({
     itemName: "",
@@ -151,20 +151,20 @@ function ItemForm() {
 
     let uploadedFileName = "";
 
-    if (pdfFile) {
+    if (files) {
+      const formData = new FormData();
 
-  const formData = new FormData();
+      files.forEach((file) => {
+        formData.append("files", file);
+      });
 
-  formData.append("pdfFile", pdfFile);
+      const uploadResponse = await axios.post(
+        "http://localhost:8080/api/files/upload",
+        formData,
+      );
 
-  const uploadResponse = await axios.post(
-    "http://localhost:8080/api/files/upload",
-    formData,
-  );
-
-  uploadedFileName = uploadResponse.data;
-
-}
+      uploadedFileName = uploadResponse.data;
+    }
 
     const item = {
       itemName: itemData.itemName,
@@ -177,7 +177,7 @@ function ItemForm() {
       paymentMethod: itemData.paymentMethod,
       productAvailability: itemData.productAvailability,
       supplierId: Number(itemData.supplierId),
-      pdfFile: uploadedFileName,
+      files: uploadedFileName,
     };
 
     const itemSupplierDTO = {
@@ -340,20 +340,17 @@ function ItemForm() {
               </select>
             </div>
             <div>
-            <label>Upload File</label>
-            <input
-    type="file"
-    accept="application/pdf"
-    onChange={(e) => {
-
-        if (e.target.files) {
-
-            setPdfFile(e.target.files[0]);
-
-        }
-
-    }}
-/>
+              <label>Upload File</label>
+              <input
+                type="file"
+                multiple
+                accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.txt"
+                onChange={(e) => {
+                  if (e.target.files) {
+                    setFiles(Array.from(e.target.files));
+                  }
+                }}
+              />
             </div>
           </div>
           <div className="supplier-block">

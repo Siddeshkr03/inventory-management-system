@@ -23,7 +23,7 @@ function ItemShow() {
     productCode: string;
     paymentMethod: string;
     productAvailability: string;
-    pdfFile: string;
+    files: string;
     supplier: Supplier;
   }
 
@@ -39,106 +39,111 @@ function ItemShow() {
       const response = await axios.get(`http://localhost:8080/api/items/${id}`);
 
       setItem(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-  <div className="item-show-container">
-    <div className="item-show-card">
-      <h1 className="title">Item Details</h1>
+    <div className="item-show-container">
+      <div className="item-show-card">
+        <h1 className="title">Item Details</h1>
 
-      <div className="details-grid">
-        <div className="detail-box">
-          <label>Item Name</label>
-          <span>{item?.itemName}</span>
+        <div className="details-grid">
+          <div className="detail-box">
+            <label>Item Name</label>
+            <span>{item?.itemName}</span>
+          </div>
+
+          <div className="detail-box">
+            <label>Price</label>
+            <span>₹ {item?.price}</span>
+          </div>
+
+          <div className="detail-box">
+            <label>Quantity</label>
+            <span>{item?.quantity}</span>
+          </div>
+
+          <div className="detail-box">
+            <label>Category</label>
+            <span>{item?.category}</span>
+          </div>
+
+          <div className="detail-box">
+            <label>Brand</label>
+            <span>{item?.brand}</span>
+          </div>
+
+          <div className="detail-box">
+            <label>Purchase Date</label>
+            <span>{item?.purchaseDate}</span>
+          </div>
+
+          <div className="detail-box">
+            <label>Product Code</label>
+            <span>{item?.productCode}</span>
+          </div>
+
+          <div className="detail-box">
+            <label>Payment Method</label>
+            <span>{item?.paymentMethod}</span>
+          </div>
+
+          <div className="detail-box">
+            <label>Availability</label>
+            <span>{item?.productAvailability}</span>
+          </div>
+
+          <div className="detail-box">
+            <label>Files</label>
+
+            {item?.files ? (
+              item.files.split(",").map((fileName, index) => (
+                <div key={index}>
+                  <a
+                    className="pdf-btn"
+                    href={`http://localhost:8080/api/files/${fileName}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    📄{fileName}
+                  </a>
+                </div>
+              ))
+            ) : (
+              <span>No Files Uploaded</span>
+            )}
+          </div>
         </div>
 
-        <div className="detail-box">
-          <label>Price</label>
-          <span>₹ {item?.price}</span>
-        </div>
+        <h2 className="section-title">Supplier Details</h2>
 
-        <div className="detail-box">
-          <label>Quantity</label>
-          <span>{item?.quantity}</span>
-        </div>
+        <div className="details-grid">
+          <div className="detail-box">
+            <label>Supplier Name</label>
+            <span>{item?.supplier?.supplierName}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Category</label>
-          <span>{item?.category}</span>
-        </div>
+          <div className="detail-box">
+            <label>Phone Number</label>
+            <span>{item?.supplier?.phoneNumber}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Brand</label>
-          <span>{item?.brand}</span>
-        </div>
+          <div className="detail-box">
+            <label>Email</label>
+            <span>{item?.supplier?.email}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Purchase Date</label>
-          <span>{item?.purchaseDate}</span>
-        </div>
-
-        <div className="detail-box">
-          <label>Product Code</label>
-          <span>{item?.productCode}</span>
-        </div>
-
-        <div className="detail-box">
-          <label>Payment Method</label>
-          <span>{item?.paymentMethod}</span>
-        </div>
-
-        <div className="detail-box">
-          <label>Availability</label>
-          <span>{item?.productAvailability}</span>
-        </div>
-
-        <div className="detail-box">
-          <label>Product Manual</label>
-
-          {item?.pdfFile ? (
-            <a
-              className="pdf-btn"
-              href={`http://localhost:8080/api/files/${item.pdfFile}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              📄 View PDF
-            </a>
-          ) : (
-            <span>No File Uploaded</span>
-          )}
-        </div>
-      </div>
-
-      <h2 className="section-title">Supplier Details</h2>
-
-      <div className="details-grid">
-        <div className="detail-box">
-          <label>Supplier Name</label>
-          <span>{item?.supplier?.supplierName}</span>
-        </div>
-
-        <div className="detail-box">
-          <label>Phone Number</label>
-          <span>{item?.supplier?.phoneNumber}</span>
-        </div>
-
-        <div className="detail-box">
-          <label>Email</label>
-          <span>{item?.supplier?.email}</span>
-        </div>
-
-        <div className="detail-box">
-          <label>Address</label>
-          <span>{item?.supplier?.address}</span>
+          <div className="detail-box">
+            <label>Address</label>
+            <span>{item?.supplier?.address}</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default ItemShow;
