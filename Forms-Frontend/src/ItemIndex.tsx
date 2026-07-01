@@ -68,7 +68,7 @@ function ItemIndex() {
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <h1 className="title">Items</h1>
 
       <div className="top-bar">
@@ -84,7 +84,8 @@ function ItemIndex() {
         </div>
 
         <Link to="/items/add">
-          <button className="add-btn"
+          <button
+            className="add-btn"
             onClick={() => {
               localStorage.removeItem("itemFormData");
               navigate("/items/add");
@@ -141,6 +142,9 @@ function ItemIndex() {
                   <td>{item.supplier?.address}</td>
 
                   <td className="action-column">
+                    <span className="view-btn" role="button" onClick={() => navigate(`/items/view/${item.id}`)}>
+                      👁
+                    </span>
                     <span
                       className="edit"
                       role="button"

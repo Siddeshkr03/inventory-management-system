@@ -17,6 +17,10 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
 
+                .headers(headers ->
+                        headers.frameOptions(frame -> frame.disable())
+                )
+
                 .authorizeHttpRequests(auth ->
                         auth.anyRequest().permitAll()
                 )

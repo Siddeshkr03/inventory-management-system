@@ -178,3 +178,15 @@ body {
 .add-btn{
   background-color: #886ae3;
 }
+
+.view-btn {
+  background-color: #2fbed1;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 800px;
+margin-right: 20px;
+padding: 10px;
+}

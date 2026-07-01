@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import java.net.MalformedURLException;
 
 @Service
 public class FileStorageServiceImpl implements FileStorageService {
@@ -46,5 +49,29 @@ public class FileStorageServiceImpl implements FileStorageService {
 
         }
 
+    }
+
+    @Override
+    public Resource loadPdf(String fileName) {
+
+        try {
+
+            Path filePath = Paths.get("uploads/pdfs")
+                    .resolve(fileName)
+                    .normalize();
+
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists()) {
+                return resource;
+            }
+
+            throw new RuntimeException("File not found.");
+
+        } catch (MalformedURLException e) {
+
+            throw new RuntimeException(e);
+
+        }
     }
 }

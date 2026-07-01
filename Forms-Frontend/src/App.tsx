@@ -5,6 +5,7 @@ import ItemIndex from "./ItemIndex";
 import SupplierForm from "./SupplierForm";
 import SupplierIndex from "./SupplierIndex";
 import Dashboard from "./Dashboard";
+import ItemShow from "./ItemShow";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/items" element={<ItemIndex />} />
         <Route path="/items/add" element={<ItemForm />} />
         <Route path="/items/edit/:id" element={<ItemForm />} />
+        <Route path="/items/view/:id" element={<ItemShow />} />
 
         <Route path="/suppliers" element={<SupplierIndex />}></Route>
         <Route path="/suppliers/add" element={<SupplierForm />} />
