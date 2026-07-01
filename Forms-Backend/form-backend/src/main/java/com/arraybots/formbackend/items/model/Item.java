@@ -39,4 +39,6 @@ public class Item {
 
     private String productAvailability;
 
+    private String pdfFile;
+
 }

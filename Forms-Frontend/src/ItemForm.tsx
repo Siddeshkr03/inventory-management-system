@@ -34,6 +34,7 @@ function ItemForm() {
 
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [showSupplierModal, setShowSupplierModal] = useState(false);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
 
   const [itemData, setItemData] = useState<ItemData>({
     itemName: "",
@@ -148,6 +149,23 @@ function ItemForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    let uploadedFileName = "";
+
+    if (pdfFile) {
+
+  const formData = new FormData();
+
+  formData.append("pdfFile", pdfFile);
+
+  const uploadResponse = await axios.post(
+    "http://localhost:8080/api/files/upload",
+    formData,
+  );
+
+  uploadedFileName = uploadResponse.data;
+
+}
+
     const item = {
       itemName: itemData.itemName,
       price: itemData.price,
@@ -159,6 +177,7 @@ function ItemForm() {
       paymentMethod: itemData.paymentMethod,
       productAvailability: itemData.productAvailability,
       supplierId: Number(itemData.supplierId),
+      pdfFile: uploadedFileName,
     };
 
     const itemSupplierDTO = {
@@ -322,7 +341,19 @@ function ItemForm() {
             </div>
             <div>
             <label>Upload File</label>
-            <input className="file" type="file" accept=".pdf" />
+            <input
+    type="file"
+    accept="application/pdf"
+    onChange={(e) => {
+
+        if (e.target.files) {
+
+            setPdfFile(e.target.files[0]);
+
+        }
+
+    }}
+/>
             </div>
           </div>
           <div className="supplier-block">
