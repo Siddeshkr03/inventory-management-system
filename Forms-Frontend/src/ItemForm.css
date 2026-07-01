@@ -88,3 +88,11 @@ h2{
 .file :hover{
     background: none;
 }
+
+.supplier-section {
+    margin-top: 50px;
+}
+
+.supplier-section .details-grid {
+    margin-top: 20px;
+}

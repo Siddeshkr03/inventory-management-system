@@ -6,6 +6,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @RestController
 
@@ -35,20 +37,27 @@ public class FileUploadController {
     }
 
     @GetMapping("/{fileName}")
-    public ResponseEntity<Resource> viewPdf(
-            @PathVariable String fileName
-    ) {
+    public ResponseEntity<Resource> viewFile(
+            @PathVariable String fileName) {
 
         Resource resource = fileStorageService.loadFiles(fileName);
 
+        String contentType;
+
+        try {
+            Path path = resource.getFile().toPath();
+            contentType = Files.probeContentType(path);
+        } catch (Exception e) {
+            contentType = "application/octet-stream";
+        }
+
         return ResponseEntity.ok()
-                .contentType(MediaType.APPLICATION_PDF)
+                .contentType(MediaType.parseMediaType(contentType))
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
                         "inline; filename=\"" + fileName + "\""
                 )
                 .body(resource);
-
     }
 
 }
