@@ -100,6 +100,49 @@
   text-decoration: underline;
 }
 
+.header {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.title {
+    text-align: center;
+    color: #173b67;
+    font-size: 34px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 42px;
+    height: 42px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ff4d6d;
+    font-size: 34px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.close-btn:hover {
+    background: transparent !important;
+    color: #d90429;
+    transform: scale(1.15);
+    box-shadow: none;
+}
+
+.close-btn:focus,
+.close-btn:active {
+    background: transparent !important;
+    outline: none;
+    box-shadow: none;
+}
+
 @media (max-width:768px){
 
     .item-show-card{

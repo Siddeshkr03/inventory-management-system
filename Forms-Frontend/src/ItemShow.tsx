@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./ItemShow.css";
 
@@ -28,6 +28,7 @@ function ItemShow() {
   }
 
   const { id } = useParams();
+  const navigate = useNavigate();
   const [item, setItem] = useState<Item | null>(null);
 
   useEffect(() => {
@@ -48,7 +49,16 @@ function ItemShow() {
 return (
   <div className="item-show-container">
     <div className="item-show-card">
-      <h1 className="title">Item Details</h1>
+        <div className="header">
+  <h1 className="title">Item Details</h1>
+
+  <button
+    className="close-btn"
+    onClick={() => navigate("/items")} // or "/" if your Item Index is the home page
+  >
+    ✕
+  </button>
+</div>
 
       <div className="details-grid">
         <div className="detail-box">
