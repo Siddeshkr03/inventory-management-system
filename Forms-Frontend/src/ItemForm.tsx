@@ -123,8 +123,8 @@ function ItemForm() {
         .then((data) => {
           setItemData({
             itemName: data.itemName,
-            price: data.price,
-            quantity: data.quantity,
+            price: String(data.price),
+            quantity: String(data.quantity),
             category: data.category,
             brand: data.brand,
             purchaseDate: data.purchaseDate,
