@@ -115,3 +115,32 @@ h2{
     margin-top:5px;
     font-weight:500;
 }
+
+.page-header{
+    display:flex;
+    justify-content:flex-start;
+    margin-bottom:20px;
+}
+
+.back-btn{
+    background:none;
+    border:none;
+    color:#2c5aa0;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    padding:0;
+    width:auto;
+    margin:0;
+    font-size: 32px;
+}
+
+.back-btn:hover{
+    background:none;
+    color:#174a8b;
+    box-shadow:none;
+}
+
+.back-btn:focus{
+    outline:none;
+}

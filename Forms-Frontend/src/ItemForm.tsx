@@ -330,6 +330,15 @@ function ItemForm() {
   return (
     <div className="items">
       <form onSubmit={handleSubmit}>
+        <div className="page-header">
+          <button
+            type="button"
+            className="back-btn"
+            onClick={() => navigate("/items")}
+          >
+            ⬅
+          </button>
+        </div>
         <div className="items-block">
           <h1 className="section-title">Item Details</h1>
           <hr className="section-divider" />
