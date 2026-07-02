@@ -127,27 +127,31 @@ function ItemIndex() {
                   <td>{item.supplier?.supplierName}</td>
 
                   <td className="action-column">
-                    <span
-                      className="view-btn"
-                      role="button"
-                      onClick={() => navigate(`/items/view/${item.id}`)}
-                    >
-                      👁
-                    </span>
-                    <span
-                      className="edit"
-                      role="button"
-                      onClick={() => navigate(`/items/edit/${item.id}`)}
-                    >
-                      Edit
-                    </span>
-                    <span
-                      className="delete"
-                      role="button"
-                      onClick={() => deleteItem(item.id)}
-                    >
-                      Delete
-                    </span>
+                    <div className="action-buttons">
+                      <span
+                        className="view-btn"
+                        role="button"
+                        onClick={() => navigate(`/items/view/${item.id}`)}
+                      >
+                        👁️
+                      </span>
+
+                      <span
+                        className="edit"
+                        role="button"
+                        onClick={() => navigate(`/items/edit/${item.id}`)}
+                      >
+                        ✏️
+                      </span>
+
+                      <span
+                        className="delete"
+                        role="button"
+                        onClick={() => deleteItem(item.id)}
+                      >
+                        🗑️
+                      </span>
+                    </div>
                   </td>
                 </tr>
               ))}

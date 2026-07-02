@@ -88,54 +88,6 @@ body {
   border-radius: 6px;
 }
 
-.delete {
-  background-color: #f05a5a;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 30px;
-}
-
-.edit {
-  background-color: #40d8e9;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-btn:hover,
-.delete:hover,
-.edit:hover {
-  background-color: #1d4ed8;
-  color: white;
-}
-
-.action-column {
-  width: 150px;
-  text-align: center;
-  vertical-align: middle;
-}
-
-.action-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
-
-.edit,
-.delete {
-  min-width: 65px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
@@ -154,59 +106,54 @@ body {
   white-space: nowrap;
 }
 
-.action-column {
-  width: 170px;
-  min-width: 170px;
-  text-align: center;
+.action-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:4px;
 }
 
-.action-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+.action-column{
+    width:1%;
+    white-space:nowrap;
 }
 
+.view-btn,
 .edit,
-.delete {
-  padding: 7px 14px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.delete{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:30px;
+    height:30px;
+    margin:0 3px;
+    padding:0;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:18px;
+    user-select:none;
 }
 
-.edit {
-  background: #2563eb;
-  color: white;
-  width: 80px;
+.view-btn{
+    background:#2fbed1;
 }
 
-.edit:hover {
-  background: #1d4ed8;
+.edit{
+    background:#2563eb;
 }
 
-.delete {
-  background: #ef4444;
-  color: white;
-  width: 80px;
+.delete{
+    background:#ef4444;
 }
 
-.delete:hover {
-  background: #dc2626;
+.view-btn:hover{
+    background:#1ea7ba;
 }
 
-.add-btn{
-  background-color: #886ae3;
+.edit:hover{
+    background:#1d4ed8;
 }
 
-.view-btn {
-  background-color: #2fbed1;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 800px;
-margin-right: 20px;
-padding: 10px;
+.delete:hover{
+    background:#dc2626;
 }

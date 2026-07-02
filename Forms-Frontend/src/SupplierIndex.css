@@ -111,7 +111,8 @@ body {
 .edit,
 .delete {
   display: inline-block;
-  width: 75px;
+  width: 40px;
+  height: 20px;
   padding: 8px 0;
   border-radius: 5px;
   color: white;

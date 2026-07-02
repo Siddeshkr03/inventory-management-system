@@ -113,7 +113,7 @@ function SupplierIndex() {
                           navigate(`/suppliers/edit/${supplier.id}`)
                         }
                       >
-                        Edit
+                        ✏️
                       </span>
 
                       <span
@@ -121,7 +121,7 @@ function SupplierIndex() {
                         role="button"
                         onClick={() => deleteSupplier(supplier.id)}
                       >
-                        Delete
+                        🗑️
                       </span>
                     </div>
                   </td>
