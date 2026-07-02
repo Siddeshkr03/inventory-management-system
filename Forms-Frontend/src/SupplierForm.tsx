@@ -159,6 +159,15 @@ function SupplierForm() {
   return (
     <div className="supplier-page">
       <form onSubmit={handleSubmit}>
+        <div className="page-header">
+          <button
+            type="button"
+            className="back-btn"
+            onClick={() => navigate("/suppliers")}
+          >
+            ⬅
+          </button>
+        </div>
         <div className="supplier-block">
           <h1 className="title">Add Supplier</h1>
 

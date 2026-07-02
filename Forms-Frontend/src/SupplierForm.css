@@ -28,3 +28,32 @@ form {
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
+
+.page-header{
+    display:flex;
+    justify-content:flex-start;
+    margin-bottom:20px;
+}
+
+.back-btn{
+    background:none;
+    border:none;
+    color:#2c5aa0;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    width:auto;
+    margin:0;
+    padding:0;
+    font-size: 32px;
+}
+
+.back-btn:hover{
+    background:none;
+    color:#174a8b;
+    box-shadow:none;
+}
+
+.back-btn:focus{
+    outline:none;
+}
