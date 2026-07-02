@@ -18,6 +18,13 @@ function SupplierForm() {
     address: "",
   });
 
+  const [errors, setErrors] = useState({
+    supplierName: "",
+    phoneNumber: "",
+    email: "",
+    address: "",
+  });
+
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
@@ -47,14 +54,76 @@ function SupplierForm() {
   ) => {
     const { name, value } = e.target;
 
+    if (name === "phoneNumber") {
+      if (!/^\d*$/.test(value)) {
+        return;
+      }
+    }
+
     setSupplierData({
       ...supplierData,
       [name]: value,
     });
+
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
+  };
+
+  const validate = () => {
+    const newErrors = {
+      supplierName: "",
+      phoneNumber: "",
+      email: "",
+      address: "",
+    };
+
+    let isValid = true;
+
+    // Supplier Name
+    if (!supplierData.supplierName.trim()) {
+      newErrors.supplierName = "Supplier Name is required";
+      isValid = false;
+    }
+
+    // Phone Number
+    if (!supplierData.phoneNumber.trim()) {
+      newErrors.phoneNumber = "Phone Number is required";
+      isValid = false;
+    } else if (!/^\d{10}$/.test(supplierData.phoneNumber)) {
+      newErrors.phoneNumber = "Phone Number must be 10 digits";
+      isValid = false;
+    }
+
+    // Email
+    if (!supplierData.email.trim()) {
+      newErrors.email = "Email is required";
+      isValid = false;
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(supplierData.email)
+    ) {
+      newErrors.email = "Enter a valid email address";
+      isValid = false;
+    }
+
+    // Address
+    if (!supplierData.address.trim()) {
+      newErrors.address = "Address is required";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    return isValid;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!validate()) {
+      return;
+    }
 
     try {
       if (id) {
@@ -104,18 +173,25 @@ function SupplierForm() {
                 value={supplierData.supplierName}
                 onChange={handleChange}
               />
+              {errors.supplierName && (
+                <p className="error">{errors.supplierName}</p>
+              )}
             </div>
 
             <div>
               <label>Phone Number</label>
 
               <input
-                type="text"
+                type="tel"
                 name="phoneNumber"
                 placeholder="Enter Phone Number"
                 value={supplierData.phoneNumber}
                 onChange={handleChange}
+                maxLength={10}
               />
+              {errors.phoneNumber && (
+                <p className="error">{errors.phoneNumber}</p>
+              )}
             </div>
 
             <div>
@@ -128,6 +204,7 @@ function SupplierForm() {
                 value={supplierData.email}
                 onChange={handleChange}
               />
+              {errors.email && <p className="error">{errors.email}</p>}
             </div>
 
             <div>
@@ -144,6 +221,7 @@ function SupplierForm() {
                   resize: "vertical",
                 }}
               />
+              {errors.address && <p className="error">{errors.address}</p>}
             </div>
           </div>
 
