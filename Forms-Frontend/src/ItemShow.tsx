@@ -49,107 +49,117 @@ function ItemShow() {
 return (
   <div className="item-show-container">
     <div className="item-show-card">
-        <div className="header">
-  <h1 className="title">Item Details</h1>
 
-  <button
-    className="close-btn"
-    onClick={() => navigate("/items")} // or "/" if your Item Index is the home page
-  >
-    ✕
-  </button>
-</div>
+      {/* Close Button */}
+      <button
+        className="close-btn"
+        onClick={() => navigate("/")}
+      >
+        ✕
+      </button>
 
-      <div className="details-grid">
-        <div className="detail-box">
-          <label>Item Name</label>
-          <span>{item?.itemName}</span>
-        </div>
+      {/* Item Details */}
+      <div className="item-section">
+        <h2 className="item-h">Item Details</h2>
 
-        <div className="detail-box">
-          <label>Price</label>
-          <span>₹ {item?.price}</span>
-        </div>
+        <div className="details-grid">
 
-        <div className="detail-box">
-          <label>Quantity</label>
-          <span>{item?.quantity}</span>
-        </div>
+          <div className="field">
+            <strong>Item Name</strong>
+            <span>{item?.itemName}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Category</label>
-          <span>{item?.category}</span>
-        </div>
+          <div className="field">
+            <strong>Price</strong>
+            <span>₹ {item?.price}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Brand</label>
-          <span>{item?.brand}</span>
-        </div>
+          <div className="field">
+            <strong>Quantity</strong>
+            <span>{item?.quantity}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Purchase Date</label>
-          <span>{item?.purchaseDate}</span>
-        </div>
+          <div className="field">
+            <strong>Category</strong>
+            <span>{item?.category}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Product Code</label>
-          <span>{item?.productCode}</span>
-        </div>
+          <div className="field">
+            <strong>Brand</strong>
+            <span>{item?.brand}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Payment Method</label>
-          <span>{item?.paymentMethod}</span>
-        </div>
+          <div className="field">
+            <strong>Purchase Date</strong>
+            <span>{item?.purchaseDate}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Availability</label>
-          <span>{item?.productAvailability}</span>
-        </div>
+          <div className="field">
+            <strong>Product Code</strong>
+            <span>{item?.productCode}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Files</label>
+          <div className="field">
+            <strong>Payment Method</strong>
+            <span>{item?.paymentMethod}</span>
+          </div>
 
-          {item?.files ? (
-            <div className="file-list">
-              {item.files.split(",").map((fileName, index) => (
-                <a
-                  key={index}
-                  className="file-link"
-                  href={`http://localhost:8080/api/files/${fileName.trim()}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  📄 {fileName.substring(fileName.indexOf("_") + 1)}
-                </a>
-              ))}
-            </div>
-          ) : (
-            <span>No Files Uploaded</span>
-          )}
+          <div className="field">
+            <strong>Availability</strong>
+            <span>{item?.productAvailability}</span>
+          </div>
+
+          <div className="field">
+            <strong>Files</strong>
+
+            {item?.files ? (
+              <div className="file-list">
+                {item.files.split(",").map((fileName, index) => (
+                  <a
+                    key={index}
+                    className="file-link"
+                    href={`http://localhost:8080/api/files/${fileName.trim()}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    📄 {fileName.substring(fileName.indexOf("_") + 1)}
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <span>No Files Uploaded</span>
+            )}
+          </div>
+
         </div>
       </div>
 
-      <h2 className="section-title">Supplier Details</h2>
+      {/* Supplier Details */}
+      <div className="supplier-section">
+        <h2 className="supplier-h">Supplier Details</h2>
 
-      <div className="details-grid">
-        <div className="detail-box">
-          <label>Supplier Name</label>
-          <span>{item?.supplier?.supplierName}</span>
-        </div>
+        <div className="details-grid">
 
-        <div className="detail-box">
-          <label>Phone Number</label>
-          <span>{item?.supplier?.phoneNumber}</span>
-        </div>
+          <div className="field">
+            <strong>Supplier Name</strong>
+            <span>{item?.supplier?.supplierName}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Email</label>
-          <span>{item?.supplier?.email}</span>
-        </div>
+          <div className="field">
+            <strong>Phone Number</strong>
+            <span>{item?.supplier?.phoneNumber}</span>
+          </div>
 
-        <div className="detail-box">
-          <label>Address</label>
-          <span>{item?.supplier?.address}</span>
+          <div className="field">
+            <strong>Email</strong>
+            <span>{item?.supplier?.email}</span>
+          </div>
+
+          <div className="field">
+            <strong>Address</strong>
+            <span>{item?.supplier?.address}</span>
+          </div>
+
         </div>
       </div>
     </div>

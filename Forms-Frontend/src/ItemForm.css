@@ -1,26 +1,29 @@
 body{
-    background-color: rgb(7, 216, 202);
+    background-color: #87d3e6;
 }
 
 .items{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 80px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:50px 20px;
 }
 
 h1{
-    display: block;
-    align-self: center;
-    margin-left: 310px;
+    text-align: center;
+    margin: 0 0 35px;
+    color: #1e3a8a;
+    font-size: 42px;
+    font-weight: 700;
 }
 
 form{
-    border: 1px solid black;
-    padding: 30px;
-    width:700px;
-    background-color: rgb(125, 211, 228);
+    width: 720px;
+    padding: 35px;
+    background: #ffffff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.15);
 }
 
 .form-grid{
@@ -30,10 +33,11 @@ form{
 }
 
 label{
-    display: block;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-weight: bold;
+    display:block;
+    margin-bottom:6px;
+    font-size:15px;
+    font-weight:600;
+    color:#173b67;
 }
 
 input{
@@ -76,9 +80,12 @@ input:hover{
 }
 
 h2{
-    display: block;
-    align-self: center;
-    margin-left: 280px;
+    text-align:center;
+    margin:40px 0 25px;
+    color:#1e3a8a;
+    font-size:30px;
+    border-bottom:2px solid #ddd;
+    padding-bottom:10px;
 }
 
 .file{
