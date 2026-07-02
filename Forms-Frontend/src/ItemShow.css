@@ -15,31 +15,6 @@
   position: relative;
 }
 
-/* Close Button */
-
-.close-btn {
-  position: absolute;
-  top: 18px;
-  right: 25px;
-  background: none;
-  border: none;
-  color: #ff4d6d;
-  cursor: pointer;
-  padding: 0;
-  font-size: 34px;
-  font-weight: bold;
-}
-
-.close-btn:hover {
-  background: none;
-  color: #ff1744;
-}
-
-.close-btn:focus {
-  outline: none;
-  background: none;
-}
-
 /* Sections */
 
 .item-section,
@@ -117,6 +92,35 @@
   color: #173b67;
   font-size: 24px;
   margin-top: 0px;
+}
+
+.page-header{
+    display:flex;
+    justify-content:flex-start;
+    margin-bottom:20px;
+}
+
+.back-btn{
+    background:none;
+    border:none;
+    color:#2c5aa0;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    padding:0;
+    margin:0;
+    width:auto;
+    font-size: 32px;
+}
+
+.back-btn:hover{
+    background:none;
+    color:#174a8b;
+    box-shadow:none;
+}
+
+.back-btn:focus{
+    outline:none;
 }
 
 /* Responsive */
