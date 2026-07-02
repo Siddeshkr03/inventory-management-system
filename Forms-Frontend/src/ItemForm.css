@@ -9,14 +9,6 @@ body{
     padding:50px 20px;
 }
 
-h1{
-    text-align: center;
-    margin: 0 0 35px;
-    color: #1e3a8a;
-    font-size: 42px;
-    font-weight: 700;
-}
-
 form{
     width: 720px;
     padding: 35px;
@@ -40,43 +32,44 @@ label{
     color:#173b67;
 }
 
-input{
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    margin-bottom: 15px;
+input,
+select,
+textarea{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+    transition:.3s;
+    box-sizing:border-box;
 }
 
-select{
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    margin-bottom: 15px;
-    color: rgb(32, 119, 218);
+input:focus,
+select:focus,
+textarea:focus{
+    outline:none;
+    border-color:#79c7da;
+    box-shadow:0 0 5px rgba(121,199,218,.5);
 }
 
 button{
-    display: block;
-    width: 100px;
-    padding: 10px;
-    border-radius: 20px;
-    margin-top: 10px;
-    background-color: #d0cec7;
-    margin-left: 310px;
+    display:block;
+    margin:35px auto 0;
+    width:170px;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#60ceea;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
 }
 
 button:hover{
-    background-color: aqua;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-input:hover{
-    background-color: antiquewhite;
+    background:#7355d4;
+    transform:translateY(-2px);
 }
 
 h2{
@@ -89,17 +82,29 @@ h2{
 }
 
 .file{
-    border-color: wheat;
-}
-
-.file :hover{
-    background: none;
+    border:1px solid #ccc;
+    border-radius:6px;
+    padding:8px;
+    background:white;
 }
 
 .supplier-section {
     margin-top: 50px;
+    border-top:2px solid #e5e5e5;
+    padding-top:30px;
 }
 
-.supplier-section .details-grid {
-    margin-top: 20px;
+.section-title {
+    text-align: center;
+    color: #173b67;
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.section-divider {
+    border: none;
+    border-top: 2px solid #ddd;
+    width: 100%;
+    margin: 0 0 30px;
 }

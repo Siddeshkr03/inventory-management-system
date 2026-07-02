@@ -1,5 +1,5 @@
 body {
-  background-color: #f4f7fe;
+  background-color: #87d3e6;
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -7,13 +7,24 @@ body {
 
 .title {
   text-align: center;
-  margin: 30px 0;
-  color: #060f1c;
-  font-size: 48px;
+  margin: 0 0 35px;
+  color: #173b67;
+  font-size: 42px;
   font-weight: 700;
 }
 
-.supplier-page{
-    margin-left: 450px;
-    margin-top: 100px;
+.supplier-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 20px;
+}
+
+form {
+    width: 720px;
+    background: #ffffff;
+    padding: 35px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }

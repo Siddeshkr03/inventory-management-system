@@ -222,7 +222,8 @@ function ItemForm() {
     <div className="items">
       <form onSubmit={handleSubmit}>
         <div className="items-block">
-          <h1>Item Details</h1>
+          <h1 className="section-title">Item Details</h1>
+          <hr className="section-divider" />
 
           <div className="form-grid">
             <div>
@@ -354,7 +355,7 @@ function ItemForm() {
             </div>
           </div>
           <div className="supplier-block">
-            <h2>Supplier Details</h2>
+            <h2 className="section-title">Supplier Details</h2>
             <div className="form-grid">
               <div>
                 <label>Supplier Name</label>
