@@ -57,13 +57,10 @@ function SupplierIndex() {
 
   return (
     <>
-    <Navbar />
-      <h1 className="title">Suppliers</h1>
+      <Navbar />
 
       <div className="top-bar">
         <div className="search-container">
-          <label>Search Supplier</label>
-
           <input
             type="text"
             placeholder="Search by Supplier Name..."
@@ -72,66 +69,67 @@ function SupplierIndex() {
           />
         </div>
 
+        <h1 className="title">Suppliers</h1>
+
         <Link to="/suppliers/add" state={{ from: "supplierIndex" }}>
           <button className="add-btn">Add Supplier</button>
         </Link>
       </div>
 
-      <table className="supplier-table" border={1} cellPadding={10}>
-        <thead>
-          <tr>
-            <th>ID</th>
+      <div className="table-wrapper">
+        <table className="supplier-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Supplier Name</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th className="action-column">Actions</th>
+            </tr>
+          </thead>
 
-            <th>Supplier Name</th>
+          <tbody>
+            {suppliers
+              .filter((supplier) =>
+                supplier.supplierName
+                  .toLowerCase()
+                  .includes(search.toLowerCase()),
+              )
+              .map((supplier) => (
+                <tr key={supplier.id}>
+                  <td>{supplier.id}</td>
+                  <td>{supplier.supplierName}</td>
+                  <td>{supplier.phoneNumber || "-"}</td>
+                  <td>{supplier.email || "-"}</td>
+                  <td>{supplier.address || "-"}</td>
 
-            <th>Phone Number</th>
+                  <td className="action-column">
+                    <div className="action-buttons">
+                      <span
+                        className="edit"
+                        role="button"
+                        onClick={() =>
+                          navigate(`/suppliers/edit/${supplier.id}`)
+                        }
+                      >
+                        Edit
+                      </span>
 
-            <th>Email</th>
-
-            <th>Address</th>
-
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {suppliers
-            .filter((supplier) =>
-              supplier.supplierName
-                .toLowerCase()
-                .includes(search.toLowerCase()),
-            )
-            .map((supplier) => (
-              <tr key={supplier.id}>
-                <td>{supplier.id}</td>
-
-                <td>{supplier.supplierName}</td>
-
-                <td>{supplier.phoneNumber || "-"}</td>
-
-                <td>{supplier.email || "-"}</td>
-
-                <td>{supplier.address || "-"}</td>
-
-                <td className="action-column">
-                  <span
-                    className="edit"
-                    onClick={() => navigate(`/suppliers/edit/${supplier.id}`)}
-                  >
-                    Edit
-                  </span>
-
-                  <span
-                    className="delete"
-                    onClick={() => deleteSupplier(supplier.id)}
-                  >
-                    Delete
-                  </span>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+                      <span
+                        className="delete"
+                        role="button"
+                        onClick={() => deleteSupplier(supplier.id)}
+                      >
+                        Delete
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

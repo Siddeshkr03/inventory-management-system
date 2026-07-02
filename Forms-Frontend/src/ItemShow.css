@@ -1,162 +1,152 @@
 .item-show-container {
-    min-height: 100vh;
-    background: #87d3e6;
-    padding: 40px 20px;
-    display: flex;
-    justify-content: center;
+  min-height: 100vh;
+  /* background: #87d3e6; */
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .item-show-card {
-    width: 1000px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 40px 50px;
-    box-shadow: 0 6px 20px rgba(0,0,0,.15);
-    position: relative;
+  width: 1000px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 35px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
 }
 
 /* Close Button */
 
-.close-btn{
-    position:absolute;
-    top:18px;
-    right:25px;
-    background:none;
-    border:none;
-    color:#ff4d6d;
-    font-size:38px;
-    cursor:pointer;
-    padding:0;
+.close-btn {
+  position: absolute;
+  top: 18px;
+  right: 25px;
+  background: none;
+  border: none;
+  color: #ff4d6d;
+  cursor: pointer;
+  padding: 0;
+  font-size: 34px;
+  font-weight: bold;
 }
 
-.close-btn:hover{
-    background:none;
-    color:#ff1744;
+.close-btn:hover {
+  background: none;
+  color: #ff1744;
 }
 
-.close-btn:focus{
-    outline:none;
-    background:none;
+.close-btn:focus {
+  outline: none;
+  background: none;
 }
 
 /* Sections */
 
 .item-section,
-.supplier-section{
-    margin-bottom:45px;
-    border: 3px solid #ddd;
-    border-radius: 12px;
-    padding: 15px;
-    padding-right: 8px;
+.supplier-section {
+  margin-bottom: 40px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 25px 30px;
+  background: white;
 }
 
 .item-section h2,
-.supplier-section h2{
-    text-align:center;
-    color:#173b67;
-    font-size:48px;
-    margin-bottom:40px;
-    border-bottom:2px solid #ddd;
-    padding-bottom:12px;
+.supplier-section h2 {
+  text-align: center;
+  color: #173b67;
+  font-size: 38px;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 12px;
 }
 
 /* Grid */
 
-.details-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    column-gap:100px;
-    row-gap:30px;
-    width:100%;
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 70px;
+  row-gap: 25px;
+  width: 100%;
 }
 
 /* Fields */
 
-.field{
-    display:flex;
-    flex-direction:column;
+.field {
+  display: flex;
+  flex-direction: column;
 }
 
-.field strong{
-    font-size:24px;
-    color:#173b67;
-    margin-bottom:10px;
+.field strong {
+  font-size: 20px;
+  font-weight: 600;
+  color: #173b67;
+  margin-bottom: 8px;
 }
 
-.field span{
-    font-size:22px;
-    color:#444;
-    line-height:1.2;
-    word-break:break-word;
+.field span {
+  font-size: 18px;
+  color: #444;
+  line-height: 1.2;
+  word-break: break-word;
 }
 
 /* Files */
 
-.file-list{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.file-link{
-    text-decoration:none;
-    color:#0d6efd;
-    font-size:20px;
+.file-link {
+  color: #2563eb;
+  font-size: 17px;
+  text-decoration: none;
+  transition: 0.2s;
 }
 
-.file-link:hover{
-    text-decoration:underline;
+.file-link:hover {
+  color: #173b67;
+  text-decoration: underline;
 }
 
-.item-h{
-    text-align:center;
-    color:#173b67;
-    font-size:40px;
-    margin-left: 0px;
-    margin-right: 680px;
-    border-bottom:2px solid #ddd;
-    padding-bottom:12px;
+.item-h, .supplier-h {
+  text-align: center;
+  color: #173b67;
+  font-size: 24px;
+  margin-top: 0px;
 }
 
-.supplier-h{
-    text-align:center;
-    color:#173b67;
-    font-size:40px;
-    margin-left: 0px;
-    margin-right: 580px;
-    border-bottom:2px solid #ddd;
-    padding-bottom:12px;
-}
 /* Responsive */
 
-@media(max-width:768px){
+@media (max-width: 768px) {
+  .item-show-card {
+    width: 100%;
+    padding: 25px;
+  }
 
-    .item-show-card{
-        width:100%;
-        padding:25px;
-    }
+  .details-grid {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
 
-    .details-grid{
-        grid-template-columns:1fr;
-        column-gap:0;
-    }
+  .item-section h2,
+  .supplier-section h2 {
+    font-size: 34px;
+  }
 
-    .item-section h2,
-    .supplier-section h2{
-        font-size:34px;
-    }
+  .field strong {
+    font-size: 18px;
+  }
 
-    .field strong{
-        font-size:18px;
-    }
+  .field span,
+  .file-link {
+    font-size: 17px;
+  }
 
-    .field span,
-    .file-link{
-        font-size:17px;
-    }
-
-    .close-btn{
-        font-size:34px;
-    }
-
+  .close-btn {
+    font-size: 34px;
+  }
 }

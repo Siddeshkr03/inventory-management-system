@@ -1,51 +1,55 @@
 body {
   margin: 0;
   padding: 0;
-  background: #f4f7fc;
+  background: #f4f7fe;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.title {
-  text-align: center;
-  color: #1e3a8a;
-  margin: 35px 0;
-  font-size: 48px;
-  font-weight: bold;
-}
+/* ---------- Top Bar ---------- */
 
 .top-bar {
-  width: 95%;
-  margin: auto;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 25px;
+  align-items: center;
+  margin: 20px 40px;
 }
 
 .search-container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.search-container label {
-  font-size: 16px;
-  font-weight: bold;
+  width: 320px;
 }
 
 .search-container input {
-  width: 320px;
+  width: 100%;
   padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  border: 1px solid #cbd5e1;
-  font-size: 15px;
+  box-sizing: border-box;
 }
+
+.title {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 700;
+  color: #2c5aa0;
+}
+
+.top-bar a {
+  width: 320px;
+  display: flex;
+  justify-content: flex-end;
+  text-decoration: none;
+}
+
+/* ---------- Add Button ---------- */
 
 .add-btn {
   background: #28c0df;
   color: white;
   border: none;
-  padding: 10px 24px;
+  padding: 10px 22px;
   border-radius: 6px;
   font-size: 15px;
   cursor: pointer;
@@ -56,25 +60,31 @@ body {
   background: #14b8d4;
 }
 
+/* ---------- Table ---------- */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .supplier-table {
   width: 95%;
   margin: auto;
   border-collapse: collapse;
   background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .supplier-table th {
-  background: #66c7de;
-  color: black;
-  padding: 12px;
-  font-size: 16px;
+  background: #79c7da;
+  color: #111;
+  padding: 14px;
+  text-align: center;
 }
 
 .supplier-table td {
-  padding: 14px;
-  text-align: center;
+  padding: 12px;
   border: 1px solid #ddd;
+  text-align: center;
 }
 
 .supplier-table tbody tr:nth-child(even) {
@@ -85,26 +95,33 @@ body {
   background: #eef7ff;
 }
 
+/* ---------- Action Buttons ---------- */
+
 .action-column {
-  white-space: nowrap;
+  width: 180px;
+  min-width: 180px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .edit,
 .delete {
   display: inline-block;
-  min-width: 70px;
-  padding: 8px 16px;
+  width: 75px;
+  padding: 8px 0;
   border-radius: 5px;
   color: white;
   cursor: pointer;
   text-align: center;
   font-size: 14px;
-  font-weight: 500;
 }
 
 .edit {
   background: #2563eb;
-  margin-right: 10px;
 }
 
 .edit:hover {
@@ -119,25 +136,28 @@ body {
   background: #dc2626;
 }
 
+/* ---------- Responsive ---------- */
+
 @media (max-width: 768px) {
-
-  .title {
-    font-size: 34px;
-  }
-
   .top-bar {
     flex-direction: column;
+    gap: 20px;
     align-items: stretch;
-    gap: 15px;
   }
 
-  .search-container input {
+  .search-container,
+  .top-bar a {
     width: 100%;
   }
 
-  .supplier-table {
-    display: block;
-    overflow-x: auto;
+  .title {
+  text-align: center;
+  color: #173b67;
+  font-size: 24px;
+  margin-top: 0px;
   }
 
+  .supplier-table {
+    min-width: 700px;
+  }
 }

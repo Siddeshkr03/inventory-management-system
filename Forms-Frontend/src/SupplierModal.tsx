@@ -61,10 +61,6 @@ function SupplierModal({
       <div className="modal-content">
         <div className="modal-header">
           <h2>Add Supplier</h2>
-
-          <button className="close-btn" onClick={onClose}>
-            ✕
-          </button>
         </div>
 
         <div className="form-grid">

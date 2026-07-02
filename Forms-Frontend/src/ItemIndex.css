@@ -33,16 +33,35 @@ body {
   background: #fff;
 }
 
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  margin: 20px;
+.top-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:20px 40px;
 }
 
-.search-container {
-  display: flex;
-  flex-direction: column;
+.search-container{
+    width:320px;
+}
+
+.h4-title{
+    margin:0;
+    color:#2c5aa0;
+    font-size:48px;
+    font-weight:700;
+    flex:1;
+    text-align:center;
+}
+
+.top-bar a{
+    width:320px;
+    display:flex;
+    justify-content:flex-end;
+    text-decoration:none;
+}
+
+.add-btn{
+    width:180px;
 }
 
 .add-btn {
@@ -76,6 +95,7 @@ body {
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
+  width: 30px;
 }
 
 .edit {

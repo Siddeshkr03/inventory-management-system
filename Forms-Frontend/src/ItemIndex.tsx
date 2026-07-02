@@ -69,12 +69,9 @@ function ItemIndex() {
   return (
     <>
       <Navbar />
-      <h1 className="title">Items</h1>
 
       <div className="top-bar">
         <div className="search-container">
-          <label>Search Item</label>
-
           <input
             type="text"
             placeholder="Search by Item Name..."
@@ -83,16 +80,13 @@ function ItemIndex() {
           />
         </div>
 
-        <Link to="/items/add">
-          <button
-            className="add-btn"
-            onClick={() => {
-              localStorage.removeItem("itemFormData");
-              navigate("/items/add");
-            }}
-          >
-            Add Item
-          </button>
+        <h4 className="h4-title">Items</h4>
+
+        <Link
+          to="/items/add"
+          onClick={() => localStorage.removeItem("itemFormData")}
+        >
+          <button className="add-btn">Add Item</button>
         </Link>
       </div>
 
@@ -108,12 +102,8 @@ function ItemIndex() {
               <th>Brand</th>
               <th>Purchase Date</th>
               <th>Product Code</th>
-              <th>Payment Method</th>
               <th>Availability</th>
               <th>Supplier Name</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>Address</th>
               <th className="action-column">Actions</th>
             </tr>
           </thead>
@@ -133,16 +123,15 @@ function ItemIndex() {
                   <td>{item.brand}</td>
                   <td>{item.purchaseDate}</td>
                   <td>{item.productCode}</td>
-                  <td>{item.paymentMethod}</td>
                   <td>{item.productAvailability}</td>
-
                   <td>{item.supplier?.supplierName}</td>
-                  <td>{item.supplier?.phoneNumber}</td>
-                  <td>{item.supplier?.email}</td>
-                  <td>{item.supplier?.address}</td>
 
                   <td className="action-column">
-                    <span className="view-btn" role="button" onClick={() => navigate(`/items/view/${item.id}`)}>
+                    <span
+                      className="view-btn"
+                      role="button"
+                      onClick={() => navigate(`/items/view/${item.id}`)}
+                    >
                       👁
                     </span>
                     <span
@@ -152,7 +141,6 @@ function ItemIndex() {
                     >
                       Edit
                     </span>
-
                     <span
                       className="delete"
                       role="button"

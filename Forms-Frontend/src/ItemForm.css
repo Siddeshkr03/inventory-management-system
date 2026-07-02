@@ -1,6 +1,6 @@
-body{
+/* body{
     background-color: #87d3e6;
-}
+} */
 
 .items{
     display:flex;
@@ -97,7 +97,7 @@ h2{
 .section-title {
     text-align: center;
     color: #173b67;
-    font-size: 42px;
+    font-size: 24px;
     font-weight: 700;
     margin-bottom: 10px;
 }
@@ -107,4 +107,11 @@ h2{
     border-top: 2px solid #ddd;
     width: 100%;
     margin: 0 0 30px;
+}
+
+.error{
+    color:#ef4444;
+    font-size:14px;
+    margin-top:5px;
+    font-weight:500;
 }

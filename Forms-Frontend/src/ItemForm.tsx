@@ -53,6 +53,19 @@ function ItemForm() {
     address: "",
   });
 
+  const [errors, setErrors] = useState({
+    itemName: "",
+    price: "",
+    quantity: "",
+    category: "",
+    brand: "",
+    purchaseDate: "",
+    productCode: "",
+    paymentMethod: "",
+    productAvailability: "",
+    supplier: "",
+  });
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -81,12 +94,21 @@ function ItemForm() {
         address: selectedSupplier?.address || "",
       });
 
+      setErrors({
+        ...errors,
+        supplier: "",
+      });
       return;
     }
 
     setItemData({
       ...itemData,
-      [name]: name === "price" || name === "quantity" ? Number(value) : value,
+      [name]: value,
+    });
+
+    setErrors({
+      ...errors,
+      [name]: "",
     });
   };
 
@@ -149,9 +171,13 @@ function ItemForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!validate()) {
+      return;
+    }
+
     let uploadedFileName = "";
 
-    if (files) {
+    if (files.length > 0) {
       const formData = new FormData();
 
       files.forEach((file) => {
@@ -168,8 +194,8 @@ function ItemForm() {
 
     const item = {
       itemName: itemData.itemName,
-      price: itemData.price,
-      quantity: itemData.quantity,
+      price: Number(itemData.price),
+      quantity: Number(itemData.quantity),
       category: itemData.category,
       brand: itemData.brand,
       purchaseDate: itemData.purchaseDate,
@@ -205,6 +231,89 @@ function ItemForm() {
     }
   };
 
+  const validate = () => {
+    const newErrors = {
+      itemName: "",
+      price: "",
+      quantity: "",
+      category: "",
+      brand: "",
+      purchaseDate: "",
+      productCode: "",
+      paymentMethod: "",
+      productAvailability: "",
+      supplier: "",
+    };
+
+    let isValid = true;
+
+    if (!itemData.itemName.trim()) {
+      newErrors.itemName = "Item Name is required";
+      isValid = false;
+    }
+
+    if (itemData.price.trim() === "") {
+      newErrors.price = "Price is required";
+      isValid = false;
+    } else if (isNaN(Number(itemData.price))) {
+      newErrors.price = "Price must be a number";
+      isValid = false;
+    } else if (Number(itemData.price) <= 0) {
+      newErrors.price = "Price must be greater than 0";
+      isValid = false;
+    }
+
+    if (itemData.quantity.trim() === "") {
+      newErrors.quantity = "Quantity is required";
+      isValid = false;
+    } else if (isNaN(Number(itemData.quantity))) {
+      newErrors.quantity = "Quantity must be a number";
+      isValid = false;
+    } else if (Number(itemData.quantity) <= 0) {
+      newErrors.quantity = "Quantity must be greater than 0";
+      isValid = false;
+    }
+
+    if (!itemData.category) {
+      newErrors.category = "Please select a category";
+      isValid = false;
+    }
+
+    if (!itemData.brand.trim()) {
+      newErrors.brand = "Brand is required";
+      isValid = false;
+    }
+
+    if (!itemData.purchaseDate) {
+      newErrors.purchaseDate = "Purchase Date is required";
+      isValid = false;
+    }
+
+    if (!itemData.productCode.trim()) {
+      newErrors.productCode = "Product Code is required";
+      isValid = false;
+    }
+
+    if (!itemData.paymentMethod) {
+      newErrors.paymentMethod = "Please select a payment method";
+      isValid = false;
+    }
+
+    if (!itemData.productAvailability) {
+      newErrors.productAvailability = "Please select availability";
+      isValid = false;
+    }
+
+    if (!itemData.supplierId) {
+      newErrors.supplier = "Please select a supplier";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    return isValid;
+  };
+
   const handleSupplierAdded = (newSupplier: Supplier) => {
     setSuppliers((prevSuppliers) => [...prevSuppliers, newSupplier]);
 
@@ -235,28 +344,31 @@ function ItemForm() {
                 value={itemData.itemName}
                 onChange={handleChange}
               />
+              {errors.itemName && <p className="error">{errors.itemName}</p>}
             </div>
 
             <div>
               <label>Price</label>
               <input
-                type="text"
+                type="number"
                 name="price"
                 placeholder="Enter Price"
                 value={itemData.price}
                 onChange={handleChange}
               />
+              {errors.price && <p className="error">{errors.price}</p>}
             </div>
 
             <div>
               <label>Quantity</label>
               <input
-                type="text"
+                type="number"
                 name="quantity"
                 placeholder="Enter Quantity"
                 value={itemData.quantity}
                 onChange={handleChange}
               />
+              {errors.quantity && <p className="error">{errors.quantity}</p>}
             </div>
 
             <div>
@@ -275,6 +387,7 @@ function ItemForm() {
                 <option value="Computers">Computers & Laptops</option>
                 <option value="Sports">Sports</option>
               </select>
+              {errors.category && <p className="error">{errors.category}</p>}
             </div>
 
             <div>
@@ -286,6 +399,7 @@ function ItemForm() {
                 value={itemData.brand}
                 onChange={handleChange}
               />
+              {errors.brand && <p className="error">{errors.brand}</p>}
             </div>
 
             <div>
@@ -297,6 +411,9 @@ function ItemForm() {
                 onChange={handleChange}
                 style={{ color: "#065F46;" }}
               />
+              {errors.purchaseDate && (
+                <p className="error">{errors.purchaseDate}</p>
+              )}
             </div>
 
             <div>
@@ -308,6 +425,9 @@ function ItemForm() {
                 value={itemData.productCode}
                 onChange={handleChange}
               />
+              {errors.productCode && (
+                <p className="error">{errors.productCode}</p>
+              )}
             </div>
 
             <div>
@@ -324,6 +444,9 @@ function ItemForm() {
                 <option value="Upi">UPI</option>
                 <option value="Cod">Cash on Delivery</option>
               </select>
+              {errors.paymentMethod && (
+                <p className="error">{errors.paymentMethod}</p>
+              )}
             </div>
 
             <div>
@@ -339,6 +462,9 @@ function ItemForm() {
                 <option value="low Stock">Low Stock</option>
                 <option value="Pre-order">Pre-order</option>
               </select>
+              {errors.productAvailability && (
+                <p className="error">{errors.productAvailability}</p>
+              )}
             </div>
             <div>
               <label>Upload File</label>
@@ -387,6 +513,7 @@ function ItemForm() {
                     Add New Supplier
                   </option>
                 </select>
+                {errors.supplier && <p className="error">{errors.supplier}</p>}
               </div>
 
               <div>
