@@ -11,13 +11,14 @@ import Dashboard from "./Dashboard";
 import ItemShow from "./ItemShow";
 import Register from "./Register";
 import Login from "./Login";
+import PublicRoute from "./PublicRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
 
         <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}></Route>
 
