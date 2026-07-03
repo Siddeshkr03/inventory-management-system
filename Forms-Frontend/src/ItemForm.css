@@ -54,12 +54,12 @@ textarea:focus{
 
 button{
     display:block;
-    margin:35px auto 0;
-    width:170px;
+    margin:10px auto 0;
+    width:90px;
     padding:12px;
     border:none;
     border-radius:8px;
-    background:#60ceea;
+    background:#41c3e3;
     color:white;
     font-size:16px;
     font-weight:600;
