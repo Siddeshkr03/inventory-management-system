@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Register.css";
 
@@ -18,6 +19,7 @@ function Register() {
   });
 
   const [apiError, setApiError] = useState("");
+  const Navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,6 +28,13 @@ function Register() {
       ...user,
       [name]: value,
     });
+
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
+
+    setApiError("");
   };
 
   const validate = () => {
@@ -87,6 +96,7 @@ function Register() {
       });
 
       alert("Registration Successful");
+      Navigate("/login");
     } catch (error: any) {
       if (error.response) {
         setApiError(error.response.data);

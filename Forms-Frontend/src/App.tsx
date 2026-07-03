@@ -7,13 +7,14 @@ import SupplierIndex from "./SupplierIndex";
 import Dashboard from "./Dashboard";
 import ItemShow from "./ItemShow";
 import Register from "./Register";
+import Login from "./Login";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<h1>Login Page</h1>} />
+        <Route path="/login" element={<Login />} />
 
         <Route path="/" element={<Dashboard />}></Route>
 
