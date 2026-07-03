@@ -52,7 +52,7 @@ textarea:focus{
     box-shadow:0 0 5px rgba(121,199,218,.5);
 }
 
-button{
+.submit-btn{
     display:block;
     margin:10px auto 0;
     width:90px;

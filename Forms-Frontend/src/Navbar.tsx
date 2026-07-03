@@ -1,24 +1,38 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
-function Navbar(){
-    return(
-        <nav className="navbar">
-            <h2 className="logo">
-                Inventory Management
-            </h2>
+function Navbar() {
+  const navigate = useNavigate();
 
-            <div className="nav-links">
-                <NavLink to="/">
-                Dashboard</NavLink>
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
 
-                <NavLink to="/items">Items</NavLink>
+    navigate("/login");
+  };
 
-                <NavLink to="/suppliers">Suppliers</NavLink>
-            </div>
-        </nav>
-        
-    )
+  return (
+    <nav className="navbar">
+      <h2 className="logo">
+        Inventory Management
+      </h2>
+
+      <div className="nav-links">
+        <NavLink to="/">Dashboard</NavLink>
+
+        <NavLink to="/items">Items</NavLink>
+
+        <NavLink to="/suppliers">Suppliers</NavLink>
+
+        <button
+          className="logout-btn"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;
