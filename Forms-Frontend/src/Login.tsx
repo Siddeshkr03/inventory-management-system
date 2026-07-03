@@ -66,12 +66,15 @@ function Login() {
     setApiError("");
 
     try {
-      const response = await axios.post(
+         await axios.post(
         "http://localhost:8080/api/users/login",
         loginData,
       );
 
-      alert(response.data);
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userEmail", loginData.email);
+
+      navigate("/");
     } catch (error: any) {
       if (error.response) {
         setApiError(error.response.data);
