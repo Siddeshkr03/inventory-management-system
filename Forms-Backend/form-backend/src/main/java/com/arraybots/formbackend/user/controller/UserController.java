@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.arraybots.formbackend.user.model.User;
 import com.arraybots.formbackend.user.service.UserService;
+import com.arraybots.formbackend.user.dto.LoginRequest;
 
 @RestController
 @RequestMapping("/api/users")
@@ -19,11 +20,23 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
 
-        User savedUser = userService.registerUser(user);
+        userService.registerUser(user);
 
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                "User Registered Successfully",
+                HttpStatus.CREATED
+        );
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(
+            @RequestBody LoginRequest loginRequest) {
+
+        String response = userService.loginUser(loginRequest);
+
+        return ResponseEntity.ok(response);
     }
 
 }

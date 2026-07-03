@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.arraybots.formbackend.user.exception.UserAlreadyExistsException;
+import com.arraybots.formbackend.user.exception.InvalidCredentialsException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -15,6 +16,16 @@ public class GlobalExceptionHandler {
             UserAlreadyExistsException ex) {
 
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<String> handleInvalidCredentialsException(
+            InvalidCredentialsException ex) {
+
+        return new ResponseEntity<>(
+                ex.getMessage(),
+                HttpStatus.UNAUTHORIZED
+        );
     }
 
 }
