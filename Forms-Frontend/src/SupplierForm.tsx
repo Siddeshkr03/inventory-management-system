@@ -158,7 +158,7 @@ function SupplierForm() {
 
   return (
     <div className="supplier-page">
-      <form onSubmit={handleSubmit}>
+      <form className="supplier-form" onSubmit={handleSubmit}>
         <div className="page-header">
           <button
             type="button"

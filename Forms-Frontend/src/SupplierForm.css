@@ -20,7 +20,7 @@ body {
     padding: 50px 20px;
 }
 
-form {
+.supplier-form {
     width: 720px;
     background: #ffffff;
     padding: 35px;

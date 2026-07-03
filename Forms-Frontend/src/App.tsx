@@ -6,11 +6,15 @@ import SupplierForm from "./SupplierForm";
 import SupplierIndex from "./SupplierIndex";
 import Dashboard from "./Dashboard";
 import ItemShow from "./ItemShow";
+import Register from "./Register";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<h1>Login Page</h1>} />
+
         <Route path="/" element={<Dashboard />}></Route>
 
         <Route path="/items" element={<ItemIndex />} />
