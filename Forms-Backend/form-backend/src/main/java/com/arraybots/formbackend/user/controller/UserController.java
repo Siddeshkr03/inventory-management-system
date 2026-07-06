@@ -3,11 +3,11 @@ package com.arraybots.formbackend.user.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import jakarta.servlet.http.HttpSession;
-
+import com.arraybots.formbackend.user.dto.LoginResponse;
 import com.arraybots.formbackend.user.model.User;
 import com.arraybots.formbackend.user.service.UserService;
 import com.arraybots.formbackend.user.dto.LoginRequest;
+import org.springframework.http.HttpHeaders;
 
 @RestController
 @RequestMapping("/api/users")
@@ -35,30 +35,25 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(
-            @RequestBody LoginRequest loginRequest,
-            HttpSession session) {
+    public ResponseEntity<LoginResponse> loginUser(
+            @RequestBody LoginRequest loginRequest) {
 
-        String response = userService.loginUser(loginRequest, session);
+        LoginResponse response =
+                userService.loginUser(loginRequest);
 
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logoutUser(HttpSession session) {
+    public ResponseEntity<String> logout(
+            @RequestHeader(HttpHeaders.AUTHORIZATION)
+            String authHeader) {
 
-        userService.logoutUser(session);
+        String token = authHeader.substring(7);
+
+        userService.logout(token);
 
         return ResponseEntity.ok("Logout Successful");
-    }
-
-    @GetMapping("/me")
-    public ResponseEntity<User> getLoggedInUser(
-            HttpSession session) {
-
-        User user = userService.getLoggedInUser(session);
-
-        return ResponseEntity.ok(user);
     }
 
 }

@@ -1,13 +1,17 @@
 package com.arraybots.formbackend.user.service;
 
+import com.arraybots.formbackend.security.JwtUtil;
 import com.arraybots.formbackend.user.dto.LoginRequest;
+import com.arraybots.formbackend.user.dto.LoginResponse;
 import com.arraybots.formbackend.user.exception.InvalidCredentialsException;
 import com.arraybots.formbackend.user.exception.UserAlreadyExistsException;
 import com.arraybots.formbackend.user.model.User;
 import com.arraybots.formbackend.user.repository.UserRepository;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.arraybots.formbackend.token.model.UserToken;
+import com.arraybots.formbackend.token.repository.UserTokenRepository;
+import java.time.LocalDateTime;
 
 import java.util.Optional;
 
@@ -16,11 +20,21 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final JwtUtil jwtUtil;
+
+    private final UserTokenRepository userTokenRepository;
+
     private final BCryptPasswordEncoder passwordEncoder =
             new BCryptPasswordEncoder();
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(
+            UserRepository userRepository,
+            JwtUtil jwtUtil,
+            UserTokenRepository userTokenRepository) {
+
         this.userRepository = userRepository;
+        this.jwtUtil = jwtUtil;
+        this.userTokenRepository = userTokenRepository;
     }
 
     @Override
@@ -39,13 +53,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String loginUser(LoginRequest loginRequest,
-                            HttpSession session) {
+    public LoginResponse loginUser(LoginRequest loginRequest) {
 
         Optional<User> user =
                 userRepository.findByEmail(loginRequest.getEmail());
 
-        if (!user.isPresent()) {
+        if (user.isEmpty()) {
             throw new InvalidCredentialsException("Invalid Email or Password");
         }
 
@@ -56,27 +69,50 @@ public class UserServiceImpl implements UserService {
             throw new InvalidCredentialsException("Invalid Email or Password");
         }
 
-        // Store the logged-in user in the HTTP Session
-        session.setAttribute("loggedInUser", user.get());
+        String token =
+                jwtUtil.generateToken(user.get().getEmail());
 
-        return "Login Successful";
+        UserToken userToken = new UserToken();
+
+        userToken.setToken(token);
+
+        userToken.setUser(user.get());
+
+        userToken.setCreatedAt(LocalDateTime.now());
+
+        userToken.setExpiresAt(
+                jwtUtil.getExpiryDateTime()
+        );
+
+        userToken.setRevoked(false);
+
+        userToken.setExpired(false);
+
+        userTokenRepository.save(userToken);
+
+        return new LoginResponse(
+                token,
+                "Login Successful"
+                );
     }
 
     @Override
-    public User getLoggedInUser(HttpSession session) {
+    public void logout(String token) {
 
-        User user = (User) session.getAttribute("loggedInUser");
+        Optional<UserToken> userToken =
+                userTokenRepository.findByToken(token);
 
-        if (user == null) {
-            throw new InvalidCredentialsException("User is not logged in");
+        if (userToken.isEmpty()) {
+            return;
         }
 
-        return user;
-    }
+        UserToken storedToken = userToken.get();
 
-    @Override
-    public void logoutUser(HttpSession session) {
+        storedToken.setRevoked(true);
 
-        session.invalidate();
+        storedToken.setExpired(true);
+
+        userTokenRepository.save(storedToken);
+
     }
 }
