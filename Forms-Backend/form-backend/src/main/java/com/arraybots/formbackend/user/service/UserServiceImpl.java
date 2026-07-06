@@ -1,14 +1,15 @@
 package com.arraybots.formbackend.user.service;
 
-import org.springframework.stereotype.Service;
-
+import com.arraybots.formbackend.user.dto.LoginRequest;
+import com.arraybots.formbackend.user.exception.InvalidCredentialsException;
+import com.arraybots.formbackend.user.exception.UserAlreadyExistsException;
 import com.arraybots.formbackend.user.model.User;
 import com.arraybots.formbackend.user.repository.UserRepository;
-import java.util.Optional;
-import com.arraybots.formbackend.user.exception.UserAlreadyExistsException;
-import com.arraybots.formbackend.user.exception.InvalidCredentialsException;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import com.arraybots.formbackend.user.dto.LoginRequest;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,7 +26,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User registerUser(User user) {
 
-        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+        Optional<User> existingUser =
+                userRepository.findByEmail(user.getEmail());
 
         if (existingUser.isPresent()) {
             throw new UserAlreadyExistsException("Email already exists");
@@ -37,7 +39,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String loginUser(LoginRequest loginRequest) {
+    public String loginUser(LoginRequest loginRequest,
+                            HttpSession session) {
 
         Optional<User> user =
                 userRepository.findByEmail(loginRequest.getEmail());
@@ -53,6 +56,27 @@ public class UserServiceImpl implements UserService {
             throw new InvalidCredentialsException("Invalid Email or Password");
         }
 
+        // Store the logged-in user in the HTTP Session
+        session.setAttribute("loggedInUser", user.get());
+
         return "Login Successful";
+    }
+
+    @Override
+    public User getLoggedInUser(HttpSession session) {
+
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            throw new InvalidCredentialsException("User is not logged in");
+        }
+
+        return user;
+    }
+
+    @Override
+    public void logoutUser(HttpSession session) {
+
+        session.invalidate();
     }
 }

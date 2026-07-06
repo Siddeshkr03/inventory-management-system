@@ -1,28 +1,18 @@
 import { Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useAuth } from "./AuthContext";
 
 interface PublicRouteProps {
   children: React.ReactNode;
 }
 
 function PublicRoute({ children }: PublicRouteProps) {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-  localStorage.getItem("isLoggedIn")
-);
+  const { isAuthenticated, loading } = useAuth();
 
-useEffect(() => {
-  const handleStorageChange = () => {
-    setIsLoggedIn(localStorage.getItem("isLoggedIn"));
-  };
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
-  window.addEventListener("storage", handleStorageChange);
-
-  return () => {
-    window.removeEventListener("storage", handleStorageChange);
-  };
-}, []);
-
-  if (isLoggedIn) {
+  if (isAuthenticated) {
     return <Navigate to="/" replace />;
   }
 

@@ -1,10 +1,14 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "./api";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
+
+  const { checkAuth } = useAuth();
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -66,13 +70,9 @@ function Login() {
     setApiError("");
 
     try {
-         await axios.post(
-        "http://localhost:8080/api/users/login",
-        loginData,
-      );
+      await api.post("/users/login", loginData);
 
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userEmail", loginData.email);
+      await checkAuth();
 
       navigate("/");
     } catch (error: any) {
