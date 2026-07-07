@@ -1,6 +1,6 @@
-/* body{
-    background-color: #87d3e6;
-} */
+body{
+    background-color: #F8FAFC;
+}
 
 .items{
     display:flex;
@@ -12,10 +12,10 @@
 .item-form{
     width: 720px;
     padding: 35px;
-    background: #ffffff;
+    background: #a2d2ff;
     border: none;
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,.15);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .form-grid{
@@ -27,7 +27,7 @@
 label{
     display:block;
     margin-bottom:6px;
-    font-size:15px;
+    font-size:20px;
     font-weight:600;
     color:#173b67;
 }

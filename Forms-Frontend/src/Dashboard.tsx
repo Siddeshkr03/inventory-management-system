@@ -1,5 +1,6 @@
 import "./Dashboard.css";
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "./api";
 
@@ -22,6 +23,8 @@ function Dashboard() {
     outOfStock: 0,
   });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getDashboardData();
   }, []);
@@ -40,12 +43,12 @@ function Dashboard() {
     <>
       <Navbar />
       <div className="dashboard">
-        <div className="dashboard-card">
+        <div className="dashboard-card" onClick={() => navigate("/items")}>
           <h3>Total Items</h3>
           <h1>{dashboardData.totalItems}</h1>
         </div>
 
-        <div className="dashboard-card">
+        <div className="dashboard-card" onClick={() => navigate("/suppliers")}>
           <h3>Total Suppliers</h3>
           <h1>{dashboardData.totalSuppliers}</h1>
         </div>
