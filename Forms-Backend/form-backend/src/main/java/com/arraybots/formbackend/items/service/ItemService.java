@@ -8,7 +8,7 @@ public interface ItemService {
 
     Item saveItem(Item item);
 
-    List<Item> getAllItems();
+    List<Item> getAllItems(String productAvailability);
 
     Item getItemById(Long id);
 

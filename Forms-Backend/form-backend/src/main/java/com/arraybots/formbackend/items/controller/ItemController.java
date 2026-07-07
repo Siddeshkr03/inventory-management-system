@@ -43,11 +43,10 @@ public class ItemController {
     }
 
     @GetMapping
+    public List<Item> getAllItems(
+            @RequestParam(required = false) String productAvailability) {
 
-    public List<Item> getAllItems() {
-
-        return itemService.getAllItems();
-
+        return itemService.getAllItems(productAvailability);
     }
 
     @DeleteMapping("/{id}")

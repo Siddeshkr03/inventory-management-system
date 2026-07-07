@@ -31,3 +31,9 @@
   font-size: 40px;
   color: #1e3a8a;
 }
+
+.dashboard-card {
+    cursor: pointer;
+}
+
+

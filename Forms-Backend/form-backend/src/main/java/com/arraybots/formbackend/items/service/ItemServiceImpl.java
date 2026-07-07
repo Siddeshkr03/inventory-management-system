@@ -26,10 +26,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> getAllItems() {
+    public List<Item> getAllItems(String productAvailability) {
 
-        return itemRepository.findAll();
+        if (productAvailability == null || productAvailability.isBlank()) {
+            return itemRepository.findAll();
+        }
 
+        return itemRepository.findByProductAvailability(productAvailability);
     }
 
     @Override
