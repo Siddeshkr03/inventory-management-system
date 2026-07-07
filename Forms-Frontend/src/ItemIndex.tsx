@@ -29,18 +29,19 @@ function ItemIndex() {
 
   const [items, setItems] = useState<Item[]>([]);
   const [search, setSearch] = useState("");
+  const [productAvailability, setProductAvailability] = useState("");
 
   const navigate = useNavigate();
 
   const fetchItems = async () => {
     try {
-      const response = await api.get("/items");
+      const response = await api.get("/items", {
+        params: {
+          productAvailability: productAvailability || undefined,
+        },
+      });
 
-      const data = response.data;
-
-      console.log(data);
-
-      setItems(data);
+      setItems(response.data);
     } catch (error) {
       console.error("Error fetching items:", error);
     }
@@ -62,9 +63,9 @@ function ItemIndex() {
     }
   };
 
-  useEffect(() => {
-    fetchItems();
-  }, []);
+useEffect(() => {
+  fetchItems();
+}, [productAvailability]);
 
   return (
     <>
@@ -78,6 +79,22 @@ function ItemIndex() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
+        </div>
+
+        <div className="filter-container">
+          <label htmlFor="productAvailability">Filter</label>
+
+          <select
+            id="productAvailability"
+            value={productAvailability}
+            onChange={(e) => setProductAvailability(e.target.value)}
+          >
+            <option value="">All</option>
+            <option value="IN_STOCK">In Stock</option>
+            <option value="LOW_STOCK">Low Stock</option>
+            <option value="OUT_OF_STOCK">Out of Stock</option>
+            <option value="PRE_ORDER">Pre-order</option>
+          </select>
         </div>
 
         <h4 className="h4-title">Items</h4>
