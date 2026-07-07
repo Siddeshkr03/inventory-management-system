@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "./api";
 import "./SupplierModal.css";
 
 interface SupplierData {
@@ -44,8 +44,8 @@ function SupplierModal({
 
   const handleSaveSupplier = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/suppliers",
+      const response = await api.post(
+        "/suppliers",
         supplierData,
       );
 

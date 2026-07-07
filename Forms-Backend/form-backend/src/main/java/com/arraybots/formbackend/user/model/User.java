@@ -1,6 +1,6 @@
-package com.arraybots.formbackend.user.model
-;
+package com.arraybots.formbackend.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +21,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @JsonIgnore
     private String password;
 
     public User() {

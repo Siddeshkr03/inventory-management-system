@@ -50,5 +50,4 @@ public class UserToken {
         this.user = user;
     }
 
-    // Generate getters and setters using IntelliJ
 }

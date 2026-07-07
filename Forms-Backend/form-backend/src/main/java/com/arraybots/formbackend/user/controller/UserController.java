@@ -8,6 +8,7 @@ import com.arraybots.formbackend.user.model.User;
 import com.arraybots.formbackend.user.service.UserService;
 import com.arraybots.formbackend.user.dto.LoginRequest;
 import org.springframework.http.HttpHeaders;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/users")
@@ -54,6 +55,16 @@ public class UserController {
         userService.logout(token);
 
         return ResponseEntity.ok("Logout Successful");
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<User> getLoggedInUser(
+            HttpServletRequest request) {
+
+        User user = (User) request.getAttribute("loggedInUser");
+
+        return ResponseEntity.ok(user);
+
     }
 
 }

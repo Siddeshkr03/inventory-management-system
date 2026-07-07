@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import api from "./api";
 import "./ItemIndex.css";
 
 function ItemIndex() {
@@ -33,8 +34,9 @@ function ItemIndex() {
 
   const fetchItems = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/items");
-      const data = await response.json();
+      const response = await api.get("/items");
+
+      const data = response.data;
 
       console.log(data);
 
@@ -52,9 +54,7 @@ function ItemIndex() {
     if (!confirmDelete) return;
 
     try {
-      await fetch(`http://localhost:8080/api/items/${id}`, {
-        method: "DELETE",
-      });
+      await api.delete(`/items/${id}`);
 
       fetchItems();
     } catch (error) {

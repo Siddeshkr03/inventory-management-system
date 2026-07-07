@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import axios from "axios";
+import api from "./api";
 import "./SupplierForm.css";
 
 function SupplierForm() {
@@ -30,24 +30,36 @@ function SupplierForm() {
   const { id } = useParams();
 
   useEffect(() => {
-    if (id) {
-      fetch(`http://localhost:8080/api/suppliers/${id}`)
-        .then((response) => response.json())
 
-        .then((data) => {
-          setSupplierData({
-            supplierName: data.supplierName,
-            phoneNumber: data.phoneNumber,
-            email: data.email,
-            address: data.address,
-          });
-        })
+  if (!id) return;
 
-        .catch((error) => {
-          console.error(error);
-        });
+  const fetchSupplier = async () => {
+
+    try {
+
+      const response =
+        await api.get(`/suppliers/${id}`);
+
+      const data = response.data;
+
+      setSupplierData({
+        supplierName: data.supplierName,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
+        address: data.address,
+      });
+
+    } catch (error) {
+
+      console.error(error);
+
     }
-  }, [id]);
+
+  };
+
+  fetchSupplier();
+
+}, [id]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -127,15 +139,15 @@ function SupplierForm() {
 
     try {
       if (id) {
-        await axios.put(
-          `http://localhost:8080/api/suppliers/${id}`,
+        await api.put(
+          `/suppliers/${id}`,
           supplierData,
         );
 
         alert("Supplier Updated Successfully!");
       } else {
-        const response = await axios.post(
-          "http://localhost:8080/api/suppliers",
+        const response = await api.post(
+          "/suppliers",
           supplierData,
         );
 

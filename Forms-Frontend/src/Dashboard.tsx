@@ -1,20 +1,19 @@
 import "./Dashboard.css";
 import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "./api";
 
 function Dashboard() {
   interface DashboardData {
-  totalItems: number;
-  totalSuppliers: number;
-  inStock: number;
-  lowStock: number;
-  preOrder: number;
-  outOfStock: number;
-}
+    totalItems: number;
+    totalSuppliers: number;
+    inStock: number;
+    lowStock: number;
+    preOrder: number;
+    outOfStock: number;
+  }
 
-const [dashboardData, setDashboardData] =
-  useState<DashboardData>({
+  const [dashboardData, setDashboardData] = useState<DashboardData>({
     totalItems: 0,
     totalSuppliers: 0,
     inStock: 0,
@@ -24,55 +23,53 @@ const [dashboardData, setDashboardData] =
   });
 
   useEffect(() => {
-  getDashboardData();
-}, []);
+    getDashboardData();
+  }, []);
 
-const getDashboardData = async () => {
-  try {
-    const response = await axios.get(
-      "http://localhost:8080/api/dashboard"
-    );
+  const getDashboardData = async () => {
+    try {
+      const response = await api.get("/dashboard");
 
-    setDashboardData(response.data);
-
-  } catch (error) {
-    console.error(error);
-  }
-};
+      setDashboardData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <><Navbar />
-    <div className="dashboard">
-      <div className="dashboard-card">
-        <h3>Total Items</h3>
-        <h1>{dashboardData.totalItems}</h1>
-      </div>
+    <>
+      <Navbar />
+      <div className="dashboard">
+        <div className="dashboard-card">
+          <h3>Total Items</h3>
+          <h1>{dashboardData.totalItems}</h1>
+        </div>
 
-      <div className="dashboard-card">
-        <h3>Total Suppliers</h3>
-        <h1>{dashboardData.totalSuppliers}</h1>
-      </div>
+        <div className="dashboard-card">
+          <h3>Total Suppliers</h3>
+          <h1>{dashboardData.totalSuppliers}</h1>
+        </div>
 
-      <div className="dashboard-card">
-        <h3>In Stock</h3>
-        <h1>{dashboardData.inStock}</h1>
-      </div>
+        <div className="dashboard-card">
+          <h3>In Stock</h3>
+          <h1>{dashboardData.inStock}</h1>
+        </div>
 
-      <div className="dashboard-card">
-        <h3>Low Stock</h3>
-        <h1>{dashboardData.lowStock}</h1>
-      </div>
+        <div className="dashboard-card">
+          <h3>Low Stock</h3>
+          <h1>{dashboardData.lowStock}</h1>
+        </div>
 
-      <div className="dashboard-card">
-        <h3>Pre-order</h3>
-        <h1>{dashboardData.preOrder}</h1>
-      </div>
+        <div className="dashboard-card">
+          <h3>Pre-order</h3>
+          <h1>{dashboardData.preOrder}</h1>
+        </div>
 
-      <div className="dashboard-card">
-        <h3>Out of Stock</h3>
-        <h1>{dashboardData.outOfStock}</h1>
+        <div className="dashboard-card">
+          <h3>Out of Stock</h3>
+          <h1>{dashboardData.outOfStock}</h1>
+        </div>
       </div>
-    </div>
     </>
   );
 }

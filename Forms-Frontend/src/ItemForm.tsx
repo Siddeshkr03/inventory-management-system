@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import api from "./api";
 import "./ItemForm.css";
+
 import SupplierModal from "./SupplierModal";
 
 function ItemForm() {
@@ -116,44 +117,50 @@ function ItemForm() {
   const { id } = useParams();
 
   useEffect(() => {
-    if (id) {
-      fetch(`http://localhost:8080/api/items/${id}`)
-        .then((response) => response.json())
+    if (!id) return;
 
-        .then((data) => {
-          setItemData({
-            itemName: data.itemName,
-            price: String(data.price),
-            quantity: String(data.quantity),
-            category: data.category,
-            brand: data.brand,
-            purchaseDate: data.purchaseDate,
-            productCode: data.productCode,
-            paymentMethod: data.paymentMethod,
-            productAvailability: data.productAvailability,
-            supplierId: data.supplier?.id?.toString() || "",
-            supplierName: data.supplier?.supplierName || "",
-            phoneNumber: data.supplier?.phoneNumber || "",
-            email: data.supplier?.email || "",
-            address: data.supplier?.address || "",
-          });
-        })
+    const fetchItem = async () => {
+      try {
+        const response = await api.get(`/items/${id}`);
 
-        .catch((error) => {
-          console.error(error);
+        const data = response.data;
+
+        setItemData({
+          itemName: data.itemName,
+          price: String(data.price),
+          quantity: String(data.quantity),
+          category: data.category,
+          brand: data.brand,
+          purchaseDate: data.purchaseDate,
+          productCode: data.productCode,
+          paymentMethod: data.paymentMethod,
+          productAvailability: data.productAvailability,
+          supplierId: data.supplier?.id?.toString() || "",
+          supplierName: data.supplier?.supplierName || "",
+          phoneNumber: data.supplier?.phoneNumber || "",
+          email: data.supplier?.email || "",
+          address: data.supplier?.address || "",
         });
-    }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchItem();
   }, [id]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/suppliers")
-      .then((response) => response.json())
-      .then((data) => {
-        setSuppliers(data);
-      })
-      .catch((error) => {
+    const fetchSuppliers = async () => {
+      try {
+        const response = await api.get("/suppliers");
+
+        setSuppliers(response.data);
+      } catch (error) {
         console.error("Error fetching suppliers:", error);
-      });
+      }
+    };
+
+    fetchSuppliers();
   }, []);
 
   useEffect(() => {
@@ -184,10 +191,7 @@ function ItemForm() {
         formData.append("files", file);
       });
 
-      const uploadResponse = await axios.post(
-        "http://localhost:8080/api/files/upload",
-        formData,
-      );
+      const uploadResponse = await api.post("/files/upload", formData);
 
       uploadedFileName = uploadResponse.data;
     }
@@ -213,14 +217,11 @@ function ItemForm() {
 
     try {
       if (id) {
-        await axios.put(
-          `http://localhost:8080/api/items/${id}`,
-          itemSupplierDTO,
-        );
+        await api.put(`/items/${id}`, itemSupplierDTO);
 
         alert("Updated Successfully!");
       } else {
-        await axios.post("http://localhost:8080/api/items", itemSupplierDTO);
+        await api.post("/items", itemSupplierDTO);
 
         alert("Saved Successfully!");
       }

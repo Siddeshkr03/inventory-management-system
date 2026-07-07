@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "./api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import { saveToken } from "./token";
 import "./Login.css";
 
 function Login() {
@@ -70,7 +71,9 @@ function Login() {
     setApiError("");
 
     try {
-      await api.post("/users/login", loginData);
+      const response = await api.post("/users/login", loginData);
+
+      saveToken(response.data.token);
 
       await checkAuth();
 

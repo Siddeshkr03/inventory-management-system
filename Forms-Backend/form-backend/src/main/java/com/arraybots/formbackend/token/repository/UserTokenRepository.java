@@ -10,6 +10,4 @@ public interface UserTokenRepository
 
     Optional<UserToken> findByToken(String token);
 
-    void logout(String token);
-
 }

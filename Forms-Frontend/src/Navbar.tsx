@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import api from "./api";
 import { useAuth } from "./AuthContext";
+import { removeToken } from "./token";
 import "./Navbar.css";
 
 function Navbar() {
@@ -11,6 +12,8 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       await api.post("/users/logout");
+
+      removeToken();
 
       await checkAuth();
 

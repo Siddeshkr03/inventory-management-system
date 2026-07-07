@@ -73,7 +73,9 @@ public class JwtInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        if (userToken.get().isRevoked()) {
+        UserToken storedToken = userToken.get();
+
+        if (storedToken.isRevoked()) {
 
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED
@@ -82,7 +84,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        if (userToken.get().isExpired()) {
+        if (storedToken.isExpired()) {
 
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED

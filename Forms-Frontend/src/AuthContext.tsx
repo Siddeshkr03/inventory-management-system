@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-
+import { getToken } from "./token";
 import api from "./api";
 
 interface AuthContextType {
@@ -16,7 +16,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   const checkAuth = async () => {
-    setLoading(true);
+    const token = getToken();
+
+    if (!token) {
+      setIsAuthenticated(false);
+
+      setLoading(false);
+
+      return;
+    }
 
     try {
       await api.get("/users/me");

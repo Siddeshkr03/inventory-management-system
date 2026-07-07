@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import api from "./api";
 import "./SupplierIndex.css";
 
 function SupplierIndex() {
@@ -19,13 +20,11 @@ function SupplierIndex() {
 
   const fetchSuppliers = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/suppliers");
+      const response = await api.get("/suppliers");
 
-      const data = await response.json();
+      console.log(response.data);
 
-      console.log(data);
-
-      setSuppliers(data);
+      setSuppliers(response.data);
     } catch (error) {
       console.error("Error fetching suppliers:", error);
     }
@@ -41,9 +40,7 @@ function SupplierIndex() {
     }
 
     try {
-      await fetch(`http://localhost:8080/api/suppliers/${id}`, {
-        method: "DELETE",
-      });
+      await api.delete(`/suppliers/${id}`);
 
       fetchSuppliers();
     } catch (error) {
