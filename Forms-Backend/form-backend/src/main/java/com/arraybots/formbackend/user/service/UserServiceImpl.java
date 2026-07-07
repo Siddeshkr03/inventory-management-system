@@ -72,17 +72,40 @@ public class UserServiceImpl implements UserService {
         String token =
                 jwtUtil.generateToken(user.get().getEmail());
 
-        UserToken userToken = new UserToken();
+        System.out.println("================================");
+        System.out.println("Logged in User ID: " + user.get().getId());
+
+        Optional<UserToken> existingToken =
+                userTokenRepository.findByUser_Id(user.get().getId());
+
+        System.out.println("Existing token found: " + existingToken.isPresent());
+
+        if (existingToken.isPresent()) {
+            System.out.println("Token row ID: " + existingToken.get().getId());
+            System.out.println("User ID in token: " + existingToken.get().getUser().getId());
+        }
+
+        System.out.println("================================");
+
+        UserToken userToken;
+
+        if (existingToken.isPresent()) {
+
+            userToken = existingToken.get();
+
+        } else {
+
+            userToken = new UserToken();
+
+            userToken.setUser(user.get());
+
+            userToken.setCreatedAt(LocalDateTime.now());
+
+        }
 
         userToken.setToken(token);
 
-        userToken.setUser(user.get());
-
-        userToken.setCreatedAt(LocalDateTime.now());
-
-        userToken.setExpiresAt(
-                jwtUtil.getExpiryDateTime()
-        );
+        userToken.setExpiresAt(jwtUtil.getExpiryDateTime());
 
         userToken.setRevoked(false);
 

@@ -32,7 +32,7 @@ public class UserToken {
     @Column(nullable = false)
     private LocalDateTime expiresAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
