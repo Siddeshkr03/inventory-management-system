@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import api from "./api";
 import { useAuth } from "./AuthContext";
 import { removeToken } from "./token";
@@ -9,11 +10,18 @@ function Navbar() {
 
   const { checkAuth } = useAuth();
 
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const storedUser = localStorage.getItem("user");
+
+  const user = storedUser ? JSON.parse(storedUser) : null;
+
   const handleLogout = async () => {
     try {
       await api.post("/users/logout");
 
       removeToken();
+      localStorage.removeItem("user");
 
       await checkAuth();
 
@@ -34,9 +42,32 @@ function Navbar() {
 
         <NavLink to="/suppliers">Suppliers</NavLink>
 
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
+        <div className="profile-container">
+          <div
+            className="profile-button"
+            onClick={() => setShowDropdown(!showDropdown)}
+          >
+            <span className="profile-icon">👤</span>
+
+            <span>{user?.name}</span>
+
+            <span className="arrow">▼</span>
+          </div>
+
+          {showDropdown && (
+            <div className="profile-dropdown">
+              <div className="profile-name">{user?.name}</div>
+
+              <div className="profile-email">{user?.email}</div>
+
+              <hr />
+
+              <button className="logout-btn" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );

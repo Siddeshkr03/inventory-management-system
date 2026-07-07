@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.arraybots.formbackend.token.model.UserToken;
 import com.arraybots.formbackend.token.repository.UserTokenRepository;
+import com.arraybots.formbackend.user.dto.LoginUserResponse;
 import java.time.LocalDateTime;
 
 import java.util.Optional;
@@ -113,10 +114,17 @@ public class UserServiceImpl implements UserService {
 
         userTokenRepository.save(userToken);
 
+        LoginUserResponse loginUser = new LoginUserResponse(
+                user.get().getId(),
+                user.get().getName(),
+                user.get().getEmail()
+        );
+
         return new LoginResponse(
                 token,
-                "Login Successful"
-                );
+                "Login Successful",
+                loginUser
+        );
     }
 
     @Override

@@ -75,6 +75,8 @@ function Login() {
 
       saveToken(response.data.token);
 
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
       await checkAuth();
 
       navigate("/");

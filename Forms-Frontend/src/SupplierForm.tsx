@@ -246,7 +246,7 @@ function SupplierForm() {
             </div>
           </div>
 
-          <button type="submit">Save Supplier</button>
+          <button className="submit-btn-sup" type="submit">Save Supplier</button>
         </div>
       </form>
     </div>

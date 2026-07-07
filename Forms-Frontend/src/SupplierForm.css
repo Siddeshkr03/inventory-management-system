@@ -57,3 +57,18 @@ body {
 .back-btn:focus{
     outline:none;
 }
+
+.submit-btn-sup{
+    display:block;
+    margin:10px auto 0;
+    width:90px;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#41c3e3;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}

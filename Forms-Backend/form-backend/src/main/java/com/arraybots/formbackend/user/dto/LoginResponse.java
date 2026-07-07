@@ -11,16 +11,15 @@ public class LoginResponse {
 
     private String message;
 
+    private LoginUserResponse user;
+
     public LoginResponse() {
     }
 
-    public LoginResponse(
-            String token,
-            String message) {
-
+    public LoginResponse(String token, String message, LoginUserResponse user) {
         this.token = token;
         this.message = message;
-
+        this.user = user;
     }
 
 }
