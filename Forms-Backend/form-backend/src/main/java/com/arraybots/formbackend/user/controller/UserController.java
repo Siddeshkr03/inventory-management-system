@@ -10,6 +10,7 @@ import com.arraybots.formbackend.user.service.UserService;
 import com.arraybots.formbackend.user.dto.LoginRequest;
 import org.springframework.http.HttpHeaders;
 import jakarta.servlet.http.HttpServletRequest;
+import com.arraybots.formbackend.user.dto.ForgotPasswordRequest;
 
 @RestController
 @RequestMapping("/api/users")
@@ -87,6 +88,17 @@ public class UserController {
         );
 
         return ResponseEntity.ok("Test email sent successfully.");
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(
+            @RequestBody ForgotPasswordRequest request) {
+
+        userService.forgotPassword(request.getEmail());
+
+        return ResponseEntity.ok(
+                "OTP sent successfully."
+        );
     }
 
 }

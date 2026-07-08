@@ -153,4 +153,9 @@ public class UserServiceImpl implements UserService {
 
         return String.valueOf(otp);
     }
+
+    @Override
+    public void forgotPassword(String email) {
+
+    }
 }

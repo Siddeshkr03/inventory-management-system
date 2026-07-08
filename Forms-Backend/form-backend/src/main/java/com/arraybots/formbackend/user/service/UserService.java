@@ -11,4 +11,6 @@ public interface UserService {
     LoginResponse loginUser(LoginRequest loginRequest);
 
     void logout(String token);
+
+    void forgotPassword(String email);
 }
