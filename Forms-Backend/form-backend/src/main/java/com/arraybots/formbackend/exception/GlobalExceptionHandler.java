@@ -1,5 +1,7 @@
 package com.arraybots.formbackend.exception;
 
+import com.arraybots.formbackend.user.exception.InvalidOtpException;
+import com.arraybots.formbackend.user.exception.OtpExpiredException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,6 +27,26 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(
                 ex.getMessage(),
                 HttpStatus.UNAUTHORIZED
+        );
+    }
+
+    @ExceptionHandler(InvalidOtpException.class)
+    public ResponseEntity<String> handleInvalidOtpException(
+            InvalidOtpException ex) {
+
+        return new ResponseEntity<>(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
+    @ExceptionHandler(OtpExpiredException.class)
+    public ResponseEntity<String> handleOtpExpiredException(
+            OtpExpiredException ex) {
+
+        return new ResponseEntity<>(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST
         );
     }
 

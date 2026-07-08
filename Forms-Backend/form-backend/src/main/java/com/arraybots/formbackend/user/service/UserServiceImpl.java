@@ -5,6 +5,8 @@ import com.arraybots.formbackend.security.JwtUtil;
 import com.arraybots.formbackend.user.dto.LoginRequest;
 import com.arraybots.formbackend.user.dto.LoginResponse;
 import com.arraybots.formbackend.user.exception.InvalidCredentialsException;
+import com.arraybots.formbackend.user.exception.InvalidOtpException;
+import com.arraybots.formbackend.user.exception.OtpExpiredException;
 import com.arraybots.formbackend.user.exception.UserAlreadyExistsException;
 import com.arraybots.formbackend.user.model.User;
 import com.arraybots.formbackend.user.repository.UserRepository;
@@ -202,11 +204,11 @@ public class UserServiceImpl implements UserService {
         }
 
         if (!otp.equals(user.get().getOtp())) {
-            throw new RuntimeException("Invalid OTP.");
+            throw new InvalidOtpException("Invalid OTP");
         }
 
         if (LocalDateTime.now().isAfter(user.get().getOtpExpiry())) {
-            throw new RuntimeException("OTP has expired.");
+            throw new OtpExpiredException("OTP has expired.");
         }
     }
 

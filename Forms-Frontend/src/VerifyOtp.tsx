@@ -66,7 +66,7 @@ function VerifyOtp() {
       if (error.response) {
         setApiError(error.response.data);
       } else {
-        setApiError("Something went wrong. Please try again.");
+        setApiError("Something went wrong.");
       }
     }
   };
