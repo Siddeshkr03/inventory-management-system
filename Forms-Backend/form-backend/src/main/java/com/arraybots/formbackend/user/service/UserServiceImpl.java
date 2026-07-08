@@ -1,5 +1,6 @@
 package com.arraybots.formbackend.user.service;
 
+import com.arraybots.formbackend.email.service.EmailService;
 import com.arraybots.formbackend.security.JwtUtil;
 import com.arraybots.formbackend.user.dto.LoginRequest;
 import com.arraybots.formbackend.user.dto.LoginResponse;
@@ -29,14 +30,18 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder =
             new BCryptPasswordEncoder();
 
+    private final EmailService emailService;
+
     public UserServiceImpl(
             UserRepository userRepository,
             JwtUtil jwtUtil,
-            UserTokenRepository userTokenRepository) {
+            UserTokenRepository userTokenRepository,
+            EmailService emailService) {
 
         this.userRepository = userRepository;
         this.jwtUtil = jwtUtil;
         this.userTokenRepository = userTokenRepository;
+        this.emailService = emailService;
     }
 
     @Override
@@ -157,5 +162,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public void forgotPassword(String email) {
 
+        Optional<User> user =
+                userRepository.findByEmail(email);
+
+        if (user.isEmpty()) {
+            throw new RuntimeException("User not found.");
+        }
+
+        String otp = generateOtp();
+
+        LocalDateTime expiryTime =
+                LocalDateTime.now().plusMinutes(10);
+
+        user.get().setOtp(otp);
+
+        user.get().setOtpExpiry(expiryTime);
+
+        userRepository.save(user.get());
+
+        emailService.sendEmail(
+                email,
+                "Password Reset OTP",
+                "Your OTP is: " + otp +
+                        "\n\nThis OTP is valid for 10 minutes."
+        );
     }
 }
