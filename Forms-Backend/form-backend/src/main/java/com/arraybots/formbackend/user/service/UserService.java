@@ -13,4 +13,6 @@ public interface UserService {
     void logout(String token);
 
     void forgotPassword(String email);
+
+    void verifyOtp(String email, String otp);
 }

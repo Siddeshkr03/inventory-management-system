@@ -187,4 +187,27 @@ public class UserServiceImpl implements UserService {
                         "\n\nThis OTP is valid for 10 minutes."
         );
     }
+
+    @Override
+    public void verifyOtp(
+            String email,
+            String otp
+    ) {
+
+        Optional<User> user =
+                userRepository.findByEmail(email);
+
+        if (user.isEmpty()) {
+            throw new RuntimeException("User not found.");
+        }
+
+        if (!otp.equals(user.get().getOtp())) {
+            throw new RuntimeException("Invalid OTP.");
+        }
+
+        if (LocalDateTime.now().isAfter(user.get().getOtpExpiry())) {
+            throw new RuntimeException("OTP has expired.");
+        }
+
+    }
 }

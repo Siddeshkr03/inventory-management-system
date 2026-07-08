@@ -11,6 +11,7 @@ import com.arraybots.formbackend.user.dto.LoginRequest;
 import org.springframework.http.HttpHeaders;
 import jakarta.servlet.http.HttpServletRequest;
 import com.arraybots.formbackend.user.dto.ForgotPasswordRequest;
+import com.arraybots.formbackend.user.dto.VerifyOtpRequest;
 
 @RestController
 @RequestMapping("/api/users")
@@ -98,6 +99,20 @@ public class UserController {
 
         return ResponseEntity.ok(
                 "OTP sent successfully."
+        );
+    }
+
+    @PostMapping("/verify-otp")
+    public ResponseEntity<String> verifyOtp(
+            @RequestBody VerifyOtpRequest request) {
+
+        userService.verifyOtp(
+                request.getEmail(),
+                request.getOtp()
+        );
+
+        return ResponseEntity.ok(
+                "OTP verified successfully."
         );
     }
 
