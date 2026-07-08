@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import api from "./api";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { saveToken } from "./token";
 import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const { checkAuth } = useAuth();
+  const [successMessage, setSuccessMessage] = useState("");
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -21,6 +22,16 @@ function Login() {
   });
 
   const [apiError, setApiError] = useState("");
+
+  useEffect(() => {
+    if (location.state?.message) {
+      setSuccessMessage(location.state.message);
+
+      navigate(location.pathname, {
+        replace: true,
+      });
+    }
+  }, [location, navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -92,6 +103,7 @@ function Login() {
   return (
     <div className="login-page">
       <div className="login-card">
+        {successMessage && <p className="success-message">{successMessage}</p>}
         <h2>Login</h2>
 
         <form className="login-form" onSubmit={handleSubmit}>

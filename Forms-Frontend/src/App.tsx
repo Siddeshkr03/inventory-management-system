@@ -13,6 +13,10 @@ import Register from "./Register";
 import Login from "./Login";
 import PublicRoute from "./PublicRoute";
 
+import ForgotPassword from "./ForgotPassword";
+import VerifyOtp from "./VerifyOtp";
+import ResetPassword from "./ResetPassword";
+
 function App() {
   return (
     <BrowserRouter>
@@ -29,7 +33,34 @@ function App() {
 
         <Route path="/suppliers" element={<ProtectedRoute><SupplierIndex /></ProtectedRoute>}></Route>
         <Route path="/suppliers/add" element={<ProtectedRoute><SupplierForm /></ProtectedRoute>} />
-        <Route path="/suppliers/edit/:id" element={<ProtectedRoute><SupplierForm /></ProtectedRoute>} />
+        <Route path="/suppliers/edit/:id" element={<ProtectedRoute><SupplierForm /></ProtectedRoute>}/>
+
+        <Route
+    path="/forgot-password"
+    element={
+        <PublicRoute>
+            <ForgotPassword />
+        </PublicRoute>
+    }
+/>
+
+<Route
+    path="/verify-otp"
+    element={
+        <PublicRoute>
+            <VerifyOtp />
+        </PublicRoute>
+    }
+/>
+
+<Route
+    path="/reset-password"
+    element={
+        <PublicRoute>
+            <ResetPassword />
+        </PublicRoute>
+    }
+/>
       </Routes>
     </BrowserRouter>
   );
