@@ -111,7 +111,7 @@ useEffect(() => {
         <table className="item-table">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>S.No.</th>
               <th>Item Name</th>
               <th>Price</th>
               <th>Quantity</th>
@@ -130,9 +130,9 @@ useEffect(() => {
               .filter((item) =>
                 item.itemName.toLowerCase().includes(search.toLowerCase()),
               )
-              .map((item) => (
+              .map((item, index) => (
                 <tr key={item.id}>
-                  <td>{item.id}</td>
+                  <td>{index + 1}</td>
                   <td>{item.itemName}</td>
                   <td>{item.price}</td>
                   <td>{item.quantity}</td>

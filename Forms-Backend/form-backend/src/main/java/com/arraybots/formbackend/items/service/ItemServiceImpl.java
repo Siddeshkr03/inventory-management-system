@@ -3,6 +3,7 @@ package com.arraybots.formbackend.items.service;
 import com.arraybots.formbackend.items.model.Item;
 import com.arraybots.formbackend.items.repository.ItemRepository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +29,19 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> getAllItems(String productAvailability) {
 
+        System.out.println("Using DESC sort");
+
+        System.out.println("productAvailability = " + productAvailability);
         if (productAvailability == null || productAvailability.isBlank()) {
-            return itemRepository.findAll();
+            return itemRepository.findAll(
+                    Sort.by(Sort.Direction.DESC, "id")
+            );
         }
 
-        return itemRepository.findByProductAvailability(productAvailability);
+        return itemRepository.findByProductAvailability(
+                productAvailability,
+                Sort.by(Sort.Direction.DESC, "id")
+        );
     }
 
     @Override

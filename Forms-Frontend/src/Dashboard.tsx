@@ -53,7 +53,7 @@ function Dashboard() {
           <h1>{dashboardData.totalSuppliers}</h1>
         </div>
 
-        <div className="dashboard-card" onClick={() => navigate("/stock")}>
+        <div className="dashboard-card" >
           <h3>In Stock</h3>
           <h1>{dashboardData.inStock}</h1>
         </div>
