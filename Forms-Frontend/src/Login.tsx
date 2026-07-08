@@ -121,6 +121,10 @@ function Login() {
 
           {apiError && <p className="api-error">{apiError}</p>}
 
+          <div className="forgot-password">
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </div>
+
           <button className="login-btn">Login</button>
 
           <div className="register-link">
