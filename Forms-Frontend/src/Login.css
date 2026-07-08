@@ -131,3 +131,14 @@ body {
 .forgot-password a:hover {
     text-decoration: underline;
 }
+
+.success-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #81c784;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+}
