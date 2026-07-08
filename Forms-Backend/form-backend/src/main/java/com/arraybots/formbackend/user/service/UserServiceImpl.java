@@ -208,6 +208,30 @@ public class UserServiceImpl implements UserService {
         if (LocalDateTime.now().isAfter(user.get().getOtpExpiry())) {
             throw new RuntimeException("OTP has expired.");
         }
+    }
 
+    @Override
+    public void resetPassword(
+            String email,
+            String newPassword
+    ) {
+
+        Optional<User> user =
+                userRepository.findByEmail(email);
+
+        if (user.isEmpty()) {
+            throw new RuntimeException("User not found.");
+        }
+
+        String encodedPassword =
+                passwordEncoder.encode(newPassword);
+
+        user.get().setPassword(encodedPassword);
+
+        user.get().setOtp(null);
+
+        user.get().setOtpExpiry(null);
+
+        userRepository.save(user.get());
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import jakarta.servlet.http.HttpServletRequest;
 import com.arraybots.formbackend.user.dto.ForgotPasswordRequest;
 import com.arraybots.formbackend.user.dto.VerifyOtpRequest;
+import com.arraybots.formbackend.user.dto.ResetPasswordRequest;
 
 @RestController
 @RequestMapping("/api/users")
@@ -113,6 +114,20 @@ public class UserController {
 
         return ResponseEntity.ok(
                 "OTP verified successfully."
+        );
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(
+            @RequestBody ResetPasswordRequest request) {
+
+        userService.resetPassword(
+                request.getEmail(),
+                request.getNewPassword()
+        );
+
+        return ResponseEntity.ok(
+                "Password reset successfully."
         );
     }
 
