@@ -1,5 +1,6 @@
 package com.arraybots.formbackend.user.controller;
 
+import com.arraybots.formbackend.email.service.EmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,14 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    private final EmailService emailService;
+
+    public UserController(
+            UserService userService,
+            EmailService emailService) {
+
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @PostMapping("/register")
@@ -68,6 +75,18 @@ public class UserController {
 
         return ResponseEntity.ok(user);
 
+    }
+
+    @GetMapping("/test-email")
+    public ResponseEntity<String> sendTestEmail() {
+
+        emailService.sendEmail(
+                "siddeshkr03@gmail.com",
+                "Spring Boot Email Test",
+                "Congratulations! Your email configuration is working."
+        );
+
+        return ResponseEntity.ok("Test email sent successfully.");
     }
 
 }

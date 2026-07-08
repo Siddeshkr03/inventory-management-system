@@ -24,6 +24,19 @@ spring:
   application:
     name: Forms
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: projectdemomail446@gmail.com
+    password: fkkfmtbexqxtlvrv
+
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 app:
   frontend:
     url: http://localhost:5173/
