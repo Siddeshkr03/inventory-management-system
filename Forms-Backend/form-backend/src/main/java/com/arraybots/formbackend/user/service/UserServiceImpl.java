@@ -15,6 +15,7 @@ import com.arraybots.formbackend.user.dto.LoginUserResponse;
 import java.time.LocalDateTime;
 
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -72,8 +73,6 @@ public class UserServiceImpl implements UserService {
 
         String token =
                 jwtUtil.generateToken(user.get().getEmail());
-
-        System.out.println("================================");
         System.out.println("Logged in User ID: " + user.get().getId());
 
         Optional<UserToken> existingToken =
@@ -86,7 +85,6 @@ public class UserServiceImpl implements UserService {
             System.out.println("User ID in token: " + existingToken.get().getUser().getId());
         }
 
-        System.out.println("================================");
 
         UserToken userToken;
 
@@ -145,5 +143,14 @@ public class UserServiceImpl implements UserService {
 
         userTokenRepository.save(storedToken);
 
+    }
+
+    private String generateOtp() {
+
+        Random random = new Random();
+
+        int otp = 100000 + random.nextInt(900000);
+
+        return String.valueOf(otp);
     }
 }
