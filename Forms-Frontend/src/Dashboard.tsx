@@ -1,6 +1,6 @@
 import "./Dashboard.css";
 import Navbar from "./Navbar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "./api";
 
@@ -53,22 +53,22 @@ function Dashboard() {
           <h1>{dashboardData.totalSuppliers}</h1>
         </div>
 
-        <div className="dashboard-card" >
+        <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=IN_STOCK")}>
           <h3>In Stock</h3>
           <h1>{dashboardData.inStock}</h1>
         </div>
 
-        <div className="dashboard-card">
+        <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=LOW_STOCK")}>
           <h3>Low Stock</h3>
           <h1>{dashboardData.lowStock}</h1>
         </div>
 
-        <div className="dashboard-card">
+        <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=PRE_ORDER")}>
           <h3>Pre-order</h3>
           <h1>{dashboardData.preOrder}</h1>
         </div>
 
-        <div className="dashboard-card">
+        <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=OUT_OF_STOCK")}>
           <h3>Out of Stock</h3>
           <h1>{dashboardData.outOfStock}</h1>
         </div>

@@ -29,19 +29,19 @@ public class DashboardServiceImpl implements DashboardService {
         dashboardDTO.setTotalSuppliers(supplierRepository.count());
 
         dashboardDTO.setInStock(
-                itemRepository.countByProductAvailability("In Stock")
+                itemRepository.countByProductAvailability("IN_STOCK")
         );
 
         dashboardDTO.setLowStock(
-                itemRepository.countByProductAvailability("Low Stock")
+                itemRepository.countByProductAvailability("LOW_STOCK")
         );
 
         dashboardDTO.setPreOrder(
-                itemRepository.countByProductAvailability("Pre-order")
+                itemRepository.countByProductAvailability("PRE_ORDER")
         );
 
         dashboardDTO.setOutOfStock(
-                itemRepository.countByProductAvailability("Out of Stock")
+                itemRepository.countByProductAvailability("OUT_OF_STOCK")
         );
         
         return dashboardDTO;

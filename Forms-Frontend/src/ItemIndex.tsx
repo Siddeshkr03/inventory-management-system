@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import api from "./api";
 import "./ItemIndex.css";
@@ -29,7 +29,14 @@ function ItemIndex() {
 
   const [items, setItems] = useState<Item[]>([]);
   const [search, setSearch] = useState("");
-  const [productAvailability, setProductAvailability] = useState("");
+  const [searchParams] = useSearchParams();
+
+  const initialProductAvailability =
+  searchParams.get("productAvailability") || "";
+
+    const [productAvailability, setProductAvailability] = useState(
+  initialProductAvailability
+);
 
   const navigate = useNavigate();
 

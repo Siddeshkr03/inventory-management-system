@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "./api";
 import "./Register.css";
 
 function Register() {
@@ -19,7 +19,7 @@ function Register() {
   });
 
   const [apiError, setApiError] = useState("");
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -82,7 +82,7 @@ function Register() {
     setApiError("");
 
     try {
-      await axios.post("http://localhost:8080/api/users/register", {
+      await api.post("/users/register", {
         name: user.name,
         email: user.email,
         password: user.password,
@@ -94,12 +94,22 @@ function Register() {
         password: "",
         confirmPassword: "",
       });
+      console.log("Before navigate");
+      navigate("/login", {
+        state: {
+          message: "Registration successful. Please login.",
+        },
+      });
+      
+      console.log("After navigate");
 
-      alert("Registration Successful");
-      Navigate("/login");
     } catch (error: any) {
       if (error.response) {
-        setApiError(error.response.data);
+        setApiError(
+          error.response.data.message ||
+            error.response.data.error ||
+            "Registration failed.",
+        );
       } else {
         setApiError("Something went wrong. Please try again.");
       }

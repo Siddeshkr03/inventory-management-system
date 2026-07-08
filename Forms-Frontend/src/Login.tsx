@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "./api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { saveToken } from "./token";
 import "./Login.css";
@@ -122,6 +122,12 @@ function Login() {
           {apiError && <p className="api-error">{apiError}</p>}
 
           <button className="login-btn">Login</button>
+
+          <div className="register-link">
+            <span>Don't have an account? </span>
+
+            <Link to="/register">Register</Link>
+          </div>
         </form>
       </div>
     </div>
