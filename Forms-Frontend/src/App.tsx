@@ -16,6 +16,7 @@ import PublicRoute from "./PublicRoute";
 import ForgotPassword from "./ForgotPassword";
 import VerifyOtp from "./VerifyOtp";
 import ResetPassword from "./ResetPassword";
+import CategoryIndex from "./CategoryIndex";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
         <Route path="/suppliers" element={<ProtectedRoute><SupplierIndex /></ProtectedRoute>}></Route>
         <Route path="/suppliers/add" element={<ProtectedRoute><SupplierForm /></ProtectedRoute>} />
         <Route path="/suppliers/edit/:id" element={<ProtectedRoute><SupplierForm /></ProtectedRoute>}/>
+
+        <Route path="/categories" element={<ProtectedRoute><CategoryIndex /></ProtectedRoute>}></Route>
 
         <Route
     path="/forgot-password"
