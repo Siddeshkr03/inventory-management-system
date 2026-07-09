@@ -6,8 +6,8 @@ import com.arraybots.formbackend.items.dto.ItemSupplierDTO;
 import com.arraybots.formbackend.supplier.model.Supplier;
 import com.arraybots.formbackend.supplier.service.SupplierService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -27,7 +27,9 @@ public class ItemController {
     }
 
     @PostMapping
-    public Item saveItem(@RequestBody ItemSupplierDTO dto) {
+    public Item saveItem(
+            @RequestBody ItemSupplierDTO dto,
+            HttpServletRequest request) {
 
         // Get the existing supplier using supplierId
         Supplier supplier = supplierService.getSupplierById(dto.getSupplierId());
@@ -39,7 +41,7 @@ public class ItemController {
         item.setSupplier(supplier);
 
         // Save item
-        return itemService.saveItem(item);
+        return itemService.saveItem(item, request);
     }
 
     @GetMapping
@@ -62,10 +64,11 @@ public class ItemController {
         return itemService.getItemById(id);
 
     }
-    
+
     @PutMapping("/{id}")
     public Item updateItem(@PathVariable Long id,
-                           @RequestBody ItemSupplierDTO dto) {
+                           @RequestBody ItemSupplierDTO dto,
+                           HttpServletRequest request) {
 
         Supplier supplier = supplierService.getSupplierById(
                 dto.getSupplierId()
@@ -74,7 +77,7 @@ public class ItemController {
         Item item = dto.getItem();
         item.setSupplier(supplier);
 
-        return itemService.updateItem(id, item);
+        return itemService.updateItem(id, item,request);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.arraybots.formbackend.supplier.model;
 
+import com.arraybots.formbackend.common.model.AuditEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "supplier")
-public class Supplier {
+public class Supplier extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,5 @@
 package com.arraybots.formbackend.items.model;
+import com.arraybots.formbackend.common.model.AuditEntity;
 import com.arraybots.formbackend.supplier.model.Supplier;
 
 import jakarta.persistence.*;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Entity
 @Table(name = "items")
-public class Item {
+public class Item extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,8 +5,13 @@ import com.arraybots.formbackend.items.repository.ItemRepository;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import com.arraybots.formbackend.user.model.User;
+import jakarta.servlet.http.HttpServletRequest;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -20,10 +25,16 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item saveItem(Item item) {
+    public Item saveItem(Item item, HttpServletRequest request) {
+
+        User loggedInUser =
+                (User) request.getAttribute("loggedInUser");
+
+        item.setCreatedBy(loggedInUser.getName());
+
+        item.setCreatedAt(LocalDateTime.now());
 
         return itemRepository.save(item);
-
     }
 
     @Override
@@ -59,10 +70,15 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item updateItem(Long id, Item item) {
+    public Item updateItem(Long id,
+                           Item item,
+                           HttpServletRequest request){
 
         Item existingItem = itemRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Item not found"));
+
+    User loggedInUser =
+            (User) request.getAttribute("loggedInUser");
 
         existingItem.setItemName(item.getItemName());
         existingItem.setPrice(item.getPrice());
@@ -76,6 +92,9 @@ public class ItemServiceImpl implements ItemService {
         existingItem.setFiles(item.getFiles());
 
         existingItem.setSupplier(item.getSupplier());
+
+        existingItem.setUpdatedBy(loggedInUser.getName());
+        existingItem.setUpdatedAt(LocalDateTime.now());
 
         return itemRepository.save(existingItem);
     }
