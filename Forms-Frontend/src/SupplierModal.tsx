@@ -27,6 +27,7 @@ function SupplierModal({
   onClose,
   onSupplierAdded,
 }: SupplierModalProps) {
+  
   const [supplierData, setSupplierData] = useState<SupplierData>({
     supplierName: "",
     phoneNumber: "",

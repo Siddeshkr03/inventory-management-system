@@ -33,7 +33,15 @@ function ItemForm() {
     address: string;
   }
 
+  interface Category {
+    id: number;
+    categoryName: string;
+    categoryCode: string;
+    description: string;
+  }
+
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [showSupplierModal, setShowSupplierModal] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
 
@@ -164,6 +172,20 @@ function ItemForm() {
   }, []);
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await api.get("/categories");
+
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
     const savedData = localStorage.getItem("itemFormData");
 
     if (savedData) {
@@ -174,6 +196,7 @@ function ItemForm() {
   }, []);
 
   console.log(suppliers);
+  console.log(categories);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
