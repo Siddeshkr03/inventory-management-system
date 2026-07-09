@@ -467,10 +467,14 @@ function ItemForm() {
                 onChange={handleChange}
               >
                 <option value="">Select availability</option>
-                <option value="In Stock">In Stock</option>
-                <option value="Out of Stock">Out of Stock</option>
-                <option value="low Stock">Low Stock</option>
-                <option value="Pre-order">Pre-order</option>
+
+                <option value="IN_STOCK">In Stock</option>
+
+                <option value="LOW_STOCK">Low Stock</option>
+
+                <option value="OUT_OF_STOCK">Out of Stock</option>
+
+                <option value="PRE_ORDER">Pre-order</option>
               </select>
               {errors.productAvailability && (
                 <p className="error">{errors.productAvailability}</p>
