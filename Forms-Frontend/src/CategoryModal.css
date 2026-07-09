@@ -1,0 +1,137 @@
+/* Overlay */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+/* Modal */
+
+.modal-content {
+  background: #ffffff;
+  width: 500px;
+  max-width: 90%;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+
+  animation: popup 0.2s ease-in-out;
+}
+
+/* Animation */
+
+@keyframes popup {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Header */
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #065f46;
+  font-size: 22px;
+}
+
+.close-button-mdl {
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform 0.2s;
+}
+
+.close-button-mdl:hover {
+  transform: scale(1.15);
+}
+
+/* Form */
+
+.form-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.form-grid label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-grid input,
+.form-grid textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.form-grid input:focus,
+.form-grid textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 4px rgba(16, 185, 129, 0.3);
+}
+
+.form-grid textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* Error */
+
+.error-message {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Footer */
+
+.save-btn-container-mdl {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+  margin-right: 150px;
+}
+
+.save-btn-container-mdl button {
+  background: #14d3c9;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.save-btn-container-mdl button:hover {
+  background: #059669;
+}

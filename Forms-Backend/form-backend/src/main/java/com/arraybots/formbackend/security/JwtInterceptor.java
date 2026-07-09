@@ -2,6 +2,7 @@ package com.arraybots.formbackend.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import com.arraybots.formbackend.token.model.UserToken;
@@ -35,6 +36,11 @@ public class JwtInterceptor implements HandlerInterceptor {
             HttpServletResponse response,
             Object handler)
             throws Exception {
+
+        // Allow CORS preflight requests
+        if (HttpMethod.OPTIONS.matches(request.getMethod())) {
+            return true;
+        }
 
         String authHeader =
                 request.getHeader("Authorization");

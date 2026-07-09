@@ -4,6 +4,7 @@ import api from "./api";
 import "./ItemForm.css";
 
 import SupplierModal from "./SupplierModal";
+import CategoryModal from "./CategoryModal";
 
 function ItemForm() {
   interface ItemData {
@@ -43,6 +44,7 @@ function ItemForm() {
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [showSupplierModal, setShowSupplierModal] = useState(false);
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
 
   const [itemData, setItemData] = useState<ItemData>({
@@ -107,6 +109,26 @@ function ItemForm() {
         ...errors,
         supplier: "",
       });
+      return;
+    }
+
+    if (name === "category") {
+      if (value === "ADD_NEW_CATEGORY") {
+        setShowCategoryModal(true);
+
+        return;
+      }
+
+      setItemData({
+        ...itemData,
+        category: value,
+      });
+
+      setErrors({
+        ...errors,
+        category: "",
+      });
+
       return;
     }
 
@@ -351,6 +373,15 @@ function ItemForm() {
     }));
   };
 
+  const handleCategoryAdded = (newCategory: Category) => {
+    setCategories((prev) => [...prev, newCategory]);
+
+    setItemData((prev) => ({
+      ...prev,
+      category: newCategory.categoryName,
+    }));
+  };
+
   return (
     <div className="items">
       <form className="item-form" onSubmit={handleSubmit}>
@@ -404,24 +435,24 @@ function ItemForm() {
               {errors.quantity && <p className="error">{errors.quantity}</p>}
             </div>
 
-            <div>
-              <label>Category</label>
-              <select
-                name="category"
-                value={itemData.category}
-                onChange={handleChange}
-              >
-                <option value="">Select a category</option>
-                <option value="Fashion">Fashion</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Footware">Footware</option>
-                <option value="Clothing">Clothing</option>
-                <option value="Home">Home</option>
-                <option value="Computers">Computers & Laptops</option>
-                <option value="Sports">Sports</option>
-              </select>
-              {errors.category && <p className="error">{errors.category}</p>}
-            </div>
+           <div>
+            <label>Category</label>
+             <select
+              name="category"
+              value={itemData.category}
+              onChange={handleChange}
+            >
+              <option value="">Select a category</option>
+
+              {categories.map((category) => (
+                <option key={category.id} value={category.categoryName}>
+                  {category.categoryName}
+                </option>
+              ))}
+
+              <option value="ADD_NEW_CATEGORY">Add New Category</option>
+            </select>
+           </div>
 
             <div>
               <label>Brand</label>
@@ -607,6 +638,12 @@ function ItemForm() {
         isOpen={showSupplierModal}
         onClose={() => setShowSupplierModal(false)}
         onSupplierAdded={handleSupplierAdded}
+      />
+
+      <CategoryModal
+        isOpen={showCategoryModal}
+        onClose={() => setShowCategoryModal(false)}
+        onCategoryAdded={handleCategoryAdded}
       />
     </div>
   );
