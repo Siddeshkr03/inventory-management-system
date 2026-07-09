@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import api from "./api";
 import "./ItemShow.css";
 
 function ItemShow() {
@@ -37,7 +37,7 @@ function ItemShow() {
 
   const fetchItem = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/items/${id}`);
+      const response = await api.get(`/items/${id}`);
 
       setItem(response.data);
       console.log(response.data);

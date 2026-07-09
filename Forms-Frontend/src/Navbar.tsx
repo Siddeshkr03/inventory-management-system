@@ -33,7 +33,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <h2 className="logo">Inventory Management</h2>
+      <h2 className="logo-nav">Inventory Management</h2>
 
       <div className="nav-links">
         <NavLink to="/">Dashboard</NavLink>

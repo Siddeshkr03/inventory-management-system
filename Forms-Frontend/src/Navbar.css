@@ -9,7 +9,7 @@
   padding: 25px 40px;
 }
 
-.logo {
+.logo-nav {
     margin: 0;
     font-size: 28px;
     font-weight: bold;
@@ -17,6 +17,13 @@
     border: none;
     border-bottom: none;
     text-decoration: none;
+}
+
+.logo-nav:hover{
+    color: #174a8b;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 29px;
 }
 
 .nav-links {

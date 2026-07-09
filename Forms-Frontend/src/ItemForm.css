@@ -72,14 +72,14 @@ button:hover{
     transform:translateY(-2px);
 }
 
-h2{
+/* h2{
     text-align:center;
     margin:40px 0 25px;
     color:#1e3a8a;
     font-size:30px;
     border-bottom:2px solid #ddd;
-    padding-bottom:10px;
-}
+    padding-bottom:10px; */
+
 
 .file{
     border:1px solid #ccc;
