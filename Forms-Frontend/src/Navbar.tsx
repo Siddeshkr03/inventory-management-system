@@ -42,6 +42,8 @@ function Navbar() {
 
         <NavLink to="/suppliers">Suppliers</NavLink>
 
+        <NavLink to="/categories">Categories</NavLink>
+
         <div className="profile-container">
           <div
             className="profile-button"
