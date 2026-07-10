@@ -40,9 +40,6 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> getAllItems(String productAvailability) {
 
-        System.out.println("Using DESC sort");
-
-        System.out.println("productAvailability = " + productAvailability);
         if (productAvailability == null || productAvailability.isBlank()) {
             return itemRepository.findAll(
                     Sort.by(Sort.Direction.DESC, "id")

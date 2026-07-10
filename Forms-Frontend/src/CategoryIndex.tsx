@@ -126,11 +126,11 @@ function CategoryIndex() {
                   .includes(search.toLowerCase())
               )
 
-              .map((category) => (
+              .map((category, index) => (
 
                 <tr key={category.id}>
 
-                  <td>{category.id}</td>
+                  <td>{index + 1}</td>
 
                   <td>{category.categoryName}</td>
 
