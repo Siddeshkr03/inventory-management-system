@@ -61,15 +61,12 @@ body {
   outline: none;
 }
 
-/* ==========================
-   Title Card
-========================== */
-
 .category-page-title-wrapper {
   background: #f0ead2;
   border-radius: 12px;
   padding: 18px 22px;
   margin-bottom: 30px;
+  border: 1px solid#fafcfb;
 }
 
 .category-page-title {
@@ -85,29 +82,17 @@ body {
   font-size: 16px;
 }
 
-/* ==========================
-   Details Card
-========================== */
-
 .category-details-card {
   border: 1px solid #d1d5db;
   border-radius: 16px;
   padding: 28px;
 }
 
-/* ==========================
-   Grid
-========================== */
-
 .category-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
-
-/* ==========================
-   Labels
-========================== */
 
 .category-label {
   display: block;
@@ -116,10 +101,6 @@ body {
   font-weight: 600;
   color: #374151;
 }
-
-/* ==========================
-   Inputs
-========================== */
 
 .category-input {
   width: 100%;
@@ -138,10 +119,6 @@ body {
   border-color: #4f772d;
   box-shadow: 0 0 0 4px rgba(79, 119, 45, 0.12);
 }
-
-/* ==========================
-   Textarea
-========================== */
 
 .category-textarea {
   width: 100%;
@@ -162,20 +139,12 @@ body {
   box-shadow: 0 0 0 4px rgba(79, 119, 45, 0.12);
 }
 
-/* ==========================
-   Errors
-========================== */
-
 .category-error {
   margin-top: 6px;
   color: #dc2626;
   font-size: 13px;
   font-weight: 500;
 }
-
-/* ==========================
-   Buttons
-========================== */
 
 .category-actions {
   display: flex;
@@ -226,10 +195,6 @@ body {
 .category-submit-btn:active {
   transform: translateY(0);
 }
-
-/* ==========================
-   Responsive
-========================== */
 
 @media (max-width: 768px) {
   .category-container {
