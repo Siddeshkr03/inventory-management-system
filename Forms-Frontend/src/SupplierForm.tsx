@@ -30,39 +30,30 @@ function SupplierForm() {
   const { id } = useParams();
 
   useEffect(() => {
+    if (!id) return;
 
-  if (!id) return;
+    const fetchSupplier = async () => {
+      try {
+        const response = await api.get(`/suppliers/${id}`);
 
-  const fetchSupplier = async () => {
+        const data = response.data;
 
-    try {
+        setSupplierData({
+          supplierName: data.supplierName,
+          phoneNumber: data.phoneNumber,
+          email: data.email,
+          address: data.address,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-      const response =
-        await api.get(`/suppliers/${id}`);
-
-      const data = response.data;
-
-      setSupplierData({
-        supplierName: data.supplierName,
-        phoneNumber: data.phoneNumber,
-        email: data.email,
-        address: data.address,
-      });
-
-    } catch (error) {
-
-      console.error(error);
-
-    }
-
-  };
-
-  fetchSupplier();
-
-}, [id]);
+    fetchSupplier();
+  }, [id]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
 
@@ -93,13 +84,11 @@ function SupplierForm() {
 
     let isValid = true;
 
-    // Supplier Name
     if (!supplierData.supplierName.trim()) {
       newErrors.supplierName = "Supplier Name is required";
       isValid = false;
     }
 
-    // Phone Number
     if (!supplierData.phoneNumber.trim()) {
       newErrors.phoneNumber = "Phone Number is required";
       isValid = false;
@@ -108,7 +97,6 @@ function SupplierForm() {
       isValid = false;
     }
 
-    // Email
     if (!supplierData.email.trim()) {
       newErrors.email = "Email is required";
       isValid = false;
@@ -119,7 +107,6 @@ function SupplierForm() {
       isValid = false;
     }
 
-    // Address
     if (!supplierData.address.trim()) {
       newErrors.address = "Address is required";
       isValid = false;
@@ -139,17 +126,11 @@ function SupplierForm() {
 
     try {
       if (id) {
-        await api.put(
-          `/suppliers/${id}`,
-          supplierData,
-        );
+        await api.put(`/suppliers/${id}`, supplierData);
 
         alert("Supplier Updated Successfully!");
       } else {
-        const response = await api.post(
-          "/suppliers",
-          supplierData,
-        );
+        const response = await api.post("/suppliers", supplierData);
 
         localStorage.setItem("newSupplierId", response.data.id.toString());
 
@@ -170,39 +151,45 @@ function SupplierForm() {
 
   return (
     <div className="supplier-page">
-      <form className="supplier-form" onSubmit={handleSubmit}>
-        <div className="page-header">
+      <form className="supplier-container" onSubmit={handleSubmit}>
+        <div className="supplier-page-header">
           <button
             type="button"
-            className="back-btn"
+            className="supplier-back-btn"
             onClick={() => navigate("/suppliers")}
           >
             ⬅
           </button>
         </div>
-        <div className="supplier-block">
-          <h1 className="title">Add Supplier</h1>
 
-          <div className="form-grid">
+        <div className="supplier-details-card">
+          <h1 className="supplier-page-title">
+            {id ? "Edit Supplier" : "Add Supplier"}
+          </h1>
+
+          <div className="supplier-grid">
             <div>
-              <label>Supplier Name</label>
+              <label className="supplier-label">Supplier Name</label>
 
               <input
+                className="supplier-input"
                 type="text"
                 name="supplierName"
                 placeholder="Enter Supplier Name"
                 value={supplierData.supplierName}
                 onChange={handleChange}
               />
+
               {errors.supplierName && (
-                <p className="error">{errors.supplierName}</p>
+                <p className="supplier-error">{errors.supplierName}</p>
               )}
             </div>
 
             <div>
-              <label>Phone Number</label>
+              <label className="supplier-label">Phone Number</label>
 
               <input
+                className="supplier-input"
                 type="tel"
                 name="phoneNumber"
                 placeholder="Enter Phone Number"
@@ -210,28 +197,34 @@ function SupplierForm() {
                 onChange={handleChange}
                 maxLength={10}
               />
+
               {errors.phoneNumber && (
-                <p className="error">{errors.phoneNumber}</p>
+                <p className="supplier-error">{errors.phoneNumber}</p>
               )}
             </div>
 
             <div>
-              <label>Email</label>
+              <label className="supplier-label">Email</label>
 
               <input
+                className="supplier-input"
                 type="email"
                 name="email"
                 placeholder="Enter Email"
                 value={supplierData.email}
                 onChange={handleChange}
               />
-              {errors.email && <p className="error">{errors.email}</p>}
+
+              {errors.email && (
+                <p className="supplier-error">{errors.email}</p>
+              )}
             </div>
 
             <div>
-              <label>Address</label>
+              <label className="supplier-label">Address</label>
 
               <textarea
+                className="supplier-textarea"
                 name="address"
                 placeholder="Enter Address"
                 value={supplierData.address}
@@ -242,11 +235,19 @@ function SupplierForm() {
                   resize: "vertical",
                 }}
               />
-              {errors.address && <p className="error">{errors.address}</p>}
+
+              {errors.address && (
+                <p className="supplier-error">{errors.address}</p>
+              )}
             </div>
           </div>
 
-          <button className="submit-btn-sup" type="submit">Save Supplier</button>
+          <button
+            className="supplier-submit-btn"
+            type="submit"
+          >
+            {id ? "Update Supplier" : "Save Supplier"}
+          </button>
         </div>
       </form>
     </div>

@@ -35,8 +35,7 @@ function CategoryForm() {
 
       try {
 
-        const response =
-          await api.get(`/categories/${id}`);
+        const response = await api.get(`/categories/${id}`);
 
         const data = response.data;
 
@@ -121,19 +120,13 @@ function CategoryForm() {
 
       if (id) {
 
-        await api.put(
-          `/categories/${id}`,
-          categoryData
-        );
+        await api.put(`/categories/${id}`, categoryData);
 
         alert("Category Updated Successfully!");
 
       } else {
 
-        await api.post(
-          "/categories",
-          categoryData
-        );
+        await api.post("/categories", categoryData);
 
         alert("Category Added Successfully!");
 
@@ -153,18 +146,18 @@ function CategoryForm() {
 
   return (
 
-    <div className="supplier-page">
+    <div className="category-page">
 
       <form
-        className="supplier-form"
+        className="category-container"
         onSubmit={handleSubmit}
       >
 
-        <div className="page-header">
+        <div className="category-page-header">
 
           <button
             type="button"
-            className="back-btn"
+            className="category-back-btn"
             onClick={() => navigate("/categories")}
           >
             ⬅
@@ -172,21 +165,26 @@ function CategoryForm() {
 
         </div>
 
-        <div className="supplier-block">
+        <div className="category-details-card">
 
-          <h1 className="title">
+          <h1 className="category-page-title">
 
             {id ? "Edit Category" : "Add Category"}
 
           </h1>
 
-          <div className="form-grid">
+          <div className="category-grid">
 
             <div>
 
-              <label>Category Name</label>
+              <label className="category-label">
+
+                Category Name
+
+              </label>
 
               <input
+                className="category-input"
                 type="text"
                 name="categoryName"
                 placeholder="Enter Category Name"
@@ -195,18 +193,27 @@ function CategoryForm() {
               />
 
               {errors.categoryName && (
-                <p className="error">
+
+                <p className="category-error">
+
                   {errors.categoryName}
+
                 </p>
+
               )}
 
             </div>
 
             <div>
 
-              <label>Category Code</label>
+              <label className="category-label">
+
+                Category Code
+
+              </label>
 
               <input
+                className="category-input"
                 type="text"
                 name="categoryCode"
                 placeholder="Enter Category Code"
@@ -215,18 +222,27 @@ function CategoryForm() {
               />
 
               {errors.categoryCode && (
-                <p className="error">
+
+                <p className="category-error">
+
                   {errors.categoryCode}
+
                 </p>
+
               )}
 
             </div>
 
             <div>
 
-              <label>Description</label>
+              <label className="category-label">
+
+                Description
+
+              </label>
 
               <textarea
+                className="category-textarea"
                 name="description"
                 placeholder="Enter Description"
                 value={categoryData.description}
@@ -239,9 +255,13 @@ function CategoryForm() {
               />
 
               {errors.description && (
-                <p className="error">
+
+                <p className="category-error">
+
                   {errors.description}
+
                 </p>
+
               )}
 
             </div>
@@ -249,10 +269,12 @@ function CategoryForm() {
           </div>
 
           <button
-            className="submit-btn-sup"
+            className="category-submit-btn"
             type="submit"
           >
+
             {id ? "Update Category" : "Save Category"}
+
           </button>
 
         </div>
