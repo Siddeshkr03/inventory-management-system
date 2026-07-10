@@ -53,7 +53,7 @@ function SupplierForm() {
   }, [id]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
 
@@ -161,11 +161,14 @@ function SupplierForm() {
             ⬅
           </button>
         </div>
-
         <div className="supplier-details-card">
-          <h1 className="supplier-page-title">
-            {id ? "Edit Supplier" : "Add Supplier"}
-          </h1>
+          <div className="item-page-title-wrapper">
+            <h1 className="item-page-title">{id ? "Edit Item" : "Add Item"}</h1>
+
+            <p className="item-page-subtitle">
+              Create and manage inventory items.
+            </p>
+          </div>
 
           <div className="supplier-grid">
             <div>
@@ -215,9 +218,7 @@ function SupplierForm() {
                 onChange={handleChange}
               />
 
-              {errors.email && (
-                <p className="supplier-error">{errors.email}</p>
-              )}
+              {errors.email && <p className="supplier-error">{errors.email}</p>}
             </div>
 
             <div>
@@ -242,12 +243,19 @@ function SupplierForm() {
             </div>
           </div>
 
-          <button
-            className="supplier-submit-btn"
-            type="submit"
-          >
-            {id ? "Update Supplier" : "Save Supplier"}
-          </button>
+          <div className="supplier-actions">
+            <button
+              type="button"
+              className="supplier-cancel-btn"
+              onClick={() => navigate("/items")}
+            >
+              Cancel
+            </button>
+
+            <button className="supplier-submit-btn" type="submit">
+              {id ? "Update Item" : "Save Item"}
+            </button>
+          </div>
         </div>
       </form>
     </div>

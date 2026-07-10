@@ -394,7 +394,8 @@ function ItemForm() {
   return (
     <div className="item-page">
       <form className="item-container" onSubmit={handleSubmit}>
-        <div className="item-page-header">
+        <div className="item-card">
+          <div className="item-page-header">
           <button
             type="button"
             className="item-back-btn"
@@ -403,260 +404,282 @@ function ItemForm() {
             ⬅
           </button>
         </div>
-        <div className="item-details-card">
-          <h1 className="item-section-title">Item Details</h1>
-          <hr className="item-section-divider" />
+          <div className="item-page-title-wrapper">
+            <h1 className="item-page-title">{id ? "Edit Item" : "Add Item"}</h1>
 
-          <div className="item-grid">
-            <div>
-              <label className="item-label">Item Name </label>
-              <input
-                className="item-input"
-                type="text"
-                name="itemName"
-                placeholder="Enter Item Name"
-                value={itemData.itemName}
-                onChange={handleChange}
-              />
-              {errors.itemName && <p className="item-error">{errors.itemName}</p>}
-            </div>
-
-            <div>
-              <label className="item-label">Price</label>
-              <input
-                className="item-input"
-                type="number"
-                name="price"
-                placeholder="Enter Price"
-                value={itemData.price}
-                onChange={handleChange}
-              />
-              {errors.price && <p className="item-error">{errors.price}</p>}
-            </div>
-
-            <div>
-              <label className="item-label">Quantity</label>
-              <input
-                className="item-input"
-                type="number"
-                name="quantity"
-                placeholder="Enter Quantity"
-                value={itemData.quantity}
-                onChange={handleChange}
-              />
-              {errors.quantity && <p className="item-error">{errors.quantity}</p>}
-            </div>
-
-            <div>
-              <label className="item-label">Category</label>
-              <select
-                className="item-select"
-                name="category"
-                value={itemData.category}
-                onChange={handleChange}
-              >
-                <option value="">Select a category</option>
-
-                {categories.map((category) => (
-                  <option key={category.id} value={category.categoryName}>
-                    {category.categoryName}
-                  </option>
-                ))}
-
-                <option value="ADD_NEW_CATEGORY" className="item-add-btn">
-                  Add New Category
-                </option>
-              </select>
-            </div>
-
-            <div>
-              <label className="item-label">Brand</label>
-              <input
-                className="item-input"
-                type="text"
-                name="brand"
-                placeholder="Enter brand"
-                value={itemData.brand}
-                onChange={handleChange}
-              />
-              {errors.brand && <p className="item-error">{errors.brand}</p>}
-            </div>
-
-            <div>
-              <label className="item-label">Purchase Date</label>
-              <input
-                className="item-input"
-                type="date"
-                name="purchaseDate"
-                value={itemData.purchaseDate}
-                onChange={handleChange}
-                style={{ color: "#065F46;" }}
-              />
-              {errors.purchaseDate && (
-                <p className="item-error">{errors.purchaseDate}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="item-label">Product Code</label>
-              <input
-                className="item-input"
-                type="text"
-                name="productCode"
-                placeholder="Enter Product Code"
-                value={itemData.productCode}
-                onChange={handleChange}
-              />
-              {errors.productCode && (
-                <p className="item-error">{errors.productCode}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="item-label">Payment Method</label>
-              <select
-                className="item-select"
-                name="paymentMethod"
-                value={itemData.paymentMethod}
-                onChange={handleChange}
-              >
-                <option value="">Select a payment method</option>
-                <option value="Cash">Cash</option>
-                <option value="Credit Card">Credit Card</option>
-                <option value="Debit Card">Debit Card</option>
-                <option value="Upi">UPI</option>
-                <option value="Cod">Cash on Delivery</option>
-              </select>
-              {errors.paymentMethod && (
-                <p className="item-error">{errors.paymentMethod}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="item-label">Product Availability</label>
-              <select
-                className="item-select"
-                name="productAvailability"
-                value={itemData.productAvailability}
-                onChange={handleChange}
-              >
-                <option value="">Select availability</option>
-
-                <option value="IN_STOCK">In Stock</option>
-
-                <option value="LOW_STOCK">Low Stock</option>
-
-                <option value="OUT_OF_STOCK">Out of Stock</option>
-
-                <option value="PRE_ORDER">Pre-order</option>
-              </select>
-              {errors.productAvailability && (
-                <p className="item-error">{errors.productAvailability}</p>
-              )}
-            </div>
-            <div>
-              <label className="item-label">Upload File</label>
-              <input
-                className="item-file-input"
-                type="file"
-                multiple
-                accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.txt"
-                onChange={(e) => {
-                  if (e.target.files) {
-                    setFiles(Array.from(e.target.files));
-                  }
-                }}
-              />
-            </div>
+            <p className="item-page-subtitle">
+              Create and manage inventory items.
+            </p>
           </div>
-          <div className="supplier-details-card">
-            <h2 className="item-section-title">Supplier Details</h2>
+          <div className="item-section-card">
+            <div className="item-section-header">
+              <h2 className="item-section-title">Item Information</h2>
+            </div>
+
             <div className="item-grid">
               <div>
-                <label className="item-label">Supplier Name</label>
-
-                <select
-                  className="item-select"
-                  name="supplierName"
-                  value={itemData.supplierName}
-                  onChange={handleChange}
-                >
-                  <option value="">Select Supplier</option>
-
-                  {Array.from(
-                    new Map(
-                      suppliers
-                        .filter(
-                          (supplier) =>
-                            supplier.supplierName &&
-                            supplier.supplierName.trim() !== "",
-                        )
-                        .map((supplier) => [supplier.supplierName, supplier]),
-                    ).values(),
-                  ).map((supplier) => (
-                    <option key={supplier.id} value={supplier.supplierName}>
-                      {supplier.supplierName}
-                    </option>
-                  ))}
-
-                  <option value="ADD_NEW_SUPPLIER" className="item-add-btn">
-                    Add New Supplier
-                  </option>
-                </select>
-                {errors.supplier && <p className="item-error">{errors.supplier}</p>}
-              </div>
-
-              <div>
-                <label className="item-label">Phone Number</label>
+                <label className="item-label">Item Name </label>
                 <input
                   className="item-input"
                   type="text"
-                  placeholder="Enter Phone nuumber"
-                  name="phoneNumber"
-                  value={itemData.phoneNumber}
+                  name="itemName"
+                  placeholder="Enter Item Name"
+                  value={itemData.itemName}
                   onChange={handleChange}
                 />
+                {errors.itemName && (
+                  <p className="item-error">{errors.itemName}</p>
+                )}
               </div>
 
               <div>
-                <label className="item-label">Email</label>
+                <label className="item-label">Price</label>
                 <input
                   className="item-input"
-                  type="email"
-                  placeholder="Enter Email"
-                  name="email"
-                  value={itemData.email}
+                  type="number"
+                  name="price"
+                  placeholder="Enter Price"
+                  value={itemData.price}
                   onChange={handleChange}
                 />
+                {errors.price && <p className="item-error">{errors.price}</p>}
               </div>
 
               <div>
-                <label className="item-label">Address</label>
+                <label className="item-label">Quantity</label>
+                <input
+                  className="item-input"
+                  type="number"
+                  name="quantity"
+                  placeholder="Enter Quantity"
+                  value={itemData.quantity}
+                  onChange={handleChange}
+                />
+                {errors.quantity && (
+                  <p className="item-error">{errors.quantity}</p>
+                )}
+              </div>
 
-                <textarea
-                  className="item-textarea"
-                  name="address"
-                  placeholder="Enter Address"
-                  value={itemData.address}
-                  onChange={(e) =>
-                    setItemData({
-                      ...itemData,
-                      address: e.target.value,
-                    })
-                  }
-                  style={{
-                    width: "100%",
-                    minHeight: "20px",
-                    resize: "vertical",
+              <div>
+                <label className="item-label">Category</label>
+                <select
+                  className="item-select"
+                  name="category"
+                  value={itemData.category}
+                  onChange={handleChange}
+                >
+                  <option value="">Select a category</option>
+
+                  {categories.map((category) => (
+                    <option key={category.id} value={category.categoryName}>
+                      {category.categoryName}
+                    </option>
+                  ))}
+
+                  <option value="ADD_NEW_CATEGORY" className="item-add-btn">
+                    Add New Category
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label className="item-label">Brand</label>
+                <input
+                  className="item-input"
+                  type="text"
+                  name="brand"
+                  placeholder="Enter brand"
+                  value={itemData.brand}
+                  onChange={handleChange}
+                />
+                {errors.brand && <p className="item-error">{errors.brand}</p>}
+              </div>
+
+              <div>
+                <label className="item-label">Purchase Date</label>
+                <input
+                  className="item-input"
+                  type="date"
+                  name="purchaseDate"
+                  value={itemData.purchaseDate}
+                  onChange={handleChange}
+                />
+                {errors.purchaseDate && (
+                  <p className="item-error">{errors.purchaseDate}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="item-label">Product Code</label>
+                <input
+                  className="item-input"
+                  type="text"
+                  name="productCode"
+                  placeholder="Enter Product Code"
+                  value={itemData.productCode}
+                  onChange={handleChange}
+                />
+                {errors.productCode && (
+                  <p className="item-error">{errors.productCode}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="item-label">Payment Method</label>
+                <select
+                  className="item-select"
+                  name="paymentMethod"
+                  value={itemData.paymentMethod}
+                  onChange={handleChange}
+                >
+                  <option value="">Select a payment method</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Credit Card">Credit Card</option>
+                  <option value="Debit Card">Debit Card</option>
+                  <option value="Upi">UPI</option>
+                  <option value="Cod">Cash on Delivery</option>
+                </select>
+                {errors.paymentMethod && (
+                  <p className="item-error">{errors.paymentMethod}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="item-label">Product Availability</label>
+                <select
+                  className="item-select"
+                  name="productAvailability"
+                  value={itemData.productAvailability}
+                  onChange={handleChange}
+                >
+                  <option value="">Select availability</option>
+
+                  <option value="IN_STOCK">In Stock</option>
+
+                  <option value="LOW_STOCK">Low Stock</option>
+
+                  <option value="OUT_OF_STOCK">Out of Stock</option>
+
+                  <option value="PRE_ORDER">Pre-order</option>
+                </select>
+                {errors.productAvailability && (
+                  <p className="item-error">{errors.productAvailability}</p>
+                )}
+              </div>
+              <div>
+                <label className="item-label">Upload File</label>
+                <input
+                  className="item-file-input"
+                  type="file"
+                  multiple
+                  accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.txt"
+                  onChange={(e) => {
+                    if (e.target.files) {
+                      setFiles(Array.from(e.target.files));
+                    }
                   }}
                 />
               </div>
             </div>
+            <div className="item-section-card">
+              <div className="item-section-header">
+                <h2 className="item-section-title">Supplier Information</h2>
+              </div>
+
+              <div className="item-grid">
+                <div>
+                  <label className="item-label">Supplier Name</label>
+
+                  <select
+                    className="item-select"
+                    name="supplierName"
+                    value={itemData.supplierName}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select Supplier</option>
+
+                    {Array.from(
+                      new Map(
+                        suppliers
+                          .filter(
+                            (supplier) =>
+                              supplier.supplierName &&
+                              supplier.supplierName.trim() !== "",
+                          )
+                          .map((supplier) => [supplier.supplierName, supplier]),
+                      ).values(),
+                    ).map((supplier) => (
+                      <option key={supplier.id} value={supplier.supplierName}>
+                        {supplier.supplierName}
+                      </option>
+                    ))}
+
+                    <option value="ADD_NEW_SUPPLIER" className="item-add-btn">
+                      Add New Supplier
+                    </option>
+                  </select>
+                  {errors.supplier && (
+                    <p className="item-error">{errors.supplier}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="item-label">Phone Number</label>
+                  <input
+                    className="item-input"
+                    type="text"
+                    placeholder="Enter Phone nuumber"
+                    name="phoneNumber"
+                    value={itemData.phoneNumber}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div>
+                  <label className="item-label">Email</label>
+                  <input
+                    className="item-input"
+                    type="email"
+                    placeholder="Enter Email"
+                    name="email"
+                    value={itemData.email}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div>
+                  <label className="item-label">Address</label>
+
+                  <textarea
+                    className="item-textarea"
+                    name="address"
+                    placeholder="Enter Address"
+                    value={itemData.address}
+                    onChange={(e) =>
+                      setItemData({
+                        ...itemData,
+                        address: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="item-actions">
+              <button
+                type="button"
+                className="item-cancel-btn"
+                onClick={() => navigate("/items")}
+              >
+                Cancel
+              </button>
+
+              <button className="item-submit-btn" type="submit">
+                {id ? "Update Item" : "Save Item"}
+              </button>
+            </div>
           </div>
         </div>
-        <button className="item-submit-btn" type="submit">
-          Submit
-        </button>
       </form>
 
       <SupplierModal

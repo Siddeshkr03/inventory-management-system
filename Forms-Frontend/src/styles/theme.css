@@ -1,0 +1,43 @@
+:root{
+
+    /* Brand */
+
+    --primary-color:#1F5E46;
+    --primary-hover:#174936;
+
+    /* Background */
+
+    --page-background:#F8F8F5;
+    --card-background:#FFFFFF;
+
+    /* Text */
+
+    --text-primary:#1F2937;
+    --text-secondary:#6B7280;
+
+    /* Border */
+
+    --border-color:#E5E7EB;
+
+    /* Error */
+
+    --error-color:#DC2626;
+
+    /* Radius */
+
+    --radius-sm:8px;
+    --radius-md:12px;
+    --radius-lg:18px;
+
+    /* Shadow */
+
+    --shadow-sm:
+        0 4px 10px rgba(0,0,0,.05);
+
+    --shadow-md:
+        0 8px 24px rgba(0,0,0,.08);
+
+    /* Transition */
+
+    --transition:.25s ease;
+}

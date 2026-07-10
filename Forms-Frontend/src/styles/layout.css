@@ -1,0 +1,64 @@
+/* ==========================
+   Page Layout
+========================== */
+
+.app-page {
+    min-height: 100vh;
+    background: var(--page-background);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 40px 20px;
+}
+
+/* ==========================
+   Main Card
+========================== */
+
+.app-card {
+
+    width: 100%;
+    max-width: 900px;
+
+    background: var(--card-background);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-md);
+
+    padding: 40px;
+}
+
+/* ==========================
+   Page Header
+========================== */
+
+.app-header{
+
+    margin-bottom:40px;
+
+}
+
+.app-title{
+
+    margin:0;
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:var(--text-primary);
+
+}
+
+.app-subtitle{
+
+    margin-top:8px;
+
+    color:var(--text-secondary);
+
+    font-size:16px;
+
+}
