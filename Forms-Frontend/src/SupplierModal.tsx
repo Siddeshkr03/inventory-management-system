@@ -27,7 +27,6 @@ function SupplierModal({
   onClose,
   onSupplierAdded,
 }: SupplierModalProps) {
-  
   const [supplierData, setSupplierData] = useState<SupplierData>({
     supplierName: "",
     phoneNumber: "",
@@ -111,6 +110,23 @@ function SupplierModal({
       const response = await api.post("/suppliers", supplierData);
 
       onSupplierAdded(response.data);
+
+      setSupplierData({
+        supplierName: "",
+        phoneNumber: "",
+        email: "",
+        address: "",
+      });
+
+      setErrors({
+        supplierName: "",
+        phoneNumber: "",
+        email: "",
+        address: "",
+      });
+
+      alert("Supplier added successfully!");
+
       onClose();
     } catch (error) {
       console.error(error);
@@ -121,11 +137,10 @@ function SupplierModal({
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="modal-header">
-          <span className="close-button-mdl" onClick={onClose}>
-            ❌
-          </span>
-
           <h2>Add Supplier</h2>
+          <button type="button" className="close-button-mdl-sup" onClick={onClose}>
+            ✕
+          </button>
         </div>
 
         <div className="form-grid">

@@ -22,7 +22,7 @@
   width: 560px;
   max-width: 92%;
 
-  background: #FAEDCD;
+  background: #faedcd;
 
   border-radius: 20px;
 
@@ -30,7 +30,7 @@
 
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 
-  animation: popup .25s ease;
+  animation: popup 0.25s ease;
 }
 
 /* ==========================
@@ -38,21 +38,15 @@
 ========================== */
 
 @keyframes popup {
-
   from {
-
     opacity: 0;
-    transform: translateY(-15px) scale(.96);
-
+    transform: translateY(-15px) scale(0.96);
   }
 
   to {
-
     opacity: 1;
     transform: translateY(0) scale(1);
-
   }
-
 }
 
 /* ==========================
@@ -60,7 +54,6 @@
 ========================== */
 
 .modal-header {
-
   display: flex;
 
   justify-content: space-between;
@@ -71,20 +64,17 @@
 
   padding-bottom: 15px;
 
-  border-bottom: 1px solid #D1D5DB;
-
+  border-bottom: 1px solid #d1d5db;
 }
 
 .modal-header h2 {
-
   margin: 0;
 
   font-size: 28px;
 
   font-weight: 700;
 
-  color: #4F772D;
-
+  color: #4f772d;
 }
 
 /* ==========================
@@ -92,19 +82,15 @@
 ========================== */
 
 .close-button-mdl {
-
   cursor: pointer;
 
   font-size: 22px;
 
-  transition: .25s;
-
+  transition: 0.25s;
 }
 
 .close-button-mdl:hover {
-
   transform: rotate(90deg) scale(1.1);
-
 }
 
 /* ==========================
@@ -112,15 +98,12 @@
 ========================== */
 
 .form-grid {
-
   display: grid;
 
   gap: 20px;
-
 }
 
 .form-grid label {
-
   display: block;
 
   margin-bottom: 8px;
@@ -130,17 +113,15 @@
   font-weight: 600;
 
   color: #374151;
-
 }
 
 .form-grid input,
 .form-grid textarea {
-
   width: 100%;
 
   padding: 12px 16px;
 
-  border: 1px solid #D1D5DB;
+  border: 1px solid #d1d5db;
 
   border-radius: 12px;
 
@@ -148,25 +129,21 @@
 
   font-size: 15px;
 
-  transition: .25s;
+  transition: 0.25s;
 
   box-sizing: border-box;
-
 }
 
 .form-grid input:focus,
 .form-grid textarea:focus {
-
   outline: none;
 
-  border-color: #4F772D;
+  border-color: #4f772d;
 
-  box-shadow: 0 0 0 4px rgba(79,119,45,.12);
-
+  box-shadow: 0 0 0 4px rgba(79, 119, 45, 0.12);
 }
 
 .form-grid textarea {
-
   resize: vertical;
 
   min-height: 100px;
@@ -174,7 +151,7 @@
 
 .error-message {
   margin-top: 6px;
-  color: #DC2626;
+  color: #dc2626;
   font-size: 13px;
   font-weight: 500;
 }
@@ -184,7 +161,7 @@
   justify-content: flex-end;
   margin-top: 30px;
   padding-top: 20px;
-  border-top: 1px solid #D1D5DB;
+  border-top: 1px solid #d1d5db;
 }
 
 .save-btn-container-mdl button {
@@ -192,17 +169,34 @@
   height: 46px;
   border: none;
   border-radius: 12px;
-  background: #4F772D;
+  background: #4f772d;
   color: white;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: .25s;
+  transition: 0.25s;
   margin-right: 200px;
 }
 
 .save-btn-container-mdl button:hover {
-  background: #31572C;
+  background: #31572c;
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(79,119,45,.25);
+  box-shadow: 0 8px 18px rgba(79, 119, 45, 0.25);
+}
+
+.close-button-mdl-cat {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 22px;
+  transition: 0.25s;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.close-button-mdl-cat:hover {
+  color: #696767;
 }

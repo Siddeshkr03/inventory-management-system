@@ -122,11 +122,8 @@ function CategoryModal({
       onClose();
 
       alert("Category added successfully!");
-
     } catch (error: any) {
-      alert(
-        error.response?.data?.message || "Failed to save category."
-      );
+      alert(error.response?.data?.message || "Failed to save category.");
     }
   };
 
@@ -134,17 +131,17 @@ function CategoryModal({
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="modal-header">
-          <span
-            className="close-button-mdl"
+          <h2>Add Category</h2>
+          <button
+            type="button"
+            className="close-button-mdl-cat"
             onClick={() => {
               resetForm();
               onClose();
             }}
           >
-            ❌
-          </span>
-
-          <h2>Add Category</h2>
+            ✕
+          </button>
         </div>
 
         <div className="form-grid">
@@ -160,9 +157,7 @@ function CategoryModal({
             />
 
             {errors.categoryName && (
-              <p className="error-message">
-                {errors.categoryName}
-              </p>
+              <p className="error-message">{errors.categoryName}</p>
             )}
           </div>
 
@@ -178,9 +173,7 @@ function CategoryModal({
             />
 
             {errors.categoryCode && (
-              <p className="error-message">
-                {errors.categoryCode}
-              </p>
+              <p className="error-message">{errors.categoryCode}</p>
             )}
           </div>
 
@@ -195,18 +188,13 @@ function CategoryModal({
             />
 
             {errors.description && (
-              <p className="error-message">
-                {errors.description}
-              </p>
+              <p className="error-message">{errors.description}</p>
             )}
           </div>
         </div>
 
         <div className="save-btn-container-mdl">
-          <button
-            type="button"
-            onClick={handleSaveCategory}
-          >
+          <button type="button" onClick={handleSaveCategory}>
             Save Category
           </button>
         </div>
