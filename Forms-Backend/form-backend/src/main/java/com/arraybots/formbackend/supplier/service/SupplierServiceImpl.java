@@ -47,7 +47,7 @@ public class SupplierServiceImpl implements SupplierService {
     public void deleteSupplier(Long id) {
         supplierRepository.deleteById(id);
     }
-    
+
     @Override
     public Supplier updateSupplier(Long id,
                                    Supplier supplier,

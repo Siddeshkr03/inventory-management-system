@@ -13,12 +13,17 @@ function ItemIndex() {
     address: string;
   }
 
+  interface Category {
+    id: number;
+    categoryName: string;
+  }
+
   interface Item {
     id: number;
     itemName: string;
     price: string;
     quantity: string;
-    category: string;
+    category: Category;
     brand: string;
     purchaseDate: string;
     productCode: string;
@@ -143,7 +148,7 @@ useEffect(() => {
                   <td>{item.itemName}</td>
                   <td>{item.price}</td>
                   <td>{item.quantity}</td>
-                  <td>{item.category}</td>
+                  <td>{item.category?.categoryName}</td>
                   <td>{item.brand}</td>
                   <td>{item.purchaseDate}</td>
                   <td>{item.productCode}</td>

@@ -5,6 +5,9 @@ import com.arraybots.formbackend.items.service.ItemService;
 import com.arraybots.formbackend.items.dto.ItemSupplierDTO;
 import com.arraybots.formbackend.supplier.model.Supplier;
 import com.arraybots.formbackend.supplier.service.SupplierService;
+import com.arraybots.formbackend.category.model.Category;
+import com.arraybots.formbackend.category.service.CategoryService;
+
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +23,12 @@ public class ItemController {
 
     private final ItemService itemService;
     private final SupplierService supplierService;
+    private final CategoryService categoryService;
 
-    public ItemController(ItemService itemService, SupplierService supplierService) {
+    public ItemController(ItemService itemService, SupplierService supplierService, CategoryService categoryService) {
         this.itemService = itemService;
         this.supplierService = supplierService;
+        this.categoryService = categoryService;
     }
 
     @PostMapping
@@ -32,13 +37,16 @@ public class ItemController {
             HttpServletRequest request) {
 
         // Get the existing supplier using supplierId
-        Supplier supplier = supplierService.getSupplierById(dto.getSupplierId());
+        Supplier supplier =
+                supplierService.getSupplierById(dto.getSupplierId());
 
-        // Get item from DTO
+        Category category =
+                categoryService.getCategoryById(dto.getCategoryId());
+
         Item item = dto.getItem();
 
-        // Link the existing supplier
         item.setSupplier(supplier);
+        item.setCategory(category);
 
         // Save item
         return itemService.saveItem(item, request);
@@ -70,14 +78,18 @@ public class ItemController {
                            @RequestBody ItemSupplierDTO dto,
                            HttpServletRequest request) {
 
-        Supplier supplier = supplierService.getSupplierById(
-                dto.getSupplierId()
-        );
+        Supplier supplier =
+                supplierService.getSupplierById(dto.getSupplierId());
+
+        Category category =
+                categoryService.getCategoryById(dto.getCategoryId());
 
         Item item = dto.getItem();
-        item.setSupplier(supplier);
 
-        return itemService.updateItem(id, item,request);
+        item.setSupplier(supplier);
+        item.setCategory(category);
+
+        return itemService.updateItem(id, item, request);
     }
 
 }

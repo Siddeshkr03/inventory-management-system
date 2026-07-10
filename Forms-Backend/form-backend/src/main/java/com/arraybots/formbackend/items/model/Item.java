@@ -1,6 +1,7 @@
 package com.arraybots.formbackend.items.model;
 import com.arraybots.formbackend.common.model.AuditEntity;
 import com.arraybots.formbackend.supplier.model.Supplier;
+import com.arraybots.formbackend.category.model.Category;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,7 +25,9 @@ public class Item extends AuditEntity {
 
     private Integer quantity;
 
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     private String brand;
 

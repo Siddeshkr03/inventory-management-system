@@ -12,6 +12,7 @@ function ItemForm() {
     price: string;
     quantity: string;
     category: string;
+    categoryId: string;
     brand: string;
     purchaseDate: string;
     productCode: string;
@@ -52,6 +53,7 @@ function ItemForm() {
     price: "",
     quantity: "",
     category: "",
+    categoryId: "",
     brand: "",
     purchaseDate: "",
     productCode: "",
@@ -119,9 +121,14 @@ function ItemForm() {
         return;
       }
 
+      const selectedCategory = categories.find(
+        (category) => category.categoryName === value,
+      );
+
       setItemData({
         ...itemData,
         category: value,
+        categoryId: selectedCategory?.id.toString() || "",
       });
 
       setErrors({
@@ -159,7 +166,8 @@ function ItemForm() {
           itemName: data.itemName,
           price: String(data.price),
           quantity: String(data.quantity),
-          category: data.category,
+          category: data.category?.categoryName || "",
+          categoryId: data.category?.id?.toString() || "",
           brand: data.brand,
           purchaseDate: data.purchaseDate,
           productCode: data.productCode,
@@ -245,7 +253,6 @@ function ItemForm() {
       itemName: itemData.itemName,
       price: Number(itemData.price),
       quantity: Number(itemData.quantity),
-      category: itemData.category,
       brand: itemData.brand,
       purchaseDate: itemData.purchaseDate,
       productCode: itemData.productCode,
@@ -258,6 +265,7 @@ function ItemForm() {
     const itemSupplierDTO = {
       item,
       supplierId: Number(itemData.supplierId),
+      categoryId: Number(itemData.categoryId),
     };
 
     try {
@@ -379,6 +387,7 @@ function ItemForm() {
     setItemData((prev) => ({
       ...prev,
       category: newCategory.categoryName,
+      categoryId: newCategory.id.toString(),
     }));
   };
 
@@ -435,24 +444,26 @@ function ItemForm() {
               {errors.quantity && <p className="error">{errors.quantity}</p>}
             </div>
 
-           <div>
-            <label>Category</label>
-             <select
-              name="category"
-              value={itemData.category}
-              onChange={handleChange}
-            >
-              <option value="">Select a category</option>
+            <div>
+              <label>Category</label>
+              <select
+                name="category"
+                value={itemData.category}
+                onChange={handleChange}
+              >
+                <option value="">Select a category</option>
 
-              {categories.map((category) => (
-                <option key={category.id} value={category.categoryName}>
-                  {category.categoryName}
+                {categories.map((category) => (
+                  <option key={category.id} value={category.categoryName}>
+                    {category.categoryName}
+                  </option>
+                ))}
+
+                <option value="ADD_NEW_CATEGORY" className="add-btn">
+                  Add New Category
                 </option>
-              ))}
-
-              <option value="ADD_NEW_CATEGORY">Add New Category</option>
-            </select>
-           </div>
+              </select>
+            </div>
 
             <div>
               <label>Brand</label>
