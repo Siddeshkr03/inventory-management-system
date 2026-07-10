@@ -2,14 +2,14 @@ body{
     background-color: #F8FAFC;
 }
 
-.items{
+.item-page{
     display:flex;
     justify-content:center;
     align-items:flex-start;
     padding:50px 20px;
 }
 
-.item-form{
+.item-container{
     width: 720px;
     padding: 35px;
     background: #a2d2ff;
@@ -18,7 +18,7 @@ body{
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-.form-grid{
+.item-grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -52,7 +52,7 @@ textarea:focus{
     box-shadow:0 0 5px rgba(121,199,218,.5);
 }
 
-.submit-btn{
+.item-submit-btn{
     display:block;
     margin:10px auto 0;
     width:90px;
@@ -72,15 +72,6 @@ button:hover{
     transform:translateY(-2px);
 }
 
-/* h2{
-    text-align:center;
-    margin:40px 0 25px;
-    color:#1e3a8a;
-    font-size:30px;
-    border-bottom:2px solid #ddd;
-    padding-bottom:10px; */
-
-
 .file{
     border:1px solid #ccc;
     border-radius:6px;
@@ -88,13 +79,13 @@ button:hover{
     background:white;
 }
 
-.supplier-section {
+.item-supplier-section {
     margin-top: 50px;
     border-top:2px solid #e5e5e5;
     padding-top:30px;
 }
 
-.section-title {
+.item-section-title {
     text-align: center;
     color: #173b67;
     font-size: 24px;
@@ -102,7 +93,7 @@ button:hover{
     margin-bottom: 10px;
 }
 
-.section-divider {
+.item-section-divider {
     border: none;
     border-top: 2px solid #ddd;
     width: 100%;
@@ -116,13 +107,13 @@ button:hover{
     font-weight:500;
 }
 
-.page-header{
+.item-page-header{
     display:flex;
     justify-content:flex-start;
     margin-bottom:20px;
 }
 
-.back-btn{
+.item-back-btn{
     background:none;
     border:none;
     color:#2c5aa0;
@@ -135,12 +126,12 @@ button:hover{
     font-size: 32px;
 }
 
-.back-btn:hover{
+.item-back-btn:hover{
     background:none;
     color:#174a8b;
     box-shadow:none;
 }
 
-.back-btn:focus{
+.item-back-btn:focus{
     outline:none;
 }

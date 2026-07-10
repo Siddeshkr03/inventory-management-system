@@ -392,22 +392,22 @@ function ItemForm() {
   };
 
   return (
-    <div className="items">
-      <form className="item-form" onSubmit={handleSubmit}>
-        <div className="page-header">
+    <div className="item-page">
+      <form className="item-container" onSubmit={handleSubmit}>
+        <div className="item-page-header">
           <button
             type="button"
-            className="back-btn"
+            className="item-back-btn"
             onClick={() => navigate("/items")}
           >
             ⬅
           </button>
         </div>
-        <div className="items-block">
-          <h1 className="section-title">Item Details</h1>
-          <hr className="section-divider" />
+        <div className="item-details-card">
+          <h1 className="item-section-title">Item Details</h1>
+          <hr className="item-section-divider" />
 
-          <div className="form-grid">
+          <div className="item-grid">
             <div>
               <label>Item Name </label>
               <input
@@ -459,7 +459,7 @@ function ItemForm() {
                   </option>
                 ))}
 
-                <option value="ADD_NEW_CATEGORY" className="add-btn">
+                <option value="ADD_NEW_CATEGORY" className="item-add-btn">
                   Add New Category
                 </option>
               </select>
@@ -559,9 +559,9 @@ function ItemForm() {
               />
             </div>
           </div>
-          <div className="supplier-block">
-            <h2 className="section-title">Supplier Details</h2>
-            <div className="form-grid">
+          <div className="supplier-details-card">
+            <h2 className="item-section-title">Supplier Details</h2>
+            <div className="item-grid">
               <div>
                 <label>Supplier Name</label>
 
@@ -588,7 +588,7 @@ function ItemForm() {
                     </option>
                   ))}
 
-                  <option value="ADD_NEW_SUPPLIER" className="add-btn">
+                  <option value="ADD_NEW_SUPPLIER" className="item-add-btn">
                     Add New Supplier
                   </option>
                 </select>
@@ -640,7 +640,7 @@ function ItemForm() {
             </div>
           </div>
         </div>
-        <button className="submit-btn" type="submit">
+        <button className="item-submit-btn" type="submit">
           Submit
         </button>
       </form>
