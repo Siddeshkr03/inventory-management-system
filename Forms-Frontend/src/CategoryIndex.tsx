@@ -84,7 +84,7 @@ function CategoryIndex() {
 
         <Link to="/categories/add">
 
-          <button className="add-btn">
+          <button className="cat-add-btn">
 
             Add Category
 

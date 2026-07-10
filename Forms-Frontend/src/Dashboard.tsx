@@ -44,32 +44,32 @@ function Dashboard() {
       <Navbar />
       <div className="dashboard">
         <div className="dashboard-card" onClick={() => navigate("/items")}>
-          <h3>Total Items</h3>
+          <h3>📦 Total Items</h3>
           <h1>{dashboardData.totalItems}</h1>
         </div>
 
         <div className="dashboard-card" onClick={() => navigate("/suppliers")}>
-          <h3>Total Suppliers</h3>
+          <h3>🏢 Total Suppliers</h3>
           <h1>{dashboardData.totalSuppliers}</h1>
         </div>
 
         <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=IN_STOCK")}>
-          <h3>In Stock</h3>
+          <h3>✅ In Stock</h3>
           <h1>{dashboardData.inStock}</h1>
         </div>
 
         <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=LOW_STOCK")}>
-          <h3>Low Stock</h3>
+          <h3>⚠️ Low Stock</h3>
           <h1>{dashboardData.lowStock}</h1>
         </div>
 
         <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=PRE_ORDER")}>
-          <h3>Pre-order</h3>
+          <h3>📋 Pre-order</h3>
           <h1>{dashboardData.preOrder}</h1>
         </div>
 
         <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=OUT_OF_STOCK")}>
-          <h3>Out of Stock</h3>
+          <h3>❌ Out of Stock</h3>
           <h1>{dashboardData.outOfStock}</h1>
         </div>
       </div>

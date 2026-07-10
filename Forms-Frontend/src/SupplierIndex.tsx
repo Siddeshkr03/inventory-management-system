@@ -69,7 +69,7 @@ function SupplierIndex() {
         <h1 className="title">Suppliers</h1>
 
         <Link to="/suppliers/add" state={{ from: "supplierIndex" }}>
-          <button className="add-btn">Add Supplier</button>
+          <button className="sup-add-btn">Add Supplier</button>
         </Link>
       </div>
 

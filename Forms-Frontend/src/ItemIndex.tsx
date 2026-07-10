@@ -115,7 +115,7 @@ useEffect(() => {
           to="/items/add"
           onClick={() => localStorage.removeItem("itemFormData")}
         >
-          <button className="add-btn">Add Item</button>
+          <button className="item-add-btn">Add Item</button>
         </Link>
       </div>
 
