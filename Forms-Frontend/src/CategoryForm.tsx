@@ -4,7 +4,6 @@ import api from "./api";
 import "./CategoryForm.css";
 
 function CategoryForm() {
-
   interface CategoryData {
     categoryName: string;
     categoryCode: string;
@@ -28,13 +27,10 @@ function CategoryForm() {
   const { id } = useParams();
 
   useEffect(() => {
-
     if (!id) return;
 
     const fetchCategory = async () => {
-
       try {
-
         const response = await api.get(`/categories/${id}`);
 
         const data = response.data;
@@ -44,23 +40,17 @@ function CategoryForm() {
           categoryCode: data.categoryCode,
           description: data.description,
         });
-
       } catch (error) {
-
         console.error(error);
-
       }
-
     };
 
     fetchCategory();
-
   }, [id]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-
     const { name, value } = e.target;
 
     setCategoryData({
@@ -72,11 +62,9 @@ function CategoryForm() {
       ...errors,
       [name]: "",
     });
-
   };
 
   const validate = () => {
-
     const newErrors = {
       categoryName: "",
       categoryCode: "",
@@ -103,13 +91,9 @@ function CategoryForm() {
     setErrors(newErrors);
 
     return isValid;
-
   };
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>,
-  ) => {
-
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!validate()) {
@@ -117,44 +101,28 @@ function CategoryForm() {
     }
 
     try {
-
       if (id) {
-
         await api.put(`/categories/${id}`, categoryData);
 
         alert("Category Updated Successfully!");
-
       } else {
-
         await api.post("/categories", categoryData);
 
         alert("Category Added Successfully!");
-
       }
 
       navigate("/categories");
-
     } catch (error) {
-
       console.error(error);
 
       alert("Error saving category!");
-
     }
-
   };
 
   return (
-
     <div className="category-page">
-
-      <form
-        className="category-container"
-        onSubmit={handleSubmit}
-      >
-
+      <form className="category-container" onSubmit={handleSubmit}>
         <div className="category-page-header">
-
           <button
             type="button"
             className="category-back-btn"
@@ -162,26 +130,22 @@ function CategoryForm() {
           >
             ⬅
           </button>
+        </div>
 
+        <div className="category-page-title-wrapper">
+          <h1 className="category-page-title">
+            {id ? "Edit Category" : "Add Category"}
+          </h1>
+
+          <p className="category-page-subtitle">
+            Create and manage product categories.
+          </p>
         </div>
 
         <div className="category-details-card">
-
-          <h1 className="category-page-title">
-
-            {id ? "Edit Category" : "Add Category"}
-
-          </h1>
-
           <div className="category-grid">
-
             <div>
-
-              <label className="category-label">
-
-                Category Name
-
-              </label>
+              <label className="category-label">Category Name</label>
 
               <input
                 className="category-input"
@@ -193,24 +157,12 @@ function CategoryForm() {
               />
 
               {errors.categoryName && (
-
-                <p className="category-error">
-
-                  {errors.categoryName}
-
-                </p>
-
+                <p className="category-error">{errors.categoryName}</p>
               )}
-
             </div>
 
             <div>
-
-              <label className="category-label">
-
-                Category Code
-
-              </label>
+              <label className="category-label">Category Code</label>
 
               <input
                 className="category-input"
@@ -222,24 +174,12 @@ function CategoryForm() {
               />
 
               {errors.categoryCode && (
-
-                <p className="category-error">
-
-                  {errors.categoryCode}
-
-                </p>
-
+                <p className="category-error">{errors.categoryCode}</p>
               )}
-
             </div>
 
             <div>
-
-              <label className="category-label">
-
-                Description
-
-              </label>
+              <label className="category-label">Description</label>
 
               <textarea
                 className="category-textarea"
@@ -247,44 +187,31 @@ function CategoryForm() {
                 placeholder="Enter Description"
                 value={categoryData.description}
                 onChange={handleChange}
-                style={{
-                  width: "100%",
-                  minHeight: "40px",
-                  resize: "vertical",
-                }}
               />
 
               {errors.description && (
-
-                <p className="category-error">
-
-                  {errors.description}
-
-                </p>
-
+                <p className="category-error">{errors.description}</p>
               )}
-
             </div>
-
           </div>
 
-          <button
-            className="category-submit-btn"
-            type="submit"
-          >
+          <div className="category-actions">
+            <button
+              type="button"
+              className="category-cancel-btn"
+              onClick={() => navigate("/categories")}
+            >
+              Cancel
+            </button>
 
-            {id ? "Update Category" : "Save Category"}
-
-          </button>
-
+            <button className="category-submit-btn" type="submit">
+              {id ? "Update Category" : "Save Category"}
+            </button>
+          </div>
         </div>
-
       </form>
-
     </div>
-
   );
-
 }
 
 export default CategoryForm;

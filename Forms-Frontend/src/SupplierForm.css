@@ -181,9 +181,6 @@ body {
   transform: translateY(0);
 }
 
-/* ==========================
-   Responsive
-========================== */
 
 @media (max-width: 768px) {
 
