@@ -24,7 +24,7 @@ body{
     gap: 20px;
 }
 
-label{
+.item-label{
     display:block;
     margin-bottom:6px;
     font-size:20px;
@@ -32,9 +32,7 @@ label{
     color:#173b67;
 }
 
-input,
-select,
-textarea{
+.item-textarea{
     width:100%;
     padding:11px 12px;
     border:1px solid #ccc;
@@ -44,9 +42,40 @@ textarea{
     box-sizing:border-box;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
+.item-input{
+        width:100%;
+    padding:11px 12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+    transition:.3s;
+    box-sizing:border-box;
+
+}
+
+.item-select{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+    transition:.3s;
+    box-sizing:border-box;
+}
+
+.item-textarea:focus{
+    outline:none;
+    border-color:#79c7da;
+    box-shadow:0 0 5px rgba(121,199,218,.5);
+}
+
+.item-input:focus{
+    outline:none;
+    border-color:#79c7da;
+    box-shadow:0 0 5px rgba(121,199,218,.5);
+}
+
+select:focus{
     outline:none;
     border-color:#79c7da;
     box-shadow:0 0 5px rgba(121,199,218,.5);
@@ -67,22 +96,16 @@ textarea:focus{
     transition:.3s;
 }
 
-button:hover{
+.item-submit-btn:hover{
     background:#7355d4;
     transform:translateY(-2px);
 }
 
-.file{
+.item-file-input{
     border:1px solid #ccc;
     border-radius:6px;
     padding:8px;
     background:white;
-}
-
-.item-supplier-section {
-    margin-top: 50px;
-    border-top:2px solid #e5e5e5;
-    padding-top:30px;
 }
 
 .item-section-title {
@@ -100,7 +123,7 @@ button:hover{
     margin: 0 0 30px;
 }
 
-.error{
+.item-error{
     color:#ef4444;
     font-size:14px;
     margin-top:5px;

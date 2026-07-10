@@ -409,44 +409,48 @@ function ItemForm() {
 
           <div className="item-grid">
             <div>
-              <label>Item Name </label>
+              <label className="item-label">Item Name </label>
               <input
+                className="item-input"
                 type="text"
                 name="itemName"
                 placeholder="Enter Item Name"
                 value={itemData.itemName}
                 onChange={handleChange}
               />
-              {errors.itemName && <p className="error">{errors.itemName}</p>}
+              {errors.itemName && <p className="item-error">{errors.itemName}</p>}
             </div>
 
             <div>
-              <label>Price</label>
+              <label className="item-label">Price</label>
               <input
+                className="item-input"
                 type="number"
                 name="price"
                 placeholder="Enter Price"
                 value={itemData.price}
                 onChange={handleChange}
               />
-              {errors.price && <p className="error">{errors.price}</p>}
+              {errors.price && <p className="item-error">{errors.price}</p>}
             </div>
 
             <div>
-              <label>Quantity</label>
+              <label className="item-label">Quantity</label>
               <input
+                className="item-input"
                 type="number"
                 name="quantity"
                 placeholder="Enter Quantity"
                 value={itemData.quantity}
                 onChange={handleChange}
               />
-              {errors.quantity && <p className="error">{errors.quantity}</p>}
+              {errors.quantity && <p className="item-error">{errors.quantity}</p>}
             </div>
 
             <div>
-              <label>Category</label>
+              <label className="item-label">Category</label>
               <select
+                className="item-select"
                 name="category"
                 value={itemData.category}
                 onChange={handleChange}
@@ -466,20 +470,22 @@ function ItemForm() {
             </div>
 
             <div>
-              <label>Brand</label>
+              <label className="item-label">Brand</label>
               <input
+                className="item-input"
                 type="text"
                 name="brand"
                 placeholder="Enter brand"
                 value={itemData.brand}
                 onChange={handleChange}
               />
-              {errors.brand && <p className="error">{errors.brand}</p>}
+              {errors.brand && <p className="item-error">{errors.brand}</p>}
             </div>
 
             <div>
-              <label>Purchase Date</label>
+              <label className="item-label">Purchase Date</label>
               <input
+                className="item-input"
                 type="date"
                 name="purchaseDate"
                 value={itemData.purchaseDate}
@@ -487,13 +493,14 @@ function ItemForm() {
                 style={{ color: "#065F46;" }}
               />
               {errors.purchaseDate && (
-                <p className="error">{errors.purchaseDate}</p>
+                <p className="item-error">{errors.purchaseDate}</p>
               )}
             </div>
 
             <div>
-              <label>Product Code</label>
+              <label className="item-label">Product Code</label>
               <input
+                className="item-input"
                 type="text"
                 name="productCode"
                 placeholder="Enter Product Code"
@@ -501,13 +508,14 @@ function ItemForm() {
                 onChange={handleChange}
               />
               {errors.productCode && (
-                <p className="error">{errors.productCode}</p>
+                <p className="item-error">{errors.productCode}</p>
               )}
             </div>
 
             <div>
-              <label>Payment Method</label>
+              <label className="item-label">Payment Method</label>
               <select
+                className="item-select"
                 name="paymentMethod"
                 value={itemData.paymentMethod}
                 onChange={handleChange}
@@ -520,13 +528,14 @@ function ItemForm() {
                 <option value="Cod">Cash on Delivery</option>
               </select>
               {errors.paymentMethod && (
-                <p className="error">{errors.paymentMethod}</p>
+                <p className="item-error">{errors.paymentMethod}</p>
               )}
             </div>
 
             <div>
-              <label>Product Availability</label>
+              <label className="item-label">Product Availability</label>
               <select
+                className="item-select"
                 name="productAvailability"
                 value={itemData.productAvailability}
                 onChange={handleChange}
@@ -542,12 +551,13 @@ function ItemForm() {
                 <option value="PRE_ORDER">Pre-order</option>
               </select>
               {errors.productAvailability && (
-                <p className="error">{errors.productAvailability}</p>
+                <p className="item-error">{errors.productAvailability}</p>
               )}
             </div>
             <div>
-              <label>Upload File</label>
+              <label className="item-label">Upload File</label>
               <input
+                className="item-file-input"
                 type="file"
                 multiple
                 accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.txt"
@@ -563,9 +573,10 @@ function ItemForm() {
             <h2 className="item-section-title">Supplier Details</h2>
             <div className="item-grid">
               <div>
-                <label>Supplier Name</label>
+                <label className="item-label">Supplier Name</label>
 
                 <select
+                  className="item-select"
                   name="supplierName"
                   value={itemData.supplierName}
                   onChange={handleChange}
@@ -592,12 +603,13 @@ function ItemForm() {
                     Add New Supplier
                   </option>
                 </select>
-                {errors.supplier && <p className="error">{errors.supplier}</p>}
+                {errors.supplier && <p className="item-error">{errors.supplier}</p>}
               </div>
 
               <div>
-                <label>Phone Number</label>
+                <label className="item-label">Phone Number</label>
                 <input
+                  className="item-input"
                   type="text"
                   placeholder="Enter Phone nuumber"
                   name="phoneNumber"
@@ -607,8 +619,9 @@ function ItemForm() {
               </div>
 
               <div>
-                <label>Email</label>
+                <label className="item-label">Email</label>
                 <input
+                  className="item-input"
                   type="email"
                   placeholder="Enter Email"
                   name="email"
@@ -618,9 +631,10 @@ function ItemForm() {
               </div>
 
               <div>
-                <label>Address</label>
+                <label className="item-label">Address</label>
 
                 <textarea
+                  className="item-textarea"
                   name="address"
                   placeholder="Enter Address"
                   value={itemData.address}
