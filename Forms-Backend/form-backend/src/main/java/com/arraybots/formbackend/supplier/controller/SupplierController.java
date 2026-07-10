@@ -2,6 +2,7 @@ package com.arraybots.formbackend.supplier.controller;
 
 import com.arraybots.formbackend.supplier.model.Supplier;
 import com.arraybots.formbackend.supplier.service.SupplierService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,10 @@ public class SupplierController {
     }
 
     @PostMapping
-    public Supplier saveSupplier(@RequestBody Supplier supplier) {
-        return supplierService.saveSupplier(supplier);
+    public Supplier saveSupplier(@RequestBody Supplier supplier,
+                                 HttpServletRequest request) {
+
+        return supplierService.saveSupplier(supplier, request);
     }
 
     @GetMapping
@@ -39,8 +42,9 @@ public class SupplierController {
 
     @PutMapping("/{id}")
     public Supplier updateSupplier(@PathVariable Long id,
-                                   @RequestBody Supplier supplier) {
+                                   @RequestBody Supplier supplier,
+                                   HttpServletRequest request) {
 
-        return supplierService.updateSupplier(id, supplier);
+        return supplierService.updateSupplier(id, supplier, request);
     }
 }

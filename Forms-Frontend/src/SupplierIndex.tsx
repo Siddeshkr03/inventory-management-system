@@ -93,9 +93,9 @@ function SupplierIndex() {
                   .toLowerCase()
                   .includes(search.toLowerCase()),
               )
-              .map((supplier) => (
+              .map((supplier, index) => (
                 <tr key={supplier.id}>
-                  <td>{supplier.id}</td>
+                  <td>{index + 1}</td>
                   <td>{supplier.supplierName}</td>
                   <td>{supplier.phoneNumber || "-"}</td>
                   <td>{supplier.email || "-"}</td>
