@@ -3,6 +3,7 @@ import api from "./api";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { saveToken } from "./token";
+import { CircleUserRound, LockKeyhole } from "lucide-react";
 import "./Login.css";
 
 function Login() {
@@ -108,27 +109,37 @@ function Login() {
 
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="login-group">
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter Email"
-              value={loginData.email}
-              onChange={handleChange}
-            />
-            {errors.email && <p className="error-message">{errors.email}</p>}
+            <CircleUserRound />
+
+            <div className="login-input-wrapper">
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                value={loginData.email}
+                onChange={handleChange}
+              />
+
+              {errors.email && <p className="error-message">{errors.email}</p>}
+            </div>
           </div>
 
           <div className="login-group">
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter Password"
-              value={loginData.password}
-              onChange={handleChange}
-            />
-            {errors.password && (
-              <p className="error-message">{errors.password}</p>
-            )}
+            <LockKeyhole />
+
+            <div className="login-input-wrapper">
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                value={loginData.password}
+                onChange={handleChange}
+              />
+
+              {errors.password && (
+                <p className="error-message">{errors.password}</p>
+              )}
+            </div>
           </div>
 
           {apiError && <p className="api-error">{apiError}</p>}

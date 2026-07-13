@@ -212,34 +212,34 @@ function Profile() {
   };
 
   const removeProfilePhoto = async () => {
-  if (!profile?.profileImage) {
-    toast.info("No profile photo to remove.");
-    return;
-  }
-
-  const confirmRemove = window.confirm(
-    "Are you sure you want to remove your profile photo?"
-  );
-
-  if (!confirmRemove) return;
-
-  try {
-    const response = await api.delete("/users/profile/photo");
-
-    setProfile(response.data);
-    setEditProfile(response.data);
-
-    toast.success("Profile photo removed successfully.");
-  } catch (error: any) {
-    console.error(error);
-
-    if (error.response?.data) {
-      toast.error(error.response.data);
-    } else {
-      toast.error("Unable to remove profile photo.");
+    if (!profile?.profileImage) {
+      toast.info("No profile photo to remove.");
+      return;
     }
-  }
-};
+
+    const confirmRemove = window.confirm(
+      "Are you sure you want to remove your profile photo?",
+    );
+
+    if (!confirmRemove) return;
+
+    try {
+      const response = await api.delete("/users/profile/photo");
+
+      setProfile(response.data);
+      setEditProfile(response.data);
+
+      toast.success("Profile photo removed successfully.");
+    } catch (error: any) {
+      console.error(error);
+
+      if (error.response?.data) {
+        toast.error(error.response.data);
+      } else {
+        toast.error("Unable to remove profile photo.");
+      }
+    }
+  };
 
   useEffect(() => {
     fetchProfile();
@@ -291,10 +291,14 @@ function Profile() {
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
               >
-                Change Photo
+                {profile?.profileImage ? "Change Photo" : "Upload Photo"}
               </button>
 
-              <button type="button" onClick={removeProfilePhoto}>Remove</button>
+              {profile?.profileImage && (
+                <button type="button" onClick={removeProfilePhoto}>
+                  Remove
+                </button>
+              )}
             </div>
           </div>
 

@@ -8,7 +8,11 @@
 
 .verify-otp-card {
     width: 400px;
-    background: white;
+    background: linear-gradient(
+    135deg,
+    #FAEDCD,
+    #FFF8E8
+);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
