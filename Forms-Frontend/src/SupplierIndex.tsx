@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Pencil, Trash2 } from "lucide-react";
 import Navbar from "./Navbar";
 import api from "./api";
 import "./SupplierIndex.css";
@@ -110,7 +111,7 @@ function SupplierIndex() {
                           navigate(`/suppliers/edit/${supplier.id}`)
                         }
                       >
-                        ✏️
+                        <Pencil />
                       </span>
 
                       <span
@@ -118,7 +119,7 @@ function SupplierIndex() {
                         role="button"
                         onClick={() => deleteSupplier(supplier.id)}
                       >
-                        🗑️
+                        <Trash2 />
                       </span>
                     </div>
                   </td>

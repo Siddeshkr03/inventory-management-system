@@ -163,28 +163,20 @@ body {
   cursor: pointer;
   font-size: 18px;
   user-select: none;
-  color: #f41f1f;
+  color: #e24141;
   background: #d8d4d4;
 }
 
-.edit {
-  background: #2563eb;
-}
-
-.delete {
-  background: #ef4444;
-}
-
 .view-btn:hover {
-  background: #1ea7ba;
+  color: #1ea7ba;
 }
 
-.edit:hover {
-  background: #1d4ed8;
+.i-edit:hover {
+  color: #163e18;
 }
 
-.delete:hover {
-  background: #dc2626;
+.i-delete:hover {
+  color: #ef1111;
 }
 
 .filter-container {

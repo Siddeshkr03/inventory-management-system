@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Pencil, Trash2 } from "lucide-react";
 import Navbar from "./Navbar";
 import api from "./api";
 import "./CategoryIndex.css";
@@ -149,7 +150,7 @@ function CategoryIndex() {
                           navigate(`/categories/edit/${category.id}`)
                         }
                       >
-                        ✏️
+                        <Pencil />
                       </span>
 
                       <span
@@ -157,7 +158,7 @@ function CategoryIndex() {
                         role="button"
                         onClick={() => deleteCategory(category.id)}
                       >
-                        🗑️
+                        <Trash2 />
                       </span>
 
                     </div>

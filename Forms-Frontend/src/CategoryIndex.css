@@ -99,36 +99,47 @@ body {
 .action-buttons {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 9px;
 }
 
-.cat-edit,
-.cat-delete {
-  display: inline-block;
-  width: 40px;
-  height: 20px;
-  padding: 8px 0;
-  border-radius: 5px;
-  color: white;
+.cat-edit{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 32px;
+  margin: 0 3px;
+  padding: 2px;
+  border-radius: 8px;
   cursor: pointer;
-  text-align: center;
-  font-size: 14px;
+  font-size: 12px;
+  user-select: none;
+  color: #4F772D;
+  background: #d8d4d4;
 }
 
-.edit {
-  background: #2563eb;
+.cat-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 36px;
+  margin: 0 3px;
+  padding: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+  color: #ed4e4e;
+  background: #d8d4d4;
 }
 
-.edit:hover {
-  background: #1d4ed8;
+.cat-edit:hover {
+  color: #163e18;
 }
 
-.delete {
-  background: #ef4444;
-}
-
-.delete:hover {
-  background: #dc2626;
+.cat-delete:hover {
+  color: #ef1111;
 }
 
 /* ---------- Responsive ---------- */
