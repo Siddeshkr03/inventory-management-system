@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Pencil } from "lucide-react";
+import { Pencil, ShieldCheck, Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 import Navbar from "./Navbar";
 import "./Profile.css";
@@ -17,7 +16,14 @@ function Profile() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [editProfile, setEditProfile] = useState<Profile | null>(null);
   const [isEditing, setIsEditing] = useState(false);
-  const navigate = useNavigate();
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const fetchProfile = async () => {
     try {
@@ -68,6 +74,60 @@ function Profile() {
         toast.error(error.response.data);
       } else {
         toast.error("Unable to update profile.");
+      }
+    }
+  };
+
+  const sendOtp = async () => {
+    if (!profile) return;
+
+    try {
+      await api.post("/users/forgot-password", {
+        email: profile.email,
+      });
+
+      toast.success("OTP sent successfully.");
+
+      toast.success("OTP sent successfully.");
+
+      setOtpSent(true);
+    } catch (error: any) {
+      console.error(error);
+
+      if (error.response?.data) {
+        toast.error(error.response.data);
+      } else {
+        toast.error("Unable to send OTP.");
+      }
+    }
+  };
+
+  const verifyOtp = async () => {
+    if (!profile) return;
+
+    if (!otp.trim()) {
+      toast.error("Please enter the OTP.");
+      return;
+    }
+
+    try {
+      await api.post("/users/verify-otp", {
+        email: profile.email,
+        otp: otp,
+      });
+
+      toast.success("OTP verified successfully.");
+
+      setOtpSent(false);
+      setOtp("");
+      setOtpVerified(true);
+    } catch (error: any) {
+      console.error(error);
+
+      if (error.response?.data) {
+        toast.error(error.response.data);
+      } else {
+        toast.error("OTP verification failed.");
       }
     }
   };
@@ -179,9 +239,119 @@ function Profile() {
           )}
 
           <div className="profile-security">
-            <button type="button" onClick={() => navigate("/profile/change-password")}>
-              Change Password
+            <button
+              className="change-password-btn"
+              onClick={() => setIsChangingPassword(!isChangingPassword)}
+            >
+              {isChangingPassword ? "Cancel" : "Change Password"}
             </button>
+
+            {isChangingPassword && (
+              <div className="password-section">
+                <h3>
+                  <ShieldCheck />
+                </h3>
+
+                <p>
+                  A verification code will be sent to your registered email.
+                </p>
+
+                <div className="profile-field">
+                  <label>Registered Email</label>
+
+                  <input type="email" value={profile?.email || ""} readOnly />
+                </div>
+
+                <button className="profile-save-btn" onClick={sendOtp}>
+                  Send OTP
+                </button>
+
+                {otpSent && (
+                  <div className="otp-section">
+                    <h3>OTP Verification</h3>
+
+                    <p>Enter the OTP sent to your registered email.</p>
+
+                    <div className="profile-field">
+                      <label>OTP</label>
+
+                      <input
+                        type="text"
+                        placeholder="Enter OTP"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                      />
+                    </div>
+
+                    <button className="profile-save-btn" onClick={verifyOtp}>
+                      Verify OTP
+                    </button>
+                  </div>
+                )}
+
+                {otpVerified && (
+                  <div className="reset-password-section">
+                    <h3>Set New Password</h3>
+
+                    <div className="profile-field">
+                      <label>New Password</label>
+
+                      <div className="password-input-container">
+                        <input
+                          type={showNewPassword ? "text" : "password"}
+                          placeholder="Enter new password"
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                        />
+
+                        <button
+                          type="button"
+                          className="password-toggle-btn"
+                          onClick={() => setShowNewPassword(!showNewPassword)}
+                        >
+                          {showNewPassword ? (
+                            <EyeOff size={20} />
+                          ) : (
+                            <Eye size={20} />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="profile-field">
+                      <label>Confirm Password</label>
+
+                      <div className="password-input-container">
+                        <input
+                          type={showConfirmPassword ? "text" : "password"}
+                          placeholder="Confirm new password"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+
+                        <button
+                          type="button"
+                          className="password-toggle-btn"
+                          onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                        >
+                          {showConfirmPassword ? (
+                            <EyeOff size={20} />
+                          ) : (
+                            <Eye size={20} />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+
+                    <button className="profile-save-btn">
+                      Update Password
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

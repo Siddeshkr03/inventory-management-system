@@ -20,7 +20,6 @@ import CategoryIndex from "./CategoryIndex";
 import CategoryForm from "./CategoryForm";
 
 import Profile from "./Profile";
-import ChangePassword from "./ChangePassword";
 
 function App() {
   return (
@@ -167,15 +166,6 @@ function App() {
           element={
             <ProtectedRoute>
               <Profile />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/profile/change-password"
-          element={
-            <ProtectedRoute>
-              <ChangePassword />
             </ProtectedRoute>
           }
         />
