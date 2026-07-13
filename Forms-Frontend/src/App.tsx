@@ -18,6 +18,7 @@ import VerifyOtp from "./VerifyOtp";
 import ResetPassword from "./ResetPassword";
 import CategoryIndex from "./CategoryIndex";
 import CategoryForm from "./CategoryForm";
+import Profile from "./Profile";
 
 function App() {
   return (
@@ -115,8 +116,22 @@ function App() {
             </ProtectedRoute>
           }
         ></Route>
-        <Route path="/categories/add" element={<ProtectedRoute><CategoryForm /></ProtectedRoute>} />
-        <Route path="/categories/edit/:id" element={<ProtectedRoute><CategoryForm /></ProtectedRoute>} />
+        <Route
+          path="/categories/add"
+          element={
+            <ProtectedRoute>
+              <CategoryForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/categories/edit/:id"
+          element={
+            <ProtectedRoute>
+              <CategoryForm />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path="/forgot-password"
@@ -144,6 +159,11 @@ function App() {
             </PublicRoute>
           }
         />
+
+        <Route path="/profile"
+         element={<ProtectedRoute><Profile /></ProtectedRoute>}
+         />
+
       </Routes>
     </BrowserRouter>
   );
