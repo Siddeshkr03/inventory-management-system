@@ -1,5 +1,6 @@
 package com.arraybots.formbackend.user.service;
 
+import com.arraybots.formbackend.storage.FileStorageService;
 import com.arraybots.formbackend.user.dto.ProfileResponse;
 import com.arraybots.formbackend.user.dto.ProfileUpdateRequest;
 import com.arraybots.formbackend.user.exception.EmailAlreadyExistsException;
@@ -7,14 +8,21 @@ import com.arraybots.formbackend.user.model.User;
 import com.arraybots.formbackend.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
 
     private final UserRepository userRepository;
 
-    public ProfileServiceImpl(UserRepository userRepository) {
+    private final FileStorageService fileStorageService;
+
+    public ProfileServiceImpl(
+            UserRepository userRepository,
+            FileStorageService fileStorageService
+    ) {
         this.userRepository = userRepository;
+        this.fileStorageService = fileStorageService;
     }
 
     @Override
@@ -61,6 +69,32 @@ public class ProfileServiceImpl implements ProfileService {
         profileResponse.setFullName(updatedUser.getName());
         profileResponse.setEmail(updatedUser.getEmail());
         profileResponse.setProfileImage(updatedUser.getProfileImage());
+
+        return profileResponse;
+    }
+
+    @Override
+    public ProfileResponse uploadProfilePhoto(
+            MultipartFile file,
+            HttpServletRequest request
+    ) {
+
+        User loggedInUser =
+                (User) request.getAttribute("loggedInUser");
+
+        String fileName =
+                fileStorageService.saveProfilePhoto(file);
+
+        loggedInUser.setProfileImage(fileName);
+
+        userRepository.save(loggedInUser);
+
+        ProfileResponse profileResponse = new ProfileResponse();
+
+        profileResponse.setId(loggedInUser.getId());
+        profileResponse.setFullName(loggedInUser.getName());
+        profileResponse.setEmail(loggedInUser.getEmail());
+        profileResponse.setProfileImage(loggedInUser.getProfileImage());
 
         return profileResponse;
     }

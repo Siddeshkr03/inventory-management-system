@@ -9,4 +9,6 @@ public interface FileStorageService {
 
     Resource loadFiles(String fileName);
 
+    String saveProfilePhoto(MultipartFile file);
+
 }

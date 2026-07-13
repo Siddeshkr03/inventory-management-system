@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Pencil, ShieldCheck, Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 import Navbar from "./Navbar";
@@ -24,6 +24,8 @@ function Profile() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const securitySectionRef = useRef<HTMLDivElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const fetchProfile = async () => {
     try {
@@ -176,6 +178,39 @@ function Profile() {
     }
   };
 
+  const handleProfilePhotoChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+
+    try {
+      const response = await api.post("/users/profile/photo", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setProfile(response.data);
+      setEditProfile(response.data);
+
+      toast.success("Profile photo updated successfully.");
+    } catch (error: any) {
+      console.error(error);
+
+      if (error.response?.data) {
+        toast.error(error.response.data);
+      } else {
+        toast.error("Unable to upload profile photo.");
+      }
+    }
+  };
+
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -202,10 +237,32 @@ function Profile() {
           </div>
 
           <div className="profile-image-section">
-            <div className="profile-avatar">👤</div>
+            <div className="profile-avatar">
+              {profile?.profileImage ? (
+                <img
+                  src={`http://localhost:8080/api/files/${profile.profileImage}`}
+                  alt="Profile"
+                  className="profile-avatar-image"
+                />
+              ) : (
+                "👤"
+              )}
+            </div>
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleProfilePhotoChange}
+            />
 
             <div className="profile-image-buttons">
-              <button type="button">Change Photo</button>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                Change Photo
+              </button>
 
               <button type="button">Remove</button>
             </div>
@@ -282,10 +339,23 @@ function Profile() {
             </div>
           )}
 
-          <div className="profile-security">
+          <div className="profile-security" ref={securitySectionRef}>
             <button
               className="change-password-btn"
-              onClick={() => setIsChangingPassword(!isChangingPassword)}
+              onClick={() => {
+                const opening = !isChangingPassword;
+
+                setIsChangingPassword(opening);
+
+                if (opening) {
+                  setTimeout(() => {
+                    securitySectionRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }, 100);
+                }
+              }}
             >
               {isChangingPassword ? "Cancel" : "Change Password"}
             </button>
@@ -389,10 +459,7 @@ function Profile() {
                       </div>
                     </div>
 
-                    <button
-                      className="profile-up-btn"
-                      onClick={updatePassword}
-                    >
+                    <button className="profile-up-btn" onClick={updatePassword}>
                       Update Password
                     </button>
                   </div>

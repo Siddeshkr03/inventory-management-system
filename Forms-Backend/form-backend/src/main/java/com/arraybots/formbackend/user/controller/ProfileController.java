@@ -13,6 +13,10 @@ import com.arraybots.formbackend.user.dto.ProfileUpdateRequest;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 @RestController
 @CrossOrigin(
         origins = "http://localhost:5173",
@@ -42,6 +46,17 @@ public class ProfileController {
 
         ProfileResponse profileResponse =
                 profileService.updateProfile(profileUpdateRequest, request);
+
+        return ResponseEntity.ok(profileResponse);
+    }
+
+    @PostMapping("/photo")
+    public ResponseEntity<ProfileResponse> uploadProfilePhoto(
+            @RequestParam("file") MultipartFile file,
+            HttpServletRequest request) {
+
+        ProfileResponse profileResponse =
+                profileService.uploadProfilePhoto(file, request);
 
         return ResponseEntity.ok(profileResponse);
     }

@@ -59,6 +59,52 @@ public class FileStorageServiceImpl implements FileStorageService {
         }
 
     }
+
+    @Override
+    public String saveProfilePhoto(MultipartFile file) {
+
+        try {
+
+            if (file.isEmpty()) {
+                throw new RuntimeException("No file selected.");
+            }
+
+            String contentType = file.getContentType();
+
+            if (contentType == null || !contentType.startsWith("image/")) {
+                throw new RuntimeException("Only image files are allowed.");
+            }
+
+            Path uploadPath = Paths.get("uploads/profile");
+
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            String originalFileName = file.getOriginalFilename();
+
+            String extension = "";
+
+            if (originalFileName != null && originalFileName.contains(".")) {
+                extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            }
+
+            String uniqueFileName =
+                    System.currentTimeMillis() + extension;
+
+            Path filePath = uploadPath.resolve(uniqueFileName);
+
+            file.transferTo(filePath);
+
+            return uniqueFileName;
+
+        } catch (IOException e) {
+
+            throw new RuntimeException("Error while saving profile photo.", e);
+
+        }
+    }
+
     @Override
     public Resource loadFiles(String fileName) {
 
@@ -67,6 +113,13 @@ public class FileStorageServiceImpl implements FileStorageService {
             Path filePath = Paths.get("uploads/files")
                     .resolve(fileName)
                     .normalize();
+
+            if (!Files.exists(filePath)) {
+
+                filePath = Paths.get("uploads/profile")
+                        .resolve(fileName)
+                        .normalize();
+            }
 
             Resource resource = new UrlResource(filePath.toUri());
 
