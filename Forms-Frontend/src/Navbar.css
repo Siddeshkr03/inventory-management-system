@@ -33,7 +33,7 @@
 
 .nav-links a {
     text-decoration: none;
-    color: #374151;
+    color: #4F772D;
     font-size: 23px;
     font-weight: 600;
     padding: 8px 0;
@@ -41,7 +41,7 @@
 }
 
 .nav-links a:hover {
-    color: #4F772D;
+    color: #28470e;
 }
 
 .nav-links a.active {
@@ -67,19 +67,14 @@
 
 .profile-button:hover {
     background: #F0EAD2;
-
 }
 
 .profile-icon {
-
     font-size: 22px;
-
 }
 
 .arrow {
-
     font-size: 12px;
-
 }
 
 /* ==========================
@@ -87,89 +82,49 @@
 ========================== */
 
 .profile-dropdown {
-
     position: absolute;
-
     top: 55px;
-
     right: 0;
-
     width: 260px;
-
     background: white;
-
     border-radius: 16px;
-
     box-shadow: 0 12px 30px rgba(0,0,0,.12);
-
     border: 1px solid #E5E7EB;
-
     padding: 18px;
-
 }
 
 .profile-name {
-
     font-size: 18px;
-
     font-weight: 700;
-
-    color: #1F2937;
-
+    color: #153157;
 }
 
-.profile-email {
-
+.profile-email{ 
     margin-top: 6px;
-
     font-size: 14px;
-
     color: #6B7280;
-
     word-break: break-word;
-
 }
 
 .profile-dropdown hr {
-
     margin: 16px 0;
-
     border: none;
-
     border-top: 1px solid #E5E7EB;
-
 }
 
-/* ==========================
-   Logout Button
-========================== */
-
 .logout-btn {
-
     width: 100%;
-
     height: 44px;
-
     border: none;
-
     border-radius: 12px;
-
     background: #DC2626;
-
     color: white;
-
     font-size: 15px;
-
     font-weight: 600;
-
     cursor: pointer;
-
     transition: .25s;
-
 }
 
 .logout-btn:hover {
-
     background: #B91C1C;
-
 }

@@ -12,12 +12,17 @@ function ItemShow() {
     address: string;
   }
 
+    interface Category {
+    id: number;
+    categoryName: string;
+  }
+
   interface Item {
     id: number;
     itemName: string;
     price: number;
     quantity: number;
-    category: string;
+    category: Category;
     brand: string;
     purchaseDate: string;
     productCode: string;
@@ -81,7 +86,7 @@ function ItemShow() {
 
             <div className="field">
               <strong>Category</strong>
-              <span>{item?.category}</span>
+              <span>{item?.category.categoryName}</span>
             </div>
 
             <div className="field">

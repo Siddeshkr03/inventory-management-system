@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .top-bar {
@@ -70,7 +69,7 @@ body {
 }
 
 .category-table th {
-  background: #f0ead2;
+  background: #ede1b4;
   color: #111;
   padding: 14px;
   text-align: center;
@@ -82,9 +81,9 @@ body {
   text-align: center;
 }
 
-.category-table tbody tr:nth-child(even) {
+/* .category-table tbody tr:nth-child(even) {
   background: #f9fafb;
-}
+} */
 
 .category-table tbody tr:hover {
   background: #eef7ff;
