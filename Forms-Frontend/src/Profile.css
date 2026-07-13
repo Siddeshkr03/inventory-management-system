@@ -257,7 +257,7 @@
 }
 
 .profile-field input {
-    width: 100%;
+    width: 50%;
     height: 48px;
     padding: 0 14px;
     border: 1px solid #D1D5DB;
@@ -325,7 +325,7 @@
 }
 
 .password-input-container input {
-    width: 100%;
+    width: 50%;
     padding-right: 48px;
 }
 
@@ -334,15 +334,12 @@
     top: 50%;
     right: 14px;
     transform: translateY(-50%);
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border: none;
     background: transparent;
     cursor: pointer;
-
     color: #6B7280;
     transition: .2s;
 }
