@@ -18,4 +18,8 @@ public interface ProfileService {
             HttpServletRequest request
     );
 
+    ProfileResponse removeProfilePhoto(
+            HttpServletRequest request
+    );
+
 }

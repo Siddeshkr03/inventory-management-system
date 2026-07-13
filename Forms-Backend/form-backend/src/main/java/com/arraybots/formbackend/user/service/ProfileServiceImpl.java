@@ -9,6 +9,9 @@ import com.arraybots.formbackend.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -88,6 +91,48 @@ public class ProfileServiceImpl implements ProfileService {
         loggedInUser.setProfileImage(fileName);
 
         userRepository.save(loggedInUser);
+
+        ProfileResponse profileResponse = new ProfileResponse();
+
+        profileResponse.setId(loggedInUser.getId());
+        profileResponse.setFullName(loggedInUser.getName());
+        profileResponse.setEmail(loggedInUser.getEmail());
+        profileResponse.setProfileImage(loggedInUser.getProfileImage());
+
+        return profileResponse;
+    }
+
+    @Override
+    public ProfileResponse removeProfilePhoto(
+            HttpServletRequest request
+    ) {
+
+        User loggedInUser =
+                (User) request.getAttribute("loggedInUser");
+
+        if (loggedInUser.getProfileImage() != null) {
+
+            try {
+
+                Path filePath = Paths.get("uploads/profile")
+                        .resolve(loggedInUser.getProfileImage())
+                        .normalize();
+
+                Files.deleteIfExists(filePath);
+
+            } catch (Exception e) {
+
+                throw new RuntimeException(
+                        "Unable to delete profile photo.",
+                        e
+                );
+
+            }
+
+            loggedInUser.setProfileImage(null);
+
+            userRepository.save(loggedInUser);
+        }
 
         ProfileResponse profileResponse = new ProfileResponse();
 

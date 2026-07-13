@@ -5,15 +5,13 @@ import com.arraybots.formbackend.user.service.ProfileService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arraybots.formbackend.user.dto.ProfileUpdateRequest;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,6 +55,16 @@ public class ProfileController {
 
         ProfileResponse profileResponse =
                 profileService.uploadProfilePhoto(file, request);
+
+        return ResponseEntity.ok(profileResponse);
+    }
+
+    @DeleteMapping("/photo")
+    public ResponseEntity<ProfileResponse> removeProfilePhoto(
+            HttpServletRequest request) {
+
+        ProfileResponse profileResponse =
+                profileService.removeProfilePhoto(request);
 
         return ResponseEntity.ok(profileResponse);
     }
