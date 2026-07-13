@@ -1,12 +1,20 @@
 package com.arraybots.formbackend.user.service;
 
 import com.arraybots.formbackend.user.dto.ProfileResponse;
+import com.arraybots.formbackend.user.dto.ProfileUpdateRequest;
 import com.arraybots.formbackend.user.model.User;
+import com.arraybots.formbackend.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
+
+    private final UserRepository userRepository;
+
+    public ProfileServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public ProfileResponse getProfile(HttpServletRequest request) {
@@ -19,6 +27,29 @@ public class ProfileServiceImpl implements ProfileService {
         profileResponse.setFullName(loggedInUser.getName());
         profileResponse.setEmail(loggedInUser.getEmail());
         profileResponse.setProfileImage(loggedInUser.getProfileImage());
+
+        return profileResponse;
+    }
+
+    @Override
+    public ProfileResponse updateProfile(
+            ProfileUpdateRequest profileUpdateRequest,
+            HttpServletRequest request) {
+
+        User loggedInUser =
+                (User) request.getAttribute("loggedInUser");
+
+        loggedInUser.setName(profileUpdateRequest.getFullName());
+        loggedInUser.setEmail(profileUpdateRequest.getEmail());
+
+        User updatedUser = userRepository.save(loggedInUser);
+
+        ProfileResponse profileResponse = new ProfileResponse();
+
+        profileResponse.setId(updatedUser.getId());
+        profileResponse.setFullName(updatedUser.getName());
+        profileResponse.setEmail(updatedUser.getEmail());
+        profileResponse.setProfileImage(updatedUser.getProfileImage());
 
         return profileResponse;
     }

@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.arraybots.formbackend.user.dto.ProfileUpdateRequest;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 @RestController
 @CrossOrigin(
         origins = "http://localhost:5173",
         allowCredentials = "true"
 )
-@RequestMapping("/api/profile")
+@RequestMapping("/api/users/profile")
 public class ProfileController {
 
     private final ProfileService profileService;
@@ -27,6 +31,17 @@ public class ProfileController {
     public ResponseEntity<ProfileResponse> getProfile(HttpServletRequest request) {
 
         ProfileResponse profileResponse = profileService.getProfile(request);
+
+        return ResponseEntity.ok(profileResponse);
+    }
+
+    @PutMapping
+    public ResponseEntity<ProfileResponse> updateProfile(
+            @RequestBody ProfileUpdateRequest profileUpdateRequest,
+            HttpServletRequest request) {
+
+        ProfileResponse profileResponse =
+                profileService.updateProfile(profileUpdateRequest, request);
 
         return ResponseEntity.ok(profileResponse);
     }
