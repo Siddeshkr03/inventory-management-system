@@ -59,7 +59,7 @@ function Navbar() {
 
           {showDropdown && (
             <div className="profile-dropdown">
-              <div className="profile-name"><User /> {user?.name}</div>
+              <div className="profile-name" ><NavLink to="/profile"><User /> {user?.name}</NavLink></div>
 
               <div className="profile-email"><Mail />{user?.email}</div>
 

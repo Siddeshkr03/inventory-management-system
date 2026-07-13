@@ -2,6 +2,7 @@ package com.arraybots.formbackend.user.service;
 
 import com.arraybots.formbackend.user.dto.ProfileResponse;
 import com.arraybots.formbackend.user.dto.ProfileUpdateRequest;
+import com.arraybots.formbackend.user.exception.EmailAlreadyExistsException;
 import com.arraybots.formbackend.user.model.User;
 import com.arraybots.formbackend.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,6 +39,16 @@ public class ProfileServiceImpl implements ProfileService {
 
         User loggedInUser =
                 (User) request.getAttribute("loggedInUser");
+
+        User existingUser = userRepository.findByEmail(
+                profileUpdateRequest.getEmail()
+        ).orElse(null);
+
+        if (existingUser != null &&
+                !existingUser.getId().equals(loggedInUser.getId())) {
+
+            throw new EmailAlreadyExistsException("Email already exists.");
+        }
 
         loggedInUser.setName(profileUpdateRequest.getFullName());
         loggedInUser.setEmail(profileUpdateRequest.getEmail());

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Pencil } from "lucide-react";
+import { toast } from "react-toastify";
 import Navbar from "./Navbar";
 import "./Profile.css";
 import api from "./api";
@@ -15,15 +17,58 @@ function Profile() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [editProfile, setEditProfile] = useState<Profile | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
 
   const fetchProfile = async () => {
     try {
-      const response = await api.get("/profile");
+      const response = await api.get("/users/profile");
 
       setProfile(response.data);
       setEditProfile(response.data);
     } catch (error) {
       console.error("Error fetching profile:", error);
+    }
+  };
+
+  const updateProfile = async () => {
+    if (!editProfile) return;
+
+    if (!editProfile.fullName.trim()) {
+      toast.error("Name is required.");
+      return;
+    }
+
+    if (!editProfile.email.trim()) {
+      toast.error("Email is required.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(editProfile.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      const response = await api.put("/users/profile", {
+        fullName: editProfile.fullName,
+        email: editProfile.email,
+      });
+
+      setProfile(response.data);
+      setEditProfile(response.data);
+      setIsEditing(false);
+
+      toast.success("Profile updated successfully.");
+    } catch (error: any) {
+      console.error("Error updating profile:", error);
+
+      if (error.response?.data) {
+        toast.error(error.response.data);
+      } else {
+        toast.error("Unable to update profile.");
+      }
     }
   };
 
@@ -123,18 +168,20 @@ function Profile() {
                 Cancel
               </button>
 
-              <button type="button" className="profile-save-btn">
+              <button
+                type="button"
+                className="profile-save-btn"
+                onClick={updateProfile}
+              >
                 Save Changes
               </button>
             </div>
           )}
 
           <div className="profile-security">
-            <h3>Security</h3>
-
-            <p>Change your password anytime.</p>
-
-            <button type="button">Change Password</button>
+            <button type="button" onClick={() => navigate("/forgot-password")}>
+              Change Password
+            </button>
           </div>
         </div>
       </div>

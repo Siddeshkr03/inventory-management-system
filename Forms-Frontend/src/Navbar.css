@@ -101,6 +101,11 @@
   gap: 5px;
 }
 
+.profile-name:hover{
+    text-decoration: underline;
+    transform: scale(1.06);
+}
+
 .profile-email {
   margin-top: 6px;
   font-size: 14px;
