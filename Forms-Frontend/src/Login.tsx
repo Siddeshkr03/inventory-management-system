@@ -3,7 +3,7 @@ import api from "./api";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { saveToken } from "./token";
-import { CircleUserRound, LockKeyhole } from "lucide-react";
+import { CircleUserRound, LockKeyhole, Eye, EyeOff } from "lucide-react";
 import "./Login.css";
 
 function Login() {
@@ -11,6 +11,7 @@ function Login() {
   const location = useLocation();
   const { checkAuth } = useAuth();
   const [successMessage, setSuccessMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -124,22 +125,36 @@ function Login() {
             </div>
           </div>
 
-          <div className="login-group">
-            <LockKeyhole />
+            <div className="login-group">
+              <LockKeyhole />
 
-            <div className="login-input-wrapper">
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter Password"
-                value={loginData.password}
-                onChange={handleChange}
-              />
+              <div className="login-input-wrapper">
+                <div className="login-password-container">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Enter Password"
+                    value={loginData.password}
+                    onChange={handleChange}
+                  />
 
-              {errors.password && (
-                <p className="error-message">{errors.password}</p>
-              )}
-            </div>
+                  <button
+                    type="button"
+                    className="login-password-toggle-btn"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+
+                {errors.password && (
+                  <p className="error-message">{errors.password}</p>
+                )}
+              </div>
+
+            {errors.password && (
+              <p className="error-message">{errors.password}</p>
+            )}
           </div>
 
           {apiError && <p className="api-error">{apiError}</p>}
