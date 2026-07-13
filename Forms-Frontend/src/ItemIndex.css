@@ -121,24 +121,50 @@ body {
   white-space: nowrap;
 }
 
-.view-btn,
-.edit,
-.delete {
+.view-btn{
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  padding: 8px 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  background: #d8d4d4;
+  color: #24676c;
+}
+
+.i-edit{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 36px;
   margin: 0 3px;
   padding: 0;
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
   user-select: none;
+  color: #4F772D;
+  background: #d8d4d4;
 }
 
-.view-btn {
-  background: #2fbed1;
+.i-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 36px;
+  margin: 0 3px;
+  padding: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+  color: #f41f1f;
+  background: #d8d4d4;
 }
 
 .edit {

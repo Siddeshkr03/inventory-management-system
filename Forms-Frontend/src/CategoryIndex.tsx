@@ -143,7 +143,7 @@ function CategoryIndex() {
                     <div className="action-buttons">
 
                       <span
-                        className="edit"
+                        className="cat-edit"
                         role="button"
                         onClick={() =>
                           navigate(`/categories/edit/${category.id}`)
@@ -153,7 +153,7 @@ function CategoryIndex() {
                       </span>
 
                       <span
-                        className="delete"
+                        className="cat-delete"
                         role="button"
                         onClick={() => deleteCategory(category.id)}
                       >

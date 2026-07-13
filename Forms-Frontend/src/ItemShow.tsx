@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { X  } from "lucide-react";
 import api from "./api";
 import "./ItemShow.css";
 
@@ -60,7 +61,7 @@ function ItemShow() {
             className="back-btn"
             onClick={() => navigate("/items")}
           >
-            ⬅
+            <X />
           </button>
         </div>
 

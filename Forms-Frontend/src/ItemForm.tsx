@@ -275,8 +275,7 @@ function ItemForm() {
         alert("Updated Successfully!");
       } else {
         await api.post("/items", itemSupplierDTO);
-
-        alert("Saved Successfully!");
+        
       }
 
       navigate("/");

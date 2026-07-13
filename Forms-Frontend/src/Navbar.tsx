@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { User, Mail, LogOut } from "lucide-react"
 import api from "./api";
 import { useAuth } from "./AuthContext";
 import { removeToken } from "./token";
@@ -58,14 +59,14 @@ function Navbar() {
 
           {showDropdown && (
             <div className="profile-dropdown">
-              <div className="profile-name">{user?.name}</div>
+              <div className="profile-name"><User /> {user?.name}</div>
 
-              <div className="profile-email">{user?.email}</div>
+              <div className="profile-email"><Mail />{user?.email}</div>
 
               <hr />
 
               <button className="logout-btn" onClick={handleLogout}>
-                Logout
+                Logout <span><LogOut className="logout-logo"/></span>
               </button>
             </div>
           )}

@@ -104,7 +104,7 @@ function SupplierIndex() {
                   <td className="action-column">
                     <div className="action-buttons">
                       <span
-                        className="edit"
+                        className="sup-edit"
                         role="button"
                         onClick={() =>
                           navigate(`/suppliers/edit/${supplier.id}`)
@@ -114,7 +114,7 @@ function SupplierIndex() {
                       </span>
 
                       <span
-                        className="delete"
+                        className="sup-delete"
                         role="button"
                         onClick={() => deleteSupplier(supplier.id)}
                       >

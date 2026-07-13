@@ -85,7 +85,7 @@ body {
   background: #f9fafb;
 } */
 
-.category-table tbody tr:hover {
+.category-table tbody td:hover {
   background: #eef7ff;
 }
 
@@ -102,8 +102,8 @@ body {
   gap: 10px;
 }
 
-.edit,
-.delete {
+.cat-edit,
+.cat-delete {
   display: inline-block;
   width: 40px;
   height: 20px;

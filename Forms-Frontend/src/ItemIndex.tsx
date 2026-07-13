@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Eye, Pencil, Trash2 } from "lucide-react";
 import Navbar from "./Navbar";
 import api from "./api";
 import "./ItemIndex.css";
@@ -162,23 +163,23 @@ useEffect(() => {
                         role="button"
                         onClick={() => navigate(`/items/view/${item.id}`)}
                       >
-                        👁️
+                        <Eye size={20} />
                       </span>
 
                       <span
-                        className="edit"
+                        className="i-edit"
                         role="button"
                         onClick={() => navigate(`/items/edit/${item.id}`)}
                       >
-                        ✏️
+                        <Pencil size={18} />
                       </span>
 
                       <span
-                        className="delete"
+                        className="i-delete"
                         role="button"
                         onClick={() => deleteItem(item.id)}
                       >
-                        🗑️
+                        <Trash2 className="dlt-icon" size={18} />
                       </span>
                     </div>
                   </td>
