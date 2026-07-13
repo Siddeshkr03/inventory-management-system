@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Pencil } from "lucide-react";
 import { toast } from "react-toastify";
 import Navbar from "./Navbar";
@@ -179,7 +179,7 @@ function Profile() {
           )}
 
           <div className="profile-security">
-            <button type="button" onClick={() => navigate("/forgot-password")}>
+            <button type="button" onClick={() => navigate("/profile/change-password")}>
               Change Password
             </button>
           </div>
