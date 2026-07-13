@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
+import "./Profile.css";
 import api from "./api";
 
 function Profile() {
@@ -30,15 +31,46 @@ function Profile() {
     <>
       <Navbar />
 
-      <div>
-        <h2>My Profile</h2>
+      <div className="profile-page">
+        <div className="profile-card">
+          <h2 className="profile-title">My Profile</h2>
 
-        {profile && (
-          <>
-            <p>Name: {profile.fullName}</p>
-            <p>Email: {profile.email}</p>
-          </>
-        )}
+          <div className="profile-image-section">
+            <div className="profile-avatar">👤</div>
+
+            <div className="profile-image-buttons">
+              <button type="button">Change Photo</button>
+
+              <button type="button">Remove</button>
+            </div>
+          </div>
+
+          <div className="profile-form">
+            <div className="profile-form-group">
+              <label>Full Name</label>
+
+              <input type="text" value={profile?.fullName || ""} readOnly />
+            </div>
+
+            <div className="profile-form-group">
+              <label>Email Address</label>
+
+              <input type="email" value={profile?.email || ""} readOnly />
+            </div>
+          </div>
+
+          <button type="button" className="profile-save-btn">
+            Save Changes
+          </button>
+
+          <div className="profile-security">
+            <h3>Security</h3>
+
+            <p>Change your password anytime.</p>
+
+            <button type="button">Change Password</button>
+          </div>
+        </div>
       </div>
     </>
   );
