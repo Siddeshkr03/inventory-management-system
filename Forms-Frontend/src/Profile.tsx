@@ -132,6 +132,50 @@ function Profile() {
     }
   };
 
+  const updatePassword = async () => {
+    if (!profile) return;
+
+    if (!newPassword.trim()) {
+      toast.error("New password is required.");
+      return;
+    }
+
+    if (!confirmPassword.trim()) {
+      toast.error("Confirm password is required.");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      toast.error("Passwords do not match.");
+      return;
+    }
+
+    try {
+      await api.post("/users/reset-password", {
+        email: profile.email,
+        newPassword: newPassword,
+      });
+
+      toast.success("Password updated successfully.");
+
+      setIsChangingPassword(false);
+      setOtpSent(false);
+      setOtpVerified(false);
+
+      setOtp("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } catch (error: any) {
+      console.error(error);
+
+      if (error.response?.data) {
+        toast.error(error.response.data);
+      } else {
+        toast.error("Unable to update password.");
+      }
+    }
+  };
+
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -345,7 +389,10 @@ function Profile() {
                       </div>
                     </div>
 
-                    <button className="profile-save-btn">
+                    <button
+                      className="profile-up-btn"
+                      onClick={updatePassword}
+                    >
                       Update Password
                     </button>
                   </div>
