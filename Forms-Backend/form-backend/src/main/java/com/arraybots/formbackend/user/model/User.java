@@ -31,6 +31,8 @@ public class User {
 
     private LocalDateTime otpExpiry;
 
+    private String profileImage;
+
     public User() {
     }
 
