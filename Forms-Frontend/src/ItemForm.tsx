@@ -5,6 +5,7 @@ import "./ItemForm.css";
 
 import SupplierModal from "./SupplierModal";
 import CategoryModal from "./CategoryModal";
+import { toast } from "react-toastify";
 
 function ItemForm() {
   interface ItemData {
@@ -272,9 +273,11 @@ function ItemForm() {
       if (id) {
         await api.put(`/items/${id}`, itemSupplierDTO);
 
-        alert("Updated Successfully!");
+        toast.success("Item Updated Successfully")
       } else {
         await api.post("/items", itemSupplierDTO);
+
+        toast.success("Item Created Successfully")
         
       }
 
