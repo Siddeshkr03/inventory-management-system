@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "./api";
 import "./CategoryForm.css";
+import { toast } from "react-toastify";
 
 function CategoryForm() {
   interface CategoryData {
@@ -104,11 +105,11 @@ function CategoryForm() {
       if (id) {
         await api.put(`/categories/${id}`, categoryData);
 
-        alert("Category Updated Successfully!");
+        toast.success("Category Updated Successfully")
       } else {
         await api.post("/categories", categoryData);
 
-        alert("Category Added Successfully!");
+        toast.success("Category Added Successfully!");
       }
 
       navigate("/categories");

@@ -4,6 +4,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import Navbar from "./Navbar";
 import api from "./api";
 import "./SupplierIndex.css";
+import { toast } from "react-toastify";
 
 function SupplierIndex() {
   interface Supplier {
@@ -39,6 +40,8 @@ function SupplierIndex() {
     if (!confirmDelete) {
       return;
     }
+
+    toast.success("Supplier Deleted");
 
     try {
       await api.delete(`/suppliers/${id}`);

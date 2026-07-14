@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "./api";
 import "./CategoryModal.css";
+import { toast } from "react-toastify";
 
 interface Category {
   id: number;
@@ -121,7 +122,7 @@ function CategoryModal({
 
       onClose();
 
-      alert("Category added successfully!");
+      toast.success("Category added successfully!");
     } catch (error: any) {
       alert(error.response?.data?.message || "Failed to save category.");
     }

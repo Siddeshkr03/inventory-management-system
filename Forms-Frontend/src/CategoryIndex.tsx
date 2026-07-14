@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Pencil, Trash2 } from "lucide-react";
+import { toast } from "react-toastify";
 import Navbar from "./Navbar";
 import api from "./api";
 import "./CategoryIndex.css";
@@ -45,6 +46,8 @@ function CategoryIndex() {
     if (!confirmDelete) {
       return;
     }
+
+    toast.success("Category Deleted")
 
     try {
 

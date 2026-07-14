@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "./api";
 import "./SupplierModal.css";
+import { toast } from "react-toastify";
 
 interface SupplierData {
   supplierName: string;
@@ -125,7 +126,7 @@ function SupplierModal({
         address: "",
       });
 
-      alert("Supplier added successfully!");
+      toast.success("Supplier added successfully!");
 
       onClose();
     } catch (error) {

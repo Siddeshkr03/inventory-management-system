@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import api from "./api";
 import "./SupplierForm.css";
+import { toast } from "react-toastify";
 
 function SupplierForm() {
   interface SupplierData {
@@ -128,13 +129,13 @@ function SupplierForm() {
       if (id) {
         await api.put(`/suppliers/${id}`, supplierData);
 
-        alert("Supplier Updated Successfully!");
+        toast.success("Supplier Updated Successfully!")
       } else {
         const response = await api.post("/suppliers", supplierData);
 
         localStorage.setItem("newSupplierId", response.data.id.toString());
 
-        alert("Supplier Added Successfully!");
+        toast.success("Supplier Added Successfully!")
       }
 
       if (location.state?.from === "itemForm") {

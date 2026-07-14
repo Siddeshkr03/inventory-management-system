@@ -4,6 +4,7 @@ import { Eye, Pencil, Trash2 } from "lucide-react";
 import Navbar from "./Navbar";
 import api from "./api";
 import "./ItemIndex.css";
+import { toast } from "react-toastify";
 
 function ItemIndex() {
   interface Supplier {
@@ -69,7 +70,8 @@ function ItemIndex() {
 
     try {
       await api.delete(`/items/${id}`);
-
+      toast.success("Item Deleted");
+      
       fetchItems();
     } catch (error) {
       console.error(error);
