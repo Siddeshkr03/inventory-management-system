@@ -116,7 +116,7 @@ function CategoryForm() {
     } catch (error) {
       console.error(error);
 
-      alert("Error saving category!");
+      toast.error("Unable to save category.");
     }
   };
 

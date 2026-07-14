@@ -7,7 +7,6 @@ import api from "./api";
 import "./CategoryIndex.css";
 
 function CategoryIndex() {
-
   interface Category {
     id: number;
     categoryName: string;
@@ -22,51 +21,36 @@ function CategoryIndex() {
   const navigate = useNavigate();
 
   const fetchCategories = async () => {
-
     try {
-
       const response = await api.get("/categories");
 
       setCategories(response.data);
-
     } catch (error) {
-
       console.error("Error fetching categories:", error);
-
     }
-
   };
 
   const deleteCategory = async (id: number) => {
-
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this category?"
+      "Are you sure you want to delete this category?",
     );
 
     if (!confirmDelete) {
       return;
     }
 
-    toast.success("Category Deleted")
-
     try {
-
       await api.delete(`/categories/${id}`);
+      toast.success("Category Deleted");
 
       fetchCategories();
-
     } catch (error) {
-
-      console.error("Error deleting category:", error);
-
+      toast.error("Unable to delete category.");
     }
-
   };
 
   useEffect(() => {
-
     fetchCategories();
-
   }, []);
 
   return (
@@ -74,7 +58,6 @@ function CategoryIndex() {
       <Navbar />
 
       <div className="top-bar">
-
         <div className="search-container">
           <input
             type="text"
@@ -87,25 +70,14 @@ function CategoryIndex() {
         <h1 className="title">Categories</h1>
 
         <Link to="/categories/add">
-
-          <button className="cat-add-btn">
-
-            Add Category
-
-          </button>
-
+          <button className="cat-add-btn">Add Category</button>
         </Link>
-
       </div>
 
       <div className="table-wrapper">
-
         <table className="category-table">
-
           <thead>
-
             <tr>
-
               <th>ID</th>
 
               <th>Category Name</th>
@@ -115,25 +87,20 @@ function CategoryIndex() {
               <th>Description</th>
 
               <th className="action-column">Actions</th>
-
             </tr>
-
           </thead>
 
           <tbody>
-
             {categories
 
               .filter((category) =>
                 category.categoryName
                   .toLowerCase()
-                  .includes(search.toLowerCase())
+                  .includes(search.toLowerCase()),
               )
 
               .map((category, index) => (
-
                 <tr key={category.id}>
-
                   <td>{index + 1}</td>
 
                   <td>{category.categoryName}</td>
@@ -143,9 +110,7 @@ function CategoryIndex() {
                   <td>{category.description}</td>
 
                   <td className="action-column">
-
                     <div className="action-buttons">
-
                       <span
                         className="cat-edit"
                         role="button"
@@ -153,7 +118,7 @@ function CategoryIndex() {
                           navigate(`/categories/edit/${category.id}`)
                         }
                       >
-                        <Pencil size={ 18 } />
+                        <Pencil size={18} />
                       </span>
 
                       <span
@@ -161,26 +126,17 @@ function CategoryIndex() {
                         role="button"
                         onClick={() => deleteCategory(category.id)}
                       >
-                        <Trash2  size={ 18 } />
+                        <Trash2 size={18} />
                       </span>
-
                     </div>
-
                   </td>
-
                 </tr>
-
               ))}
-
           </tbody>
-
         </table>
-
       </div>
-
     </>
   );
-
 }
 
 export default CategoryIndex;

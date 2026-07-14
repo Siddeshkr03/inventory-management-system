@@ -23,9 +23,6 @@ function SupplierIndex() {
   const fetchSuppliers = async () => {
     try {
       const response = await api.get("/suppliers");
-
-      console.log(response.data);
-
       setSuppliers(response.data);
     } catch (error) {
       console.error("Error fetching suppliers:", error);
@@ -41,14 +38,13 @@ function SupplierIndex() {
       return;
     }
 
-    toast.success("Supplier Deleted");
-
     try {
       await api.delete(`/suppliers/${id}`);
-
+      toast.success("Supplier Deleted");
       fetchSuppliers();
     } catch (error) {
       console.error("Error deleting supplier:", error);
+      toast.error("Unable to delete supplier.");
     }
   };
 
@@ -114,7 +110,7 @@ function SupplierIndex() {
                           navigate(`/suppliers/edit/${supplier.id}`)
                         }
                       >
-                        <Pencil size={18}/>
+                        <Pencil size={18} />
                       </span>
 
                       <span

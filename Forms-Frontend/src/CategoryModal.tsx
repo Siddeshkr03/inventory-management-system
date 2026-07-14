@@ -124,7 +124,7 @@ function CategoryModal({
 
       toast.success("Category added successfully!");
     } catch (error: any) {
-      alert(error.response?.data?.message || "Failed to save category.");
+      toast.error(error.response?.data?.message || "Failed to save category.");
     }
   };
 

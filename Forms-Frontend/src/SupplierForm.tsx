@@ -129,13 +129,13 @@ function SupplierForm() {
       if (id) {
         await api.put(`/suppliers/${id}`, supplierData);
 
-        toast.success("Supplier Updated Successfully!")
+        toast.success("Supplier Updated Successfully!");
       } else {
         const response = await api.post("/suppliers", supplierData);
 
         localStorage.setItem("newSupplierId", response.data.id.toString());
 
-        toast.success("Supplier Added Successfully!")
+        toast.success("Supplier Added Successfully!");
       }
 
       if (location.state?.from === "itemForm") {
@@ -145,8 +145,7 @@ function SupplierForm() {
       }
     } catch (error) {
       console.error(error);
-
-      alert("Error saving supplier!");
+      toast.error("Unable to save supplier.");
     }
   };
 
@@ -164,11 +163,11 @@ function SupplierForm() {
         </div>
         <div className="supplier-details-card">
           <div className="item-page-title-wrapper">
-            <h1 className="item-page-title">{id ? "Edit Supplier" : "Add Supplier"}</h1>
+            <h1 className="item-page-title">
+              {id ? "Edit Supplier" : "Add Supplier"}
+            </h1>
 
-            <p className="item-page-subtitle">
-              Create or Edit Supplier
-            </p>
+            <p className="item-page-subtitle">Create or Edit Supplier</p>
           </div>
 
           <div className="supplier-grid">
@@ -248,13 +247,13 @@ function SupplierForm() {
             <button
               type="button"
               className="supplier-cancel-btn"
-              onClick={() => navigate("/items")}
+              onClick={() => navigate("/suppliers")}
             >
               Cancel
             </button>
 
             <button className="supplier-submit-btn" type="submit">
-              {id ? "Update Item" : "Save Item"}
+              {id ? "Update Supplier" : "Save Supplier"}
             </button>
           </div>
         </div>

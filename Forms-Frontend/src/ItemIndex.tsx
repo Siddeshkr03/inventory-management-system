@@ -75,6 +75,7 @@ function ItemIndex() {
       fetchItems();
     } catch (error) {
       console.error(error);
+      toast.error("Unable to delete item.");
     }
   };
 

@@ -226,9 +226,6 @@ function ItemForm() {
     }
   }, []);
 
-  console.log(suppliers);
-  console.log(categories);
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

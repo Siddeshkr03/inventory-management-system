@@ -46,7 +46,6 @@ function ItemShow() {
       const response = await api.get(`/items/${id}`);
 
       setItem(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
