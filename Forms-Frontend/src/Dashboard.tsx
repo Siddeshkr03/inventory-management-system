@@ -115,6 +115,7 @@ function Dashboard() {
             lowStock={dashboardData.lowStock}
             outOfStock={dashboardData.outOfStock}
             preOrder={dashboardData.preOrder}
+            totalItems={dashboardData.totalItems}
           />
         </div>
 

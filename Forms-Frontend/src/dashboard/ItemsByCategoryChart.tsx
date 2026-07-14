@@ -42,11 +42,11 @@ const ItemsByCategoryChart = ({ data }: ItemsByCategoryChartProps) => {
 
         <YAxis allowDecimals={false} axisLine={false} tickLine={false} />
 
-        <Tooltip cursor={false} />
+        <Tooltip  cursor={ false } />
 
         <Bar dataKey="count" radius={[8, 8, 0, 0]} barSize={45}>
           {data.map((_, index) => (
-            <Cell key={index} fill="#4CAF50" />
+            <Cell key={index} fill="#3a843d" />
           ))}
 
           <LabelList dataKey="count" position="top" />
