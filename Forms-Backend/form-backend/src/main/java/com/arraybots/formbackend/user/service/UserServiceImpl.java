@@ -122,7 +122,8 @@ public class UserServiceImpl implements UserService {
         LoginUserResponse loginUser = new LoginUserResponse(
                 user.get().getId(),
                 user.get().getName(),
-                user.get().getEmail()
+                user.get().getEmail(),
+                user.get().getProfileImage()
         );
 
         return new LoginResponse(
