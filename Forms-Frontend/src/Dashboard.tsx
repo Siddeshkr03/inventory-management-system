@@ -1,6 +1,7 @@
 import "./Dashboard.css";
 import Navbar from "./Navbar";
 import InventoryStatusChart from "./InventoryStatusChart";
+import ItemsByCategoryChart from "./ItemsByCategoryChart";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "./api";
@@ -15,6 +16,11 @@ function Dashboard() {
     outOfStock: number;
   }
 
+  interface CategorySummary {
+    category: string;
+    count: number;
+  }
+
   const [dashboardData, setDashboardData] = useState<DashboardData>({
     totalItems: 0,
     totalSuppliers: 0,
@@ -24,10 +30,13 @@ function Dashboard() {
     outOfStock: 0,
   });
 
+  const [categorySummary, setCategorySummary] = useState<CategorySummary[]>([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     getDashboardData();
+    getCategorySummary();
   }, []);
 
   const getDashboardData = async () => {
@@ -35,6 +44,16 @@ function Dashboard() {
       const response = await api.get("/dashboard");
 
       setDashboardData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getCategorySummary = async () => {
+    try {
+      const response = await api.get("/dashboard/category-summary");
+
+      setCategorySummary(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -97,6 +116,12 @@ function Dashboard() {
             outOfStock={dashboardData.outOfStock}
             preOrder={dashboardData.preOrder}
           />
+        </div>
+
+        <div className="dashboard-chart-card">
+          <h3>Items by Category</h3>
+
+          <ItemsByCategoryChart data={categorySummary} />
         </div>
       </div>
     </>
