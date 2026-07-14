@@ -90,8 +90,6 @@ function Profile() {
 
       toast.success("OTP sent successfully.");
 
-      toast.success("OTP sent successfully.");
-
       setOtpSent(true);
     } catch (error: any) {
       console.error(error);

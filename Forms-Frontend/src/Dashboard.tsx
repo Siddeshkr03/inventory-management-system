@@ -1,6 +1,7 @@
 import "./Dashboard.css";
 import Navbar from "./Navbar";
-import { useNavigate  } from "react-router-dom";
+import InventoryStatusChart from "./InventoryStatusChart";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "./api";
 
@@ -53,24 +54,49 @@ function Dashboard() {
           <h1>{dashboardData.totalSuppliers}</h1>
         </div>
 
-        <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=IN_STOCK")}>
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/items?productAvailability=IN_STOCK")}
+        >
           <h3>✅ In Stock</h3>
           <h1>{dashboardData.inStock}</h1>
         </div>
 
-        <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=LOW_STOCK")}>
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/items?productAvailability=LOW_STOCK")}
+        >
           <h3>⚠️ Low Stock</h3>
           <h1>{dashboardData.lowStock}</h1>
         </div>
 
-        <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=PRE_ORDER")}>
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/items?productAvailability=PRE_ORDER")}
+        >
           <h3>📋 Pre-order</h3>
           <h1>{dashboardData.preOrder}</h1>
         </div>
 
-        <div className="dashboard-card" onClick={() => navigate("/items?productAvailability=OUT_OF_STOCK")}>
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/items?productAvailability=OUT_OF_STOCK")}
+        >
           <h3>❌ Out of Stock</h3>
           <h1>{dashboardData.outOfStock}</h1>
+        </div>
+      </div>
+
+      <div className="dashboard-chart-section">
+        <div className="dashboard-chart-card">
+          <h3>Inventory Status</h3>
+
+          <InventoryStatusChart
+            inStock={dashboardData.inStock}
+            lowStock={dashboardData.lowStock}
+            outOfStock={dashboardData.outOfStock}
+            preOrder={dashboardData.preOrder}
+          />
         </div>
       </div>
     </>
