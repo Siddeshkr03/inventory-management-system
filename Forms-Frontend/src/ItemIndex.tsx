@@ -71,7 +71,7 @@ function ItemIndex() {
     try {
       await api.delete(`/items/${id}`);
       toast.success("Item Deleted");
-      
+
       fetchItems();
     } catch (error) {
       console.error(error);
@@ -140,7 +140,7 @@ useEffect(() => {
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className="item-tbody">
             {items
               .filter((item) =>
                 item.itemName.toLowerCase().includes(search.toLowerCase()),

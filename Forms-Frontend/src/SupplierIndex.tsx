@@ -114,7 +114,7 @@ function SupplierIndex() {
                           navigate(`/suppliers/edit/${supplier.id}`)
                         }
                       >
-                        <Pencil />
+                        <Pencil size={18}/>
                       </span>
 
                       <span
@@ -122,7 +122,7 @@ function SupplierIndex() {
                         role="button"
                         onClick={() => deleteSupplier(supplier.id)}
                       >
-                        <Trash2 />
+                        <Trash2 size={18} />
                       </span>
                     </div>
                   </td>
