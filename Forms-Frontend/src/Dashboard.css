@@ -9,9 +9,9 @@ background: linear-gradient(
 .dashboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 16px;
   padding: 35px;
-  margin-top: 20px;
+  margin-top: 2px;
 }
 
 .dashboard-card {
@@ -26,6 +26,7 @@ background: linear-gradient(
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   transition: all 0.25s ease;
   border: 1px solid #f0ead2;
+  height: 100px;
 }
 
 .dashboard-card:hover {
@@ -44,7 +45,38 @@ background: linear-gradient(
   margin-top: 18px;
   font-size: 46px;
   font-weight: 700;
-  color: #44c923;
+  color: #216a0e;
+}
+
+/* ===========================
+   Dashboard Charts
+=========================== */
+
+.dashboard-chart-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 30px;
+  margin-top: 10px;
+}
+
+.dashboard-chart-card {
+  background: linear-gradient(to top, #fffdf6, #fff4dc);
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid #f0e2b6;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+}
+
+.dashboard-chart-card h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #286d2b;
+  font-weight: 600;
 }
 
 @media (max-width: 992px) {
@@ -61,27 +93,8 @@ background: linear-gradient(
   }
 }
 
-/* ===========================
-   Dashboard Charts
-=========================== */
-
-.dashboard-chart-section {
-  display: grid;
-  grid-template-columns: 1fr;
-  margin: 30px;
-}
-
-.dashboard-chart-card {
-  background: linear-gradient(to right, #fffdf6, #fff4dc);
-  border-radius: 18px;
-  padding: 20px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  border: 1px solid #f0e2b6;
-}
-
-.dashboard-chart-card h3 {
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: #2e7d32;
-  font-weight: 600;
+@media (max-width: 992px) {
+  .dashboard-chart-section {
+    grid-template-columns: 1fr;
+  }
 }

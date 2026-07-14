@@ -94,8 +94,8 @@ body {
 /* ---------- Action Buttons ---------- */
 
 .action-column {
-  width: 160px;
-  min-width: 160px;
+  width: 80px;
+  min-width: 80px;
 }
 
 .action-buttons {
@@ -108,7 +108,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
+  width:34px;
   height: 32px;
   margin: 0 3px;
   padding: 2px;

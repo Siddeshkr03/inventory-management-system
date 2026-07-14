@@ -92,8 +92,8 @@ body {
 /* ---------- Action Buttons ---------- */
 
 .action-column {
-  width: 180px;
-  min-width: 180px;
+  width: 80px;
+  min-width: 80px;
 }
 
 .action-buttons {

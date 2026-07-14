@@ -1,7 +1,7 @@
 import "./Dashboard.css";
 import Navbar from "./Navbar";
-import InventoryStatusChart from "./InventoryStatusChart";
-import ItemsByCategoryChart from "./ItemsByCategoryChart";
+import InventoryStatusChart from "./dashboard/InventoryStatusChart";
+import ItemsByCategoryChart from "./dashboard/ItemsByCategoryChart";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "./api";
