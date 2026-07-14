@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { User, Mail, LogOut } from "lucide-react";
 import api from "./api";
 import { useAuth } from "./AuthContext";
@@ -12,6 +12,7 @@ function Navbar() {
   const { checkAuth } = useAuth();
 
   const [showDropdown, setShowDropdown] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
 
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("user");
@@ -29,6 +30,23 @@ function Navbar() {
 
     return () => {
       window.removeEventListener("userUpdated", handleStorageUpdate);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -60,7 +78,7 @@ function Navbar() {
 
         <NavLink to="/categories">Categories</NavLink>
 
-        <div className="profile-container">
+        <div className="profile-container" ref={profileRef}>
           <div
             className="profile-button"
             onClick={() => setShowDropdown(!showDropdown)}

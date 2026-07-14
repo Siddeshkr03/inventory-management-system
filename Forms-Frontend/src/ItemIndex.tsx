@@ -87,7 +87,7 @@ useEffect(() => {
       <Navbar />
 
       <div className="top-bar">
-        <div className="search-container">
+        <div className="item-search-container">
           <input
             type="text"
             placeholder="Search by Item Name..."

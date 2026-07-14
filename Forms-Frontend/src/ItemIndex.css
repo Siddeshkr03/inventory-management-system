@@ -76,19 +76,20 @@ body {
   font-size: 14px;
 }
 
-.search-container label {
+.item-search-container label {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
   color: #1f2937;
 }
 
-.search-container input {
-  width: 300px;
+.item-search-container input {
+  width: 200px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  margin-right: 5px;
 }
 
 .table-wrapper {
@@ -188,7 +189,6 @@ body {
 
 .filter-container label {
   font-weight: 600;
-  margin-left: 5px;
   margin-top: 15px;
 }
 
