@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { User, Mail, LogOut } from "lucide-react"
+import { useState, useEffect } from "react";
+import { User, Mail, LogOut } from "lucide-react";
 import api from "./api";
 import { useAuth } from "./AuthContext";
 import { removeToken } from "./token";
@@ -13,9 +13,24 @@ function Navbar() {
 
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const storedUser = localStorage.getItem("user");
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
-  const user = storedUser ? JSON.parse(storedUser) : null;
+  useEffect(() => {
+    const handleStorageUpdate = () => {
+      const storedUser = localStorage.getItem("user");
+
+      setUser(storedUser ? JSON.parse(storedUser) : null);
+    };
+
+    window.addEventListener("userUpdated", handleStorageUpdate);
+
+    return () => {
+      window.removeEventListener("userUpdated", handleStorageUpdate);
+    };
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -59,14 +74,24 @@ function Navbar() {
 
           {showDropdown && (
             <div className="profile-dropdown">
-              <div className="profile-name" ><NavLink to="/profile"><User /> {user?.name}</NavLink></div>
+              <div className="profile-name">
+                <NavLink to="/profile">
+                  <User /> {user?.name}
+                </NavLink>
+              </div>
 
-              <div className="profile-email"><Mail />{user?.email}</div>
+              <div className="profile-email">
+                <Mail />
+                {user?.email}
+              </div>
 
               <hr />
 
               <button className="logout-btn" onClick={handleLogout}>
-                Logout <span><LogOut className="logout-logo"/></span>
+                Logout{" "}
+                <span>
+                  <LogOut className="logout-logo" />
+                </span>
               </button>
             </div>
           )}

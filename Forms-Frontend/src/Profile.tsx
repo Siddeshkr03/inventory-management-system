@@ -68,6 +68,18 @@ function Profile() {
       setEditProfile(response.data);
       setIsEditing(false);
 
+      // Update Navbar data
+      const storedUser = localStorage.getItem("user");
+
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
+
+        user.name = response.data.fullName;
+        user.email = response.data.email;
+
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+
       toast.success("Profile updated successfully.");
     } catch (error: any) {
       console.error("Error updating profile:", error);
@@ -197,6 +209,16 @@ function Profile() {
       setProfile(response.data);
       setEditProfile(response.data);
 
+      const storedUser = localStorage.getItem("user");
+
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
+
+        user.profileImage = response.data.profileImage;
+
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+
       toast.success("Profile photo updated successfully.");
     } catch (error: any) {
       console.error(error);
@@ -226,6 +248,16 @@ function Profile() {
 
       setProfile(response.data);
       setEditProfile(response.data);
+
+      const storedUser = localStorage.getItem("user");
+
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
+
+        user.profileImage = response.data.profileImage;
+
+        localStorage.setItem("user", JSON.stringify(user));
+      }
 
       toast.success("Profile photo removed successfully.");
     } catch (error: any) {
