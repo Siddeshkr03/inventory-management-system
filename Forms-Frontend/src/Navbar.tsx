@@ -65,7 +65,15 @@ function Navbar() {
             className="profile-button"
             onClick={() => setShowDropdown(!showDropdown)}
           >
-            <span className="profile-icon">👤</span>
+            {user?.profileImage ? (
+              <img
+                src={`http://localhost:8080/api/files/${user.profileImage}`}
+                alt="Profile"
+                className="navbar-profile-image"
+              />
+            ) : (
+              <span className="profile-icon">👤</span>
+            )}
 
             <span>{user?.name}</span>
 

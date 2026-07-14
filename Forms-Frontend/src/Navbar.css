@@ -142,3 +142,12 @@
 .logout-btn:hover {
   background: #b91c1c;
 }
+
+.navbar-profile-image {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #2e7d32;
+  flex-shrink: 0;
+}
