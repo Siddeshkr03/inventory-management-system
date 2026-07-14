@@ -164,10 +164,10 @@ function SupplierForm() {
         </div>
         <div className="supplier-details-card">
           <div className="item-page-title-wrapper">
-            <h1 className="item-page-title">{id ? "Edit Item" : "Add Item"}</h1>
+            <h1 className="item-page-title">{id ? "Edit Supplier" : "Add Supplier"}</h1>
 
             <p className="item-page-subtitle">
-              Create and manage inventory items.
+              Create or Edit Supplier
             </p>
           </div>
 

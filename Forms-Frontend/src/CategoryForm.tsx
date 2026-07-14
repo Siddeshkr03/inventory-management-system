@@ -139,7 +139,7 @@ function CategoryForm() {
           </h1>
 
           <p className="category-page-subtitle">
-            Create and manage product categories.
+            Create or Edit Category
           </p>
         </div>
 
