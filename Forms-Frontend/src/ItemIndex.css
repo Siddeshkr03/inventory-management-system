@@ -7,7 +7,7 @@ body {
   text-align: center;
   margin: 10px 0;
   color: #245501;
-  font-size: 48px;
+  font-size: 30px;
   font-weight: 700;
 }
 
@@ -49,7 +49,7 @@ body {
 .h4-title {
   margin: 0;
   color: #245501;
-  font-size: 48px;
+  font-size: 30px;
   font-weight: 700;
   flex: 1;
   text-align: center;
@@ -73,7 +73,7 @@ body {
   padding: 10px 22px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .search-container label {
@@ -84,7 +84,7 @@ body {
 }
 
 .search-container input {
-  width: 320px;
+  width: 300px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;

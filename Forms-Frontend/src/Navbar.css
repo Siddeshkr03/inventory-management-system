@@ -33,7 +33,7 @@
 .nav-links a {
   text-decoration: none;
   color: #4f772d;
-  font-size: 23px;
+  font-size: 18px;
   font-weight: 600;
   padding: 8px 0;
   transition: 0.25s;
@@ -44,7 +44,7 @@
 }
 
 .nav-links a.active {
-  color: #4f772d;
+  color: #0d6905;
   border-bottom: 3px solid #4f772d;
 }
 

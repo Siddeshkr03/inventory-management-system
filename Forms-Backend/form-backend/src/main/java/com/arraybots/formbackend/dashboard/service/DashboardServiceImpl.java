@@ -4,6 +4,8 @@ import com.arraybots.formbackend.items.repository.ItemRepository;
 import com.arraybots.formbackend.supplier.repository.SupplierRepository;
 import com.arraybots.formbackend.dashboard.dto.DashboardDTO;
 import org.springframework.stereotype.Service;
+import com.arraybots.formbackend.dashboard.dto.CategorySummaryDTO;
+import java.util.List;
 
 @Service
 public class DashboardServiceImpl implements DashboardService {
@@ -45,5 +47,10 @@ public class DashboardServiceImpl implements DashboardService {
         );
         
         return dashboardDTO;
+    }
+
+    @Override
+    public List<CategorySummaryDTO> getCategorySummary() {
+        return itemRepository.getCategorySummary();
     }
 }

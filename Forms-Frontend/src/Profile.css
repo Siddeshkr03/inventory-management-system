@@ -17,7 +17,7 @@
 
 .profile-title {
     text-align: center;
-    font-size: 28px;
+    font-size: 18px;
     font-weight: 700;
     color: #2F3E1F;
     margin-bottom: 35px;
@@ -55,7 +55,7 @@
     background: #4F772D;
     color: white;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     transition: .25s;
 }
@@ -68,6 +68,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    font-size: 12px;
 }
 
 .profile-form-group {
@@ -167,7 +168,7 @@
     background: #4F772D;
     color: white;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     transition: 0.25s;
 }
@@ -179,7 +180,7 @@
 .profile-text {
     margin: 0;
     padding: 12px 0;
-    font-size: 25px;
+    font-size: 16px;
     color: #4c5e7a;
     font-weight: 500;
 }

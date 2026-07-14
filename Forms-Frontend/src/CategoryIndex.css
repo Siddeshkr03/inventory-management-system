@@ -15,7 +15,7 @@ body {
 }
 
 .search-container input {
-  width: 100%;
+  width: 80%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -27,7 +27,7 @@ body {
   flex: 1;
   margin: 0;
   text-align: center;
-  font-size: 48px;
+  font-size: 30px;
   font-weight: 700;
   color: #245501;
 }
@@ -45,7 +45,7 @@ body {
   border: none;
   padding: 10px 22px;
   border-radius: 6px;
-  font-size: 18px;
+  font-size: 14px;
   cursor: pointer;
   transition: 0.3s;
 }
