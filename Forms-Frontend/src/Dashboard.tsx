@@ -182,10 +182,15 @@ function Dashboard() {
             {recentItems.length > 0 ? (
               recentItems.map((item) => (
                 <tr key={item.id}>
-                  <td>{item.itemName}</td>
+                  <td
+                    className="recent-item-name"
+                    onClick={() => navigate("/items")}
+                  >
+                    {item.itemName}
+                  </td>
                   <td>{item.categoryName}</td>
                   <td>{item.supplierName}</td>
-                  <td>
+                  <td title={new Date(item.createdAt).toLocaleString()}>
                     <span className="recent-date-badge">
                       {getRelativeDate(item.createdAt)}
                     </span>

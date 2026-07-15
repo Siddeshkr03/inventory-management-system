@@ -159,7 +159,7 @@ useEffect(() => {
                   <td>{item.productAvailability}</td>
                   <td>{item.supplier?.supplierName}</td>
 
-                  <td className="action-column">
+                  <td className="item-action-column">
                     <div className="action-buttons">
                       <span
                         className="view-btn"

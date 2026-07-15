@@ -108,6 +108,8 @@ body {
   border: 1px solid #ddd;
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .action-buttons {
@@ -117,12 +119,12 @@ body {
   gap: 4px;
 }
 
-.action-column {
+.item-action-column {
   width: 1%;
   white-space: nowrap;
 }
 
-.view-btn{
+.view-btn {
   display: inline-block;
   width: 40px;
   height: 20px;
@@ -136,7 +138,7 @@ body {
   color: #24676c;
 }
 
-.i-edit{
+.i-edit {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -148,7 +150,7 @@ body {
   cursor: pointer;
   font-size: 18px;
   user-select: none;
-  color: #4F772D;
+  color: #4f772d;
   background: #d8d4d4;
 }
 
