@@ -1,5 +1,6 @@
 package com.arraybots.formbackend.items.service;
 
+import com.arraybots.formbackend.activity.service.ActivityService;
 import com.arraybots.formbackend.dashboard.dto.RecentItemResponse;
 import com.arraybots.formbackend.items.model.Item;
 import com.arraybots.formbackend.items.repository.ItemRepository;
@@ -17,11 +18,14 @@ import java.util.List;
 public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
+    private final ActivityService activityService;
 
-    public ItemServiceImpl(ItemRepository itemRepository) {
-
+    public ItemServiceImpl(
+            ItemRepository itemRepository,
+            ActivityService activityService
+    ) {
         this.itemRepository = itemRepository;
-
+        this.activityService = activityService;
     }
 
     @Override
@@ -31,10 +35,18 @@ public class ItemServiceImpl implements ItemService {
                 (User) request.getAttribute("loggedInUser");
 
         item.setCreatedBy(loggedInUser.getName());
-
         item.setCreatedAt(LocalDateTime.now());
 
-        return itemRepository.save(item);
+        Item savedItem = itemRepository.save(item);
+
+        activityService.logActivity(
+                "ITEM",
+                "CREATE",
+                "Added item '" + savedItem.getItemName() + "'",
+                loggedInUser.getName()
+        );
+
+        return savedItem;
     }
 
     @Override
@@ -93,7 +105,16 @@ public class ItemServiceImpl implements ItemService {
         existingItem.setUpdatedBy(loggedInUser.getName());
         existingItem.setUpdatedAt(LocalDateTime.now());
 
-        return itemRepository.save(existingItem);
+        Item updatedItem = itemRepository.save(existingItem);
+
+        activityService.logActivity(
+                "ITEM",
+                "UPDATE",
+                "Updated item '" + updatedItem.getItemName() + "'",
+                loggedInUser.getName()
+        );
+
+        return updatedItem;
     }
 
 }

@@ -17,5 +17,5 @@ public interface ItemService {
     Item updateItem(Long id, Item item, HttpServletRequest request);
 
     void deleteItem(Long id);
-    
+
 }

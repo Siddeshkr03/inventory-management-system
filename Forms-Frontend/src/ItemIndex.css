@@ -12,8 +12,7 @@ body {
 }
 
 .item-table {
-  width: max-content;
-  min-width: 100%;
+  width: 100%;
   border-collapse: collapse;
   table-layout: auto;
 }
@@ -95,11 +94,6 @@ body {
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
-}
-
-.item-table {
-  width: 100%;
-  border-collapse: collapse;
 }
 
 .item-table th,
