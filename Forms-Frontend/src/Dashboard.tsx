@@ -21,6 +21,14 @@ function Dashboard() {
     count: number;
   }
 
+  interface RecentItem {
+    id: number;
+    itemName: string;
+    categoryName: string;
+    supplierName: string;
+    createdAt: string;
+  }
+
   const [dashboardData, setDashboardData] = useState<DashboardData>({
     totalItems: 0,
     totalSuppliers: 0,
@@ -30,6 +38,8 @@ function Dashboard() {
     outOfStock: 0,
   });
 
+  const [recentItems, setRecentItems] = useState<RecentItem[]>([]);
+
   const [categorySummary, setCategorySummary] = useState<CategorySummary[]>([]);
 
   const navigate = useNavigate();
@@ -37,6 +47,7 @@ function Dashboard() {
   useEffect(() => {
     getDashboardData();
     getCategorySummary();
+    getRecentlyAddedItems();
   }, []);
 
   const getDashboardData = async () => {
@@ -54,6 +65,16 @@ function Dashboard() {
       const response = await api.get("/dashboard/category-summary");
 
       setCategorySummary(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getRecentlyAddedItems = async () => {
+    try {
+      const response = await api.get("/dashboard/recent-items");
+
+      setRecentItems(response.data);
     } catch (error) {
       console.error(error);
     }
