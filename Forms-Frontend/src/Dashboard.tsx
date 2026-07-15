@@ -80,6 +80,24 @@ function Dashboard() {
     }
   };
 
+  const getRelativeDate = (dateString: string) => {
+    const today = new Date();
+    const addedDate = new Date(dateString);
+
+    const diffTime = today.getTime() - addedDate.getTime();
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) {
+      return "Today";
+    }
+
+    if (diffDays === 1) {
+      return "Yesterday";
+    }
+
+    return `${diffDays} days ago`;
+  };
+
   return (
     <>
       <Navbar />
@@ -145,6 +163,42 @@ function Dashboard() {
 
           <ItemsByCategoryChart data={categorySummary} />
         </div>
+      </div>
+
+      <div className="recent-items-card">
+        <h3>Recently Added Items</h3>
+
+        <table className="recent-items-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Category</th>
+              <th>Supplier</th>
+              <th>Added</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {recentItems.length > 0 ? (
+              recentItems.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.itemName}</td>
+                  <td>{item.categoryName}</td>
+                  <td>{item.supplierName}</td>
+                  <td>
+                    <span className="recent-date-badge">
+                      {getRelativeDate(item.createdAt)}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={4}>No recently added items found.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </>
   );
