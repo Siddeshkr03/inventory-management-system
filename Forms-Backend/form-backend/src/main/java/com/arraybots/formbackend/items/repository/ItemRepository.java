@@ -30,4 +30,6 @@ public interface ItemRepository
 
     List<CategorySummaryDTO> getCategorySummary();
 
+    List<Item> findTop5ByOrderByCreatedAtDesc();
+
 }

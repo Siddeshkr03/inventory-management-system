@@ -1,5 +1,6 @@
 package com.arraybots.formbackend.items.service;
 
+import com.arraybots.formbackend.dashboard.dto.RecentItemResponse;
 import com.arraybots.formbackend.items.model.Item;
 import com.arraybots.formbackend.items.repository.ItemRepository;
 
@@ -9,9 +10,8 @@ import com.arraybots.formbackend.user.model.User;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class ItemServiceImpl implements ItemService {

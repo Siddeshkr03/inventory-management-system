@@ -3,9 +3,10 @@ package com.arraybots.formbackend.dashboard.controller;
 import com.arraybots.formbackend.dashboard.dto.CategorySummaryDTO;
 import com.arraybots.formbackend.dashboard.dto.DashboardDTO;
 import com.arraybots.formbackend.dashboard.service.DashboardService;
+import com.arraybots.formbackend.dashboard.dto.RecentItemResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/dashboard")
@@ -26,5 +27,13 @@ public class DashboardController {
     @GetMapping("/category-summary")
     public List<CategorySummaryDTO> getCategorySummary() {
         return dashboardService.getCategorySummary();
+    }
+
+    @GetMapping("/recent-items")
+    public ResponseEntity<List<RecentItemResponse>> getRecentlyAddedItems() {
+
+        List<RecentItemResponse> items = dashboardService.getRecentlyAddedItems();
+
+        return ResponseEntity.ok(items);
     }
 }

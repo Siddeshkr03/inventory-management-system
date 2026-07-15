@@ -278,7 +278,7 @@ function ItemForm() {
         
       }
 
-      navigate("/");
+      navigate("/items");
     } catch (error) {
       console.error(error);
     }
