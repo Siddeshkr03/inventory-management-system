@@ -67,7 +67,19 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void deleteItem(Long id) {
 
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Item not found"));
+
+        String itemName = item.getItemName();
+
         itemRepository.deleteById(id);
+
+        activityService.logActivity(
+                "ITEM",
+                "DELETE",
+                "Deleted item '" + itemName + "'",
+                item.getCreatedBy()
+        );
 
     }
 
