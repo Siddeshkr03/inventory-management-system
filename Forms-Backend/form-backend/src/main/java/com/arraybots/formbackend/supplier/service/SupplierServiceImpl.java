@@ -1,5 +1,6 @@
 package com.arraybots.formbackend.supplier.service;
 
+import com.arraybots.formbackend.activity.service.ActivityService;
 import com.arraybots.formbackend.supplier.model.Supplier;
 import com.arraybots.formbackend.supplier.repository.SupplierRepository;
 import org.springframework.data.domain.Sort;
@@ -16,8 +17,14 @@ public class SupplierServiceImpl implements SupplierService {
 
     private final SupplierRepository supplierRepository;
 
-    public SupplierServiceImpl(SupplierRepository supplierRepository) {
+    private final ActivityService activityService;
+
+    public SupplierServiceImpl(
+            SupplierRepository supplierRepository,
+            ActivityService activityService
+    ) {
         this.supplierRepository = supplierRepository;
+        this.activityService = activityService;
     }
 
     @Override
@@ -30,7 +37,16 @@ public class SupplierServiceImpl implements SupplierService {
         supplier.setCreatedBy(loggedInUser.getName());
         supplier.setCreatedAt(LocalDateTime.now());
 
-        return supplierRepository.save(supplier);
+        Supplier savedSupplier = supplierRepository.save(supplier);
+
+        activityService.logActivity(
+                "SUPPLIER",
+                "CREATE",
+                "Added supplier '" + savedSupplier.getSupplierName() + "'",
+                loggedInUser.getName()
+        );
+
+        return savedSupplier;
     }
 
     @Override
