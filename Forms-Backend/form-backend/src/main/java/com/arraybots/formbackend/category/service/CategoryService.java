@@ -22,5 +22,5 @@ public interface CategoryService {
             HttpServletRequest request
     );
 
-    void deleteCategory(Long id);
+    void deleteCategory(Long id, HttpServletRequest request);;
 }

@@ -138,9 +138,24 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(Long id) {
+    public void deleteCategory(Long id, HttpServletRequest request) {
+
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        User loggedInUser =
+                (User) request.getAttribute("loggedInUser");
+
+        String categoryName = category.getCategoryName();
 
         categoryRepository.deleteById(id);
+
+        activityService.logActivity(
+                "CATEGORY",
+                "DELETE",
+                "Deleted category '" + categoryName + "'",
+                loggedInUser.getName()
+        );
 
     }
 }

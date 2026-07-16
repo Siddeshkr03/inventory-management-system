@@ -52,9 +52,9 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable Long id) {
+    public void deleteCategory(@PathVariable Long id, HttpServletRequest request) {
 
-        categoryService.deleteCategory(id);
+        categoryService.deleteCategory(id, request);
 
     }
 }
