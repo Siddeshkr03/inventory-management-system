@@ -56,9 +56,11 @@ body {
 
 /* ---------- Table ---------- */
 
-.table-wrapper {
+.cat-table-wrapper {
   width: 100%;
   overflow-x: auto;
+  max-height: 600px;
+  overflow-y: auto;
 }
 
 .category-table {
@@ -68,7 +70,10 @@ body {
   background: white;
 }
 
-.category-table th {
+.category-table thead th {
+  position: sticky;
+  top:0;
+  z-index: 10;
   background: #ede1b4;
   color: #111;
   padding: 14px;
@@ -140,6 +145,14 @@ body {
 
 .cat-delete:hover {
   color: #ef1111;
+}
+
+tbody tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(odd) td {
+  background-color: #ffffff;
 }
 
 /* ---------- Responsive ---------- */

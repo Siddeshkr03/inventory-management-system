@@ -2,6 +2,10 @@ body {
   background: linear-gradient(135deg, #eef2eb, #f8faf6);
 }
 
+/* ===========================
+   Dashboard Summary Cards
+=========================== */
+
 .dashboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -15,10 +19,10 @@ body {
   border-radius: 20px;
   padding: 18px;
   cursor: pointer;
+  height: 100px;
+  border: 1px solid #f0ead2;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   transition: all 0.25s ease;
-  border: 1px solid #f0ead2;
-  height: 100px;
 }
 
 .dashboard-card:hover {
@@ -56,45 +60,60 @@ body {
   background: linear-gradient(to top, #fffdf6, #fff4dc);
   border-radius: 18px;
   padding: 20px;
+  min-height: 380px;
   border: 1px solid #f0e2b6;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 
   display: flex;
   flex-direction: column;
-  min-height: 380px;
 }
 
 .dashboard-chart-card h3 {
   margin-bottom: 20px;
   font-size: 20px;
+  font-weight: 600;
   color: #286d2b;
-  font-weight: 600;
 }
 
-.recent-date-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  background-color: #eaf7ea;
-  color: #2e7d32;
-  font-size: 13px;
-  font-weight: 600;
+/* ===========================
+   Bottom Dashboard Cards
+=========================== */
+
+.dashboard-bottom-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 24px;
+  align-items: stretch;
 }
 
-.recent-items-card {
+.recent-items-card,
+.recent-activities-card {
   background: linear-gradient(to bottom, #faedcd, #fff8e8);
-  margin: 0px;
   padding: 24px;
+  margin: 0;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
 }
 
-.recent-items-card h3 {
+.recent-activities-card {
+  overflow-x: auto;
+}
+
+.recent-items-card h3,
+.recent-activities-card h3 {
   margin-bottom: 20px;
-  color: #333;
   font-size: 20px;
   font-weight: 600;
+  color: #333;
 }
+
+/* ===========================
+   Recently Added Items
+=========================== */
 
 .recent-items-table {
   width: 100%;
@@ -102,8 +121,8 @@ body {
 }
 
 .recent-items-table th {
-  text-align: left;
   padding: 14px;
+  text-align: left;
   background: #dfdab9;
   color: #555;
   font-size: 16px;
@@ -119,9 +138,12 @@ body {
   text-overflow: ellipsis;
 }
 
+.recent-items-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
 .recent-items-table tbody tr:hover {
   background-color: #dedacb;
-  transition: background-color 0.2s ease;
 }
 
 .recent-items-table td[colspan] {
@@ -134,22 +156,19 @@ body {
   cursor: pointer;
 }
 
-/* Recent Activities */
-
-.recent-activities-card {
-  background: linear-gradient(to bottom, #faedcd, #fff8e8);
-  margin: 0px;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.recent-activities-card h3 {
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 20px;
+.recent-date-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background-color: #eaf7ea;
+  color: #2e7d32;
+  font-size: 13px;
   font-weight: 600;
 }
+
+/* ===========================
+   Recent Activities
+=========================== */
 
 .recent-activities-table {
   width: 100%;
@@ -157,10 +176,10 @@ body {
 }
 
 .recent-activities-table th {
-  background: #dfdab9;
-  color: #555;
   padding: 10px;
   text-align: left;
+  background: #dfdab9;
+  color: #555;
   font-size: 16px;
   font-weight: 700;
 }
@@ -171,19 +190,30 @@ body {
   font-size: 14px;
 }
 
+.recent-activities-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
 .recent-activities-table tbody tr:hover {
   background-color: #dedacb;
 }
 
 .recent-activities-table td[colspan] {
   text-align: center;
-  color: #888;
   padding: 24px;
+  color: #888;
 }
 
-.recent-activities-card {
-  overflow-x: auto;
+.description-column {
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+/* ===========================
+   Badges
+=========================== */
 
 .module-badge {
   display: inline-block;
@@ -218,42 +248,27 @@ body {
   color: #c62828;
 }
 
-.recent-items-card,
-.recent-activities-card {
-  display: flex;
-  flex-direction: column;
-}
-
-.dashboard-bottom-section {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin: 24px;
-  align-items: stretch;
-}
+/* ===========================
+   Responsive
+=========================== */
 
 @media (max-width: 992px) {
   .dashboard {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-chart-section {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-bottom-section {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
   .dashboard {
     grid-template-columns: 1fr;
-
     padding: 20px;
-  }
-}
-
-@media (max-width: 992px) {
-  .dashboard-chart-section {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 992px) {
-  .dashboard-bottom-section {
-    grid-template-columns: 1fr;
   }
 }

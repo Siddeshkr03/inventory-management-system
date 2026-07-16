@@ -58,9 +58,11 @@ body {
   background: var(--primary-color);
 }
 
-.table-wrapper {
+.sup-table-wrapper {
   width: 100%;
   overflow-x: auto;
+  max-height: 600px;
+  overflow-y: auto;
 }
 
 .supplier-table {
@@ -70,7 +72,10 @@ body {
   background: white;
 }
 
-.supplier-table th {
+.supplier-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   background: #ede1b4;
   color: #111;
   padding: 14px;
@@ -82,10 +87,6 @@ body {
   border: 1px solid #ddd;
   text-align: center;
 }
-
-/* .supplier-table tbody tr:nth-child(even) {
-  background: #f9fafb;
-} */
 
 .supplier-table tbody td:hover {
   background: #eef7ff;

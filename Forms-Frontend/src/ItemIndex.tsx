@@ -123,7 +123,7 @@ function ItemIndex() {
         </Link>
       </div>
 
-      <div className="table-wrapper">
+      <div className="item-table-wrapper">
         <table className="item-table">
           <thead>
             <tr>
@@ -157,7 +157,7 @@ function ItemIndex() {
                   <td>{item.category?.categoryName}</td>
                   <td>{item.brand}</td>
                   <td>{item.purchaseDate}</td>
-                  <td>{item.productCode}</td>
+                  <td className="product-code">{item.productCode}</td>
                   <td>
                     <span
                       className={`availability-badge ${item.productAvailability.toLowerCase()}`}

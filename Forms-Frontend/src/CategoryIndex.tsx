@@ -74,7 +74,7 @@ function CategoryIndex() {
         </Link>
       </div>
 
-      <div className="table-wrapper">
+      <div className="cat-table-wrapper">
         <table className="category-table">
           <thead>
             <tr>

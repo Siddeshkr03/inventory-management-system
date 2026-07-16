@@ -188,91 +188,95 @@ function Dashboard() {
       </div>
 
       <div className="dashboard-bottom-section">
+        <div className="recent-items-card">
+          <h3>Recently Added Items</h3>
 
-      <div className="recent-items-card">
-        <h3>Recently Added Items</h3>
-
-        <table className="recent-items-table">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Category</th>
-              <th>Supplier</th>
-              <th>Added</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {recentItems.length > 0 ? (
-              recentItems.map((item) => (
-                <tr key={item.id}>
-                  <td
-                    className="recent-item-name"
-                    onClick={() => navigate("/items")}
-                  >
-                    {item.itemName}
-                  </td>
-                  <td>{item.categoryName}</td>
-                  <td>{item.supplierName}</td>
-                  <td title={new Date(item.createdAt).toLocaleString()}>
-                    <span className="recent-date-badge">
-                      {getRelativeDate(item.createdAt)}
-                    </span>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={4}>No recently added items found.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="recent-activities-card">
-        <h3>Recent Activities</h3>
-
-        <table className="recent-activities-table">
-          <table className="recent-activities-table">
+          <table className="recent-items-table">
             <thead>
               <tr>
-                <th>Description</th>
-                <th>Module</th>
-                <th>Action</th>
-                <th>Performed By</th>
-                <th>Time</th>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Supplier</th>
+                <th>Added</th>
               </tr>
             </thead>
 
             <tbody>
-              {recentActivities.length > 0 ? (
-                recentActivities.map((activity) => (
-                  <tr key={activity.id}>
-                    <td>{activity.description}</td>
-                    <td>
-                      <span className="module-badge">{activity.module}</span>
+              {recentItems.length > 0 ? (
+                recentItems.map((item) => (
+                  <tr key={item.id}>
+                    <td
+                      className="recent-item-name"
+                      onClick={() => navigate("/items")}
+                    >
+                      {item.itemName}
                     </td>
-                    <td>
-                      <span
-                        className={`action-badge ${activity.action.toLowerCase()}`}
-                      >
-                        {activity.action}
+                    <td>{item.categoryName}</td>
+                    <td>{item.supplierName}</td>
+                    <td title={new Date(item.createdAt).toLocaleString()}>
+                      <span className="recent-date-badge">
+                        {getRelativeDate(item.createdAt)}
                       </span>
                     </td>
-                    <td>{activity.performedBy}</td>
-                    <td>{getRelativeDate(activity.performedAt)}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5}>No recent activities found.</td>
+                  <td colSpan={4}>No recently added items found.</td>
                 </tr>
               )}
             </tbody>
           </table>
-        </table>
-      </div>
+        </div>
+
+        <div className="recent-activities-card">
+          <h3>Recent Activities</h3>
+
+          <table className="recent-activities-table">
+            <table className="recent-activities-table">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Module</th>
+                  <th>Action</th>
+                  <th>Performed By</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {recentActivities.length > 0 ? (
+                  recentActivities.map((activity) => (
+                    <tr key={activity.id}>
+                      <td
+                        className="description-column"
+                        title={activity.description}
+                      >
+                        {activity.description}
+                      </td>
+                      <td>
+                        <span className="module-badge">{activity.module}</span>
+                      </td>
+                      <td>
+                        <span
+                          className={`action-badge ${activity.action.toLowerCase()}`}
+                        >
+                          {activity.action}
+                        </span>
+                      </td>
+                      <td>{activity.performedBy}</td>
+                      <td>{getRelativeDate(activity.performedAt)}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={5}>No recent activities found.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </table>
+        </div>
       </div>
     </>
   );

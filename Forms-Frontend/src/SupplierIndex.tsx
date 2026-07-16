@@ -73,7 +73,7 @@ function SupplierIndex() {
         </Link>
       </div>
 
-      <div className="table-wrapper">
+      <div className="sup-table-wrapper">
         <table className="supplier-table">
           <thead>
             <tr>
