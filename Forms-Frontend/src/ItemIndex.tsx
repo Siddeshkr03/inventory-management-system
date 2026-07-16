@@ -39,11 +39,11 @@ function ItemIndex() {
   const [searchParams] = useSearchParams();
 
   const initialProductAvailability =
-  searchParams.get("productAvailability") || "";
+    searchParams.get("productAvailability") || "";
 
-    const [productAvailability, setProductAvailability] = useState(
-  initialProductAvailability
-);
+  const [productAvailability, setProductAvailability] = useState(
+    initialProductAvailability,
+  );
 
   const navigate = useNavigate();
 
@@ -79,9 +79,9 @@ function ItemIndex() {
     }
   };
 
-useEffect(() => {
-  fetchItems();
-}, [productAvailability]);
+  useEffect(() => {
+    fetchItems();
+  }, [productAvailability]);
 
   return (
     <>
@@ -156,7 +156,13 @@ useEffect(() => {
                   <td>{item.brand}</td>
                   <td>{item.purchaseDate}</td>
                   <td>{item.productCode}</td>
-                  <td>{item.productAvailability}</td>
+                  <td>
+                    <span
+                      className={`availability-badge ${item.productAvailability.toLowerCase()}`}
+                    >
+                      {item.productAvailability.replace(/_/g, " ")}
+                    </span>
+                  </td>
                   <td>{item.supplier?.supplierName}</td>
 
                   <td className="item-action-column">

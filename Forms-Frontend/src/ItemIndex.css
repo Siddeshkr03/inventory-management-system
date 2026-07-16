@@ -195,3 +195,31 @@ body {
   font-size: 14px;
   cursor: pointer;
 }
+
+.availability-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.availability-badge.in_stock {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.availability-badge.low_stock {
+  background: #fff8e1;
+  color: #f57c00;
+}
+
+.availability-badge.out_of_stock {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.availability-badge.pre_order {
+  background: #e3f2fd;
+  color: #1565c0;
+}
