@@ -83,6 +83,15 @@ public class SupplierServiceImpl implements SupplierService {
         existingSupplier.setUpdatedBy(loggedInUser.getName());
         existingSupplier.setUpdatedAt(LocalDateTime.now());
 
-        return supplierRepository.save(existingSupplier);
+        Supplier updatedSupplier = supplierRepository.save(existingSupplier);
+
+        activityService.logActivity(
+                "SUPPLIER",
+                "UPDATE",
+                "Updated supplier '" + updatedSupplier.getSupplierName() + "'",
+                loggedInUser.getName()
+        );
+
+        return updatedSupplier;
     }
 }
