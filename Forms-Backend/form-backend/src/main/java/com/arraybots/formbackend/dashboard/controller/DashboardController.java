@@ -1,5 +1,6 @@
 package com.arraybots.formbackend.dashboard.controller;
 
+import com.arraybots.formbackend.activity.dto.RecentActivityResponse;
 import com.arraybots.formbackend.dashboard.dto.CategorySummaryDTO;
 import com.arraybots.formbackend.dashboard.dto.DashboardDTO;
 import com.arraybots.formbackend.dashboard.service.DashboardService;
@@ -35,5 +36,14 @@ public class DashboardController {
         List<RecentItemResponse> items = dashboardService.getRecentlyAddedItems();
 
         return ResponseEntity.ok(items);
+    }
+
+    @GetMapping("/recent-activities")
+    public ResponseEntity<List<RecentActivityResponse>> getRecentActivities() {
+
+        List<RecentActivityResponse> activities =
+                dashboardService.getRecentActivities();
+
+        return ResponseEntity.ok(activities);
     }
 }

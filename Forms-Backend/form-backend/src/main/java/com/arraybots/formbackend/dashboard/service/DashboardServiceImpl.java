@@ -1,5 +1,8 @@
 package com.arraybots.formbackend.dashboard.service;
 
+import com.arraybots.formbackend.activity.dto.RecentActivityResponse;
+import com.arraybots.formbackend.activity.model.Activity;
+import com.arraybots.formbackend.activity.repository.ActivityRepository;
 import com.arraybots.formbackend.dashboard.dto.RecentItemResponse;
 import com.arraybots.formbackend.items.model.Item;
 import com.arraybots.formbackend.items.repository.ItemRepository;
@@ -15,13 +18,14 @@ import java.util.List;
 public class DashboardServiceImpl implements DashboardService {
 
     private final ItemRepository itemRepository;
-
+    private final ActivityRepository activityRepository;
     private final SupplierRepository supplierRepository;
 
-    public DashboardServiceImpl(ItemRepository itemRepository,
+    public DashboardServiceImpl(ItemRepository itemRepository, ActivityRepository activityRepository,
                                 SupplierRepository supplierRepository) {
 
         this.itemRepository = itemRepository;
+        this.activityRepository = activityRepository;
         this.supplierRepository = supplierRepository;
     }
 
@@ -74,6 +78,31 @@ public class DashboardServiceImpl implements DashboardService {
             dto.setCategoryName(item.getCategory().getCategoryName());
             dto.setSupplierName(item.getSupplier().getSupplierName());
             dto.setCreatedAt(item.getCreatedAt());
+
+            response.add(dto);
+        }
+
+        return response;
+    }
+
+    @Override
+    public List<RecentActivityResponse> getRecentActivities() {
+
+        List<Activity> activities =
+                activityRepository.findTop5ByOrderByPerformedAtDesc();
+
+        List<RecentActivityResponse> response = new ArrayList<>();
+
+        for (Activity activity : activities) {
+
+            RecentActivityResponse dto = new RecentActivityResponse();
+
+            dto.setId(activity.getId());
+            dto.setModule(activity.getModule());
+            dto.setAction(activity.getAction());
+            dto.setDescription(activity.getDescription());
+            dto.setPerformedBy(activity.getPerformedBy());
+            dto.setPerformedAt(activity.getPerformedAt());
 
             response.add(dto);
         }

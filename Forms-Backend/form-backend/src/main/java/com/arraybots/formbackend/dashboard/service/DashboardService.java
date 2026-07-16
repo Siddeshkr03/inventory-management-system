@@ -1,5 +1,6 @@
 package com.arraybots.formbackend.dashboard.service;
 
+import com.arraybots.formbackend.activity.dto.RecentActivityResponse;
 import com.arraybots.formbackend.dashboard.dto.DashboardDTO;
 import com.arraybots.formbackend.dashboard.dto.CategorySummaryDTO;
 import com.arraybots.formbackend.dashboard.dto.RecentItemResponse;
@@ -14,5 +15,7 @@ public interface DashboardService {
     List<CategorySummaryDTO> getCategorySummary();
 
     List<RecentItemResponse> getRecentlyAddedItems();
+
+    List<RecentActivityResponse> getRecentActivities();
 
 }
