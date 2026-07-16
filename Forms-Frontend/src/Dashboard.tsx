@@ -29,6 +29,15 @@ function Dashboard() {
     createdAt: string;
   }
 
+  interface RecentActivity {
+    id: number;
+    module: string;
+    action: string;
+    description: string;
+    performedBy: string;
+    performedAt: string;
+  }
+
   const [dashboardData, setDashboardData] = useState<DashboardData>({
     totalItems: 0,
     totalSuppliers: 0,
@@ -39,7 +48,9 @@ function Dashboard() {
   });
 
   const [recentItems, setRecentItems] = useState<RecentItem[]>([]);
-
+  const [recentActivities, setRecentActivities] = useState<RecentActivity[]>(
+    [],
+  );
   const [categorySummary, setCategorySummary] = useState<CategorySummary[]>([]);
 
   const navigate = useNavigate();
@@ -48,6 +59,7 @@ function Dashboard() {
     getDashboardData();
     getCategorySummary();
     getRecentlyAddedItems();
+    getRecentActivities();
   }, []);
 
   const getDashboardData = async () => {
@@ -75,6 +87,16 @@ function Dashboard() {
       const response = await api.get("/dashboard/recent-items");
 
       setRecentItems(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getRecentActivities = async () => {
+    try {
+      const response = await api.get("/dashboard/recent-activities");
+
+      setRecentActivities(response.data);
     } catch (error) {
       console.error(error);
     }
