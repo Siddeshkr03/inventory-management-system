@@ -124,7 +124,16 @@ public class CategoryServiceImpl implements CategoryService {
         existingCategory.setUpdatedBy(loggedInUser.getName());
         existingCategory.setUpdatedAt(LocalDateTime.now());
 
-        return categoryRepository.save(existingCategory);
+        Category updatedCategory = categoryRepository.save(existingCategory);
+
+        activityService.logActivity(
+                "CATEGORY",
+                "UPDATE",
+                "Updated category '" + updatedCategory.getCategoryName() + "'",
+                loggedInUser.getName()
+        );
+
+        return updatedCategory;
 
     }
 
