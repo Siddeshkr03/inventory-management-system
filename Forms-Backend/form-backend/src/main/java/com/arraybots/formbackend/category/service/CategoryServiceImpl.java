@@ -1,5 +1,6 @@
 package com.arraybots.formbackend.category.service;
 
+import com.arraybots.formbackend.activity.service.ActivityService;
 import com.arraybots.formbackend.category.model.Category;
 import com.arraybots.formbackend.category.repository.CategoryRepository;
 import org.springframework.data.domain.Sort;
@@ -16,8 +17,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    private final ActivityService activityService;
+
+    public CategoryServiceImpl(CategoryRepository categoryRepository, ActivityService activityService) {
         this.categoryRepository = categoryRepository;
+        this.activityService = activityService;
     }
 
     @Override
@@ -51,7 +55,16 @@ public class CategoryServiceImpl implements CategoryService {
         category.setCreatedBy(loggedInUser.getName());
         category.setCreatedAt(LocalDateTime.now());
 
-        return categoryRepository.save(category);
+        Category savedCategory = categoryRepository.save(category);
+
+        activityService.logActivity(
+                "CATEGORY",
+                "CREATE",
+                "Added category '" + savedCategory.getCategoryName() + "'",
+                loggedInUser.getName()
+        );
+
+        return savedCategory;
     }
 
     @Override
