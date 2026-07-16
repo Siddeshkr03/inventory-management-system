@@ -60,8 +60,24 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public void deleteSupplier(Long id) {
-        supplierRepository.deleteById(id);
+    public void deleteSupplier(Long id, HttpServletRequest request) {
+
+        Supplier supplier = supplierRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Supplier not found"));
+
+        User loggedInUser =
+                (User) request.getAttribute("loggedInUser");
+
+        String supplierName = supplier.getSupplierName();
+
+        supplierRepository.delete(supplier);
+
+        activityService.logActivity(
+                "SUPPLIER",
+                "DELETE",
+                "Deleted supplier '" + supplierName + "'",
+                loggedInUser.getName()
+        );
     }
 
     @Override
