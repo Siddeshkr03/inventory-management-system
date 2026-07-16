@@ -157,7 +157,7 @@ function ItemIndex() {
                   <td>{item.category?.categoryName}</td>
                   <td>{item.brand}</td>
                   <td>{item.purchaseDate}</td>
-                  <td className="product-code">{item.productCode}</td>
+                  <td>{item.productCode}</td>
                   <td>
                     <span
                       className={`availability-badge ${item.productAvailability.toLowerCase()}`}

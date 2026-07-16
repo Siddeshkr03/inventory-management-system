@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { X  } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import api from "./api";
 import "./ItemShow.css";
 
@@ -13,7 +13,7 @@ function ItemShow() {
     address: string;
   }
 
-    interface Category {
+  interface Category {
     id: number;
     categoryName: string;
   }
@@ -35,6 +35,7 @@ function ItemShow() {
 
   const { id } = useParams();
   const navigate = useNavigate();
+
   const [item, setItem] = useState<Item | null>(null);
 
   useEffect(() => {
@@ -44,124 +45,181 @@ function ItemShow() {
   const fetchItem = async () => {
     try {
       const response = await api.get(`/items/${id}`);
-
       setItem(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
+  const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
   return (
-    <div className="item-show-container">
-      <div className="item-show-card">
-        <div className="page-header">
+    <div className="item-show-page">
+      <div className="item-show-container">
+
+        <div className="item-card">
+           <div className="item-page-header">
           <button
             type="button"
-            className="back-btn"
+            className="item-show-back-btn"
             onClick={() => navigate("/items")}
           >
-            <X />
+            <ArrowLeft size={22} />
           </button>
         </div>
+          <div className="item-page-title-wrapper">
+          <h1 className="item-page-title">Item Details</h1>
 
-        {/* Item Details */}
-        <div className="item-section">
-          <h2 className="item-h">Item Details</h2>
+          <p className="item-page-subtitle">View inventory item information.</p>
+        </div>
 
-          <div className="details-grid">
-            <div className="field">
-              <strong>Item Name</strong>
-              <span>{item?.itemName}</span>
+          <div className="item-section-header">
+            <h2 className="item-section-title">Item Information</h2>
+          </div>
+
+          <div className="item-grid">
+            <div>
+              <label className="item-label">Item Name</label>
+
+              <div className="item-display-value">{item?.itemName}</div>
             </div>
 
-            <div className="field">
-              <strong>Price</strong>
-              <span>₹ {item?.price}</span>
+            <div>
+              <label className="item-label">Price</label>
+
+              <div className="price-value">
+                ₹{item?.price?.toLocaleString("en-IN")}
+              </div>
             </div>
 
-            <div className="field">
-              <strong>Quantity</strong>
-              <span>{item?.quantity}</span>
+            <div>
+              <label className="item-label">Quantity</label>
+
+              <span className="quantity-badge">{item?.quantity}</span>
             </div>
 
-            <div className="field">
-              <strong>Category</strong>
-              <span>{item?.category.categoryName}</span>
+            <div>
+              <label className="item-label">Category</label>
+
+              <div className="item-display-value">
+                {item?.category?.categoryName}
+              </div>
             </div>
 
-            <div className="field">
-              <strong>Brand</strong>
-              <span>{item?.brand}</span>
+            <div>
+              <label className="item-label">Brand</label>
+
+              <div className="item-display-value">{item?.brand}</div>
             </div>
 
-            <div className="field">
-              <strong>Purchase Date</strong>
-              <span>{item?.purchaseDate}</span>
+            <div>
+              <label className="item-label">Purchase Date</label>
+
+              <div className="item-display-value">
+                {item?.purchaseDate && formatDate(item.purchaseDate)}
+              </div>
             </div>
 
-            <div className="field">
-              <strong>Product Code</strong>
-              <span>{item?.productCode}</span>
+            <div>
+              <label className="item-label">Product Code</label>
+
+              <div className="product-code">{item?.productCode}</div>
             </div>
 
-            <div className="field">
-              <strong>Payment Method</strong>
-              <span>{item?.paymentMethod}</span>
+            <div>
+              <label className="item-label">Payment Method</label>
+
+              <div className="item-display-value">{item?.paymentMethod}</div>
             </div>
 
-            <div className="field">
-              <strong>Availability</strong>
-              <span>{item?.productAvailability}</span>
+            <div>
+              <label className="item-label">Availability</label>
+
+              <span
+                className={`availability-badge ${item?.productAvailability.toLowerCase()}`}
+              >
+                {item?.productAvailability.replace(/_/g, " ")}
+              </span>
             </div>
 
-            <div className="field">
-              <strong>Files</strong>
+            <div>
+              <label className="item-label">Files</label>
 
               {item?.files ? (
                 <div className="file-list">
                   {item.files.split(",").map((fileName, index) => (
                     <a
                       key={index}
-                      className="file-link"
                       href={`http://localhost:8080/api/files/${fileName.trim()}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="file-link"
                     >
                       📄 {fileName.substring(fileName.indexOf("_") + 1)}
                     </a>
                   ))}
                 </div>
               ) : (
-                <span>No Files Uploaded</span>
+                <div className="item-display-value">No Files Uploaded</div>
               )}
             </div>
           </div>
-        </div>
 
-        {/* Supplier Details */}
-        <div className="supplier-section">
-          <h2 className="supplier-h">Supplier Details</h2>
+          <hr className="item-section-divider" />
+          {/* Supplier Information */}
 
-          <div className="details-grid">
-            <div className="field">
-              <strong>Supplier Name</strong>
-              <span>{item?.supplier?.supplierName}</span>
+          <div className="item-section-header">
+            <h2 className="item-section-title">Supplier Information</h2>
+          </div>
+
+          <div className="item-grid">
+            <div>
+              <label className="item-label">Supplier Name</label>
+
+              <div className="item-display-value">
+                {item?.supplier?.supplierName}
+              </div>
             </div>
 
-            <div className="field">
-              <strong>Phone Number</strong>
-              <span>{item?.supplier?.phoneNumber}</span>
+            <div>
+              <label className="item-label">Phone Number</label>
+
+              <div className="item-display-value">
+                {item?.supplier?.phoneNumber}
+              </div>
             </div>
 
-            <div className="field">
-              <strong>Email</strong>
-              <span>{item?.supplier?.email}</span>
+            <div>
+              <label className="item-label">Email</label>
+
+              <div className="item-display-value">{item?.supplier?.email}</div>
             </div>
 
-            <div className="field">
-              <strong>Address</strong>
-              <span>{item?.supplier?.address}</span>
+            <div>
+              <label className="item-label">Address</label>
+
+              <div className="item-display-value address-value">
+                {item?.supplier?.address}
+              </div>
             </div>
+          </div>
+
+          {/* Bottom Buttons */}
+
+          <div className="item-actions">
+            <button
+              type="button"
+              className="item-show-back-btn2"
+              onClick={() => navigate("/items")}
+            >
+              Back
+            </button>
           </div>
         </div>
       </div>
