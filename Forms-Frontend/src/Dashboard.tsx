@@ -227,6 +227,42 @@ function Dashboard() {
           </tbody>
         </table>
       </div>
+
+      <div className="recent-activities-card">
+        <h3>Recent Activities</h3>
+
+        <table className="recent-activities-table">
+          <table className="recent-activities-table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Module</th>
+                <th>Action</th>
+                <th>Performed By</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {recentActivities.length > 0 ? (
+                recentActivities.map((activity) => (
+                  <tr key={activity.id}>
+                    <td>{activity.description}</td>
+                    <td>{activity.module}</td>
+                    <td>{activity.action}</td>
+                    <td>{activity.performedBy}</td>
+                    <td>{getRelativeDate(activity.performedAt)}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5}>No recent activities found.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </table>
+      </div>
     </>
   );
 }
