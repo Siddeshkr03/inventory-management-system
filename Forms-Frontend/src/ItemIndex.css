@@ -223,3 +223,23 @@ body {
   background: #e3f2fd;
   color: #1565c0;
 }
+
+.quantity-badge {
+  display: inline-block;
+  min-width: 28px;
+  padding: 5px 10px;
+  border-radius: 14px;
+  background-color: #eef7ea;
+  color: #2e7d32;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.item-tbody tr:nth-child(even) {
+  background-color: #fcf8ec;
+}
+
+.item-tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}

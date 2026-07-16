@@ -151,7 +151,9 @@ function ItemIndex() {
                   <td>{index + 1}</td>
                   <td>{item.itemName}</td>
                   <td>₹{Number(item.price).toLocaleString("en-IN")}</td>
-                  <td>{item.quantity}</td>
+                  <td>
+                    <span className="quantity-badge">{item.quantity}</span>
+                  </td>
                   <td>{item.category?.categoryName}</td>
                   <td>{item.brand}</td>
                   <td>{item.purchaseDate}</td>
