@@ -187,6 +187,8 @@ function Dashboard() {
         </div>
       </div>
 
+      <div className="dashboard-bottom-section">
+
       <div className="recent-items-card">
         <h3>Recently Added Items</h3>
 
@@ -248,8 +250,16 @@ function Dashboard() {
                 recentActivities.map((activity) => (
                   <tr key={activity.id}>
                     <td>{activity.description}</td>
-                    <td>{activity.module}</td>
-                    <td>{activity.action}</td>
+                    <td>
+                      <span className="module-badge">{activity.module}</span>
+                    </td>
+                    <td>
+                      <span
+                        className={`action-badge ${activity.action.toLowerCase()}`}
+                      >
+                        {activity.action}
+                      </span>
+                    </td>
                     <td>{activity.performedBy}</td>
                     <td>{getRelativeDate(activity.performedAt)}</td>
                   </tr>
@@ -262,6 +272,7 @@ function Dashboard() {
             </tbody>
           </table>
         </table>
+      </div>
       </div>
     </>
   );
