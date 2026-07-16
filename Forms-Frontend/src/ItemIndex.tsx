@@ -150,7 +150,7 @@ function ItemIndex() {
                 <tr key={item.id}>
                   <td>{index + 1}</td>
                   <td>{item.itemName}</td>
-                  <td>{item.price}</td>
+                  <td>₹{Number(item.price).toLocaleString("en-IN")}</td>
                   <td>{item.quantity}</td>
                   <td>{item.category?.categoryName}</td>
                   <td>{item.brand}</td>
